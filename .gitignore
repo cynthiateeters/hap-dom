@@ -36,5 +36,8 @@ reports/
 .claude/worktrees/
 .claude/settings.json
 
+# Context-mode plugin
+context.db*
+
 # Local Netlify folder
 .netlify
