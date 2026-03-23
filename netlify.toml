@@ -5,10 +5,6 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Skip rebuilds when only docs/reports change
-[build.processing]
-  skip_processing = false
-
 # Security and performance headers
 [[headers]]
   for = "/*"
