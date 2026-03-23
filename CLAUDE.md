@@ -8,7 +8,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 - **Repo:** https://github.com/cynthiateeters/hap-dom
 - **Live site:** https://hap-dom.netlify.app/
-- **Local path:** /Users/cynthiateeters/Documents/Teaching/ai-augmented/HAP/hap-dom
 - **MK channel:** hap-dom (all memory-keeper items use this channel)
 - **Forked from:** https://github.com/cynthiateeters/hap-lab-astro-template
 
@@ -86,27 +85,15 @@ Supported languages: html, css, javascript, json, markdown, bash, text, nunjucks
 
 ## Content creation workflow
 
-1. Complete `docs/reference-cards/station-blueprint-template.md` for each station
-2. Copy template to `src/pages/stations/station[N].astro` or `src/pages/cheat-sheets/[topic].astro`
-3. Replace all `[PLACEHOLDER_*]` markers with content
-4. Use `station6-template.astro` for the final station (different structure)
-5. Run `npm run build` to verify
-
-### Template files
-
-| Template                                   | Purpose                                |
-| ------------------------------------------ | -------------------------------------- |
-| `src/templates/hub-template.astro`         | Landing page → `src/pages/index.astro` |
-| `src/templates/station-template.astro`     | Stations 1-5                           |
-| `src/templates/station6-template.astro`    | Final station (different layout)       |
-| `src/templates/cheat-sheet-template.astro` | Companion reference pages              |
+All 13 pages are built. Templates in `src/templates/` were used during initial build and remain as reference for future labs.
 
 ## HAP's voice (critical)
 
 HAP always speaks in **first-person apprentice voice**. This is non-negotiable.
 
 - Required: "I learned from Prof. Teeters that...", "When I was practicing...", "This was tricky for me too..."
-- Forbidden: "You should...", "Obviously...", "It's simple...", "Just", "simply"
+- Forbidden: "You should...", "Obviously...", "It's simple...", "simply"
+- Forbidden (with nuance): "Just" in imperative form ("just do", "just use") — but negated forms are fine ("doesn't just", "not just")
 - Share specific mistakes and what they taught
 
 See `docs/reference-cards/hap-voice-card.md` for complete guidelines.
@@ -142,13 +129,6 @@ HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
 HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
 -->
 ```
-
-## StationLayout optional props
-
-- **Demo banner:** Pass `demoUrl` and `demoLabel` for stations with interactive demos.
-- **Cheat sheet banner:** Pass `cheatSheetUrl` and `cheatSheetTitle` for companion reference pages. Renders banners at top (eager) and bottom (lazy) of station.
-
-Omit props for stations that don't need them.
 
 ## Key documentation
 
