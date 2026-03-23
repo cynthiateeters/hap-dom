@@ -1,0 +1,219 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<MainLayout
+    title="How I Learned to Push Back and Why | HAP's Learning Lab"
+    headerTitle="How I Learned to Push Back and Why"
+    headerSubtitle="Quick Reference"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP studying on his laptop"
+    introContent="<p>This is the story of the first time I pushed back on AI-generated code — and the framework I built from it. 🟠</p>"
+    showNavigation={false}
+    footerReminder="I own this code. The AI makes mistakes. When I don't know enough to judge, I push back and learn before I proceed."
+>
+
+    <!-- ============================================================
+         What Happened
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">The Story</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>What Happened</h3>
+                    <p>I asked my AI coding agent to help me grab a DOM element by its ID. It generated <code>document.getElementById('robot-name')</code>. The code worked perfectly. I was about to move on — working code felt like finished code.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>What Caught It</h3>
+                    <p>Grace Hopper looked at the code and said one word: <strong>"Outdated."</strong> No explanation. No alternative. Grace tells you WHAT to notice — the rest is your job.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>What I Did</h3>
+                    <p>Instead of asking the AI to "fix it," I connected the MDN MCP server and asked six questions in a chain. Each answer revealed the next question I needed to ask. I kept going until understanding clicked.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>What I Learned</h3>
+                    <p><code>querySelector</code> is the modern replacement for <code>getElementById</code>. It uses CSS selectors — the same syntax from stylesheets — and can find elements by ID, class, tag, attribute, or any combination.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>What I Changed</h3>
+                    <p>I added two rules to my project's <code>AGENTS.md</code>: use <code>querySelector</code>/<code>querySelectorAll</code> exclusively, and always consult MDN before generating DOM API code. One rule for the specific case, one rule for the process.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         The Six Questions
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Six-Question Chain</h2>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>1. "What is getElementById?"</h3>
+                    <p>A DOM Level 1 method from the late 1990s.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>2. "When was it introduced?"</h3>
+                    <p>DOM Level 1, standardized in 1998.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>3. "What is the modern replacement?"</h3>
+                    <p><code>querySelector()</code>, part of the Selectors API.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>4. "How does querySelector differ?"</h3>
+                    <p>It uses any CSS selector, not only IDs.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>5. "Can it do everything getElementById does?"</h3>
+                    <p>Yes, and more — classes, attributes, combinators.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>6. "Performance differences?"</h3>
+                    <p>Irrelevant for any real application.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         The Code
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Code Comparison</h2>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Legacy (what the AI generated):</div>
+                <CodeBlock code={`const robotName = document.getElementById('robot-name');`} lang="javascript" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">Modern (what I use now):</div>
+                <CodeBlock code={`const robotName = document.querySelector('#robot-name');`} lang="javascript" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">What I added to AGENTS.md:</div>
+                <CodeBlock code={`## DOM API Rules
+- Use querySelector/querySelectorAll exclusively. Never use getElementById,
+  getElementsByClassName, or getElementsByTagName.
+- Before generating DOM API code, consult the MDN MCP server to verify
+  the recommended modern approach.`} lang="markdown" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         The Principle
+         ============================================================ -->
+    <section class="content-section">
+        <div class="warning-box">
+            <h2>The Principle</h2>
+            <p><strong>I always have to remember that the AI Agent makes mistakes and that I own this code. When I don't know myself, I push back and find a way to learn before I proceed.</strong></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         The Pattern
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">The Pattern: Notice, Stop, Interrogate, Understand, Codify</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>Notice</h3>
+                    <p>Something feels off, or someone flags a problem. Pay attention to that signal — even when the code works.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>Stop</h3>
+                    <p>Resist the urge to move on or to ask the AI to "fix it." Pause before acting.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>Interrogate</h3>
+                    <p>Ask questions — not one, but a chain. Each answer should reveal the next question. Keep going until understanding clicks.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>Understand</h3>
+                    <p>Arrive at genuine comprehension. I need to be able to explain WHY the change matters, not only WHAT to change.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>Codify</h3>
+                    <p>Write it down where it has effect — in <code>AGENTS.md</code>, in project rules, in linter configs. Understanding that stays in my head is fragile.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         When to Use This Pattern
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When to Use This Pattern</h2>
+
+            <div class="intro-box">
+                <ul>
+                    <li>When AI-generated code works but I do not understand why it was written that way</li>
+                    <li>When someone (Grace, a mentor, a code reviewer) flags something without a full explanation</li>
+                    <li>When I find myself copy-pasting code I cannot explain</li>
+                    <li>When the AI uses an API or method I have never seen before</li>
+                    <li>When I feel the urge to say "it works, so it is fine"</li>
+                    <li>When two approaches seem equivalent and I cannot articulate the difference</li>
+                    <li>When I catch the AI contradicting something I learned at an earlier station</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</MainLayout>

@@ -1,0 +1,377 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p>Stations 1 through 3 gave me a lot — I understood the DOM, I could find elements, I could read what was inside them. But everything I'd done so far was like reading a book. I hadn't changed a single word on the page.</p>
+    <p class="mt-1">Then I looked at my Robot ID Card. The status message said "Offline." My robot was clearly running — I was TALKING to it. Could I change "Offline" to "Online" with JavaScript?</p>
+    <p class="mt-1">I reached for the tool I already knew — innerHTML. Grace's warning echoed in my head, but I didn't really understand why yet. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={4}
+    title="Changing Things"
+    subtitle="How JavaScript modifies text, classes, and attributes in the DOM"
+    labName="The DOM"
+    description="Join HAP as he learns to modify DOM elements safely. Discover textContent, classList, setAttribute, and why innerHTML with user input is dangerous."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230522/hap-thumbs-up_s4si0j.jpg"
+    avatarAlt="HAP giving a confident thumbs up"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1763230522/hap-thumbs-up_s4si0j.jpg"
+    nextStationTitle="Building New Things"
+    footerReminder="textContent for safe text changes, classList for classes, setAttribute for attributes. And never innerHTML with user input."
+    cheatSheetUrl="/cheat-sheets/dom-security/"
+    cheatSheetTitle="DOM Security Awareness"
+    demoUrl="/demos/dom-modifier/"
+    demoLabel="DOM Modifier"
+>
+
+    <!-- ============================================================
+         SECTION 1: Reading Was Just the Beginning
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Reading Was Just the Beginning</h2>
+
+            <p class="mb-2">I could read any element on the page. I could grab its text, check its attributes, inspect its classes. But all of that was <em>observation</em>. I hadn't actually <em>changed</em> anything yet.</p>
+
+            <p class="mb-2">The Robot ID Card still said "Offline." My robot was running. I wanted to fix that — and I wanted to do it with JavaScript, not by editing the HTML file.</p>
+
+            <p>That's when I learned the most important thing about the DOM: <strong>JavaScript can modify the page without reloading it.</strong> This is what makes the web interactive.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: My First Instinct Was innerHTML
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>My First Instinct Was innerHTML</h2>
+
+            <p class="mb-2">I'd seen innerHTML before. It seemed like the obvious choice — I wanted to change what was <em>inside</em> an element, and here was a property called inner-HTML. Perfect, right?</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">My first attempt:</div>
+                <CodeBlock code={`const statusMessage = document.getElementById('status-message');
+statusMessage.innerHTML = 'Online';
+// It worked! The card now said "Online"`} lang="javascript" />
+                <p class="code-comment mt-1">I was so proud of myself. The status changed right there on the page, no reload needed.</p>
+            </div>
+
+            <p class="mt-2">It worked perfectly. I leaned back in my chair feeling like a real developer. Then Prof. Teeters walked over.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Prof. Teeters and the XSS Question
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Prof. Teeters and the XSS Question</h2>
+
+            <p class="mb-2">Prof. Teeters looked at my code and asked one question that changed everything:</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Prof. Teeters:</h3>
+                    <p>"That works when <em>you</em> control the text. But what if that string came from a user? What if someone typed it into a form field, and your code put it on the page with innerHTML?"</p>
+                </div>
+            </div>
+
+            <p class="mt-2 mb-2">I didn't see the problem at first. Then Prof. Teeters showed me what a malicious user might type:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">The dangerous scenario:</div>
+                <CodeBlock code={`const userInput = '<img src="x" onerror="alert(\'hacked!\')">';
+statusMessage.innerHTML = userInput;
+// → Browser creates an <img> element
+// → The image fails to load (src="x" doesn't exist)
+// → onerror fires — attacker's code runs on YOUR page`} lang="javascript" />
+                <p class="code-comment mt-1">innerHTML <strong>parses</strong> the string as HTML. That means the browser will create real elements from it — including elements that execute code.</p>
+            </div>
+
+            <p class="mt-2">This is called <strong>Cross-Site Scripting (XSS)</strong>. The attacker injects their code into your page, and your page runs it as if you wrote it. They could steal cookies, redirect users, or modify what the page displays.</p>
+
+            <p class="mt-1">I stared at my innocent-looking <code>innerHTML = 'Online'</code> line. The text was fine <em>this time</em>. But the habit was dangerous.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: The Safe Way — textContent
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Safe Way — textContent</h2>
+
+            <p class="mb-2">Prof. Teeters showed me the safe alternative: <code>textContent</code>.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">The safe way to change text:</div>
+                <CodeBlock code={`const statusMessage = document.getElementById('status-message');
+statusMessage.textContent = 'Online';
+// Same result — but SAFE`} lang="javascript" />
+                <p class="code-comment mt-1">textContent treats everything as plain text. It never parses HTML.</p>
+            </div>
+
+            <p class="mt-2 mb-2">Here's what happens if someone tries the same attack with textContent:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">textContent neutralizes the attack:</div>
+                <CodeBlock code={`const userInput = '<img src="x" onerror="alert(\'hacked!\')">';
+statusMessage.textContent = userInput;
+// → Displays the literal text: <img src="x" onerror="alert('hacked!')">
+// → No element created, no code executed, no vulnerability`} lang="javascript" />
+                <p class="code-comment mt-1">The browser displays the angle brackets as literal characters. No HTML is parsed. No elements are created. No scripts run.</p>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 The Rule I Follow Now:</h3>
+                    <p>If I'm putting <strong>text</strong> into an element, I use <code>textContent</code>. Every time. It's the default safe choice.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Changing Classes — classList
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Changing Classes — classList</h2>
+
+            <p class="mb-2">Next I wanted to add a CSS class to the status message — an <code>.online</code> class that would change the color. My first instincts were all wrong.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Wrong: element.class</h3>
+                    <p><code>element.class</code> doesn't work. In JavaScript, <code>class</code> is a reserved word (it's used for ES6 classes). The DOM uses <code>className</code> instead — but even that has problems.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Wrong: setAttribute('class', ...)</h3>
+                    <p><code>setAttribute('class', 'online')</code> <strong>overwrites</strong> all existing classes. If the element had <code>class="status-row"</code>, it would lose that class entirely.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Wrong: className += ' online'</h3>
+                    <p>String concatenation is fragile. Forgetting the leading space creates <code>"status-rowonline"</code>. And removing a class later means messy string manipulation.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Right: classList</h3>
+                    <p><code>classList</code> gives me clean methods for working with classes. It handles spacing, duplicates, and toggling automatically.</p>
+                </div>
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">classList methods:</div>
+                <CodeBlock code={`const status = document.getElementById('status-message');
+
+status.classList.add('online');        // Add a class
+status.classList.remove('offline');    // Remove a class
+status.classList.toggle('active');     // Add if missing, remove if present
+status.classList.contains('online');   // Returns true or false`} lang="javascript" />
+                <p class="code-comment mt-1">classList is the right tool for working with CSS classes. It handles everything cleanly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Changing Attributes — setAttribute
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Changing Attributes — setAttribute</h2>
+
+            <p class="mb-2">The Robot ID Card had a <code>data-status</code> attribute set to <code>"offline"</code>. I wanted to update it to <code>"online"</code> to match the text I'd changed.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Setting an attribute:</div>
+                <CodeBlock code={`const status = document.getElementById('status-message');
+
+// Read the current value
+console.log(status.getAttribute('data-status')); // "offline"
+
+// Update it
+status.setAttribute('data-status', 'online');
+
+// Verify
+console.log(status.getAttribute('data-status')); // "online"`} lang="javascript" />
+                <p class="code-comment mt-1">setAttribute is great for data-* attributes, aria-* attributes, and other custom attributes.</p>
+            </div>
+
+            <div class="warning-box mt-2">
+                <p><strong>Important:</strong> <code>setAttribute('class', 'newclass')</code> <strong>overwrites the entire class attribute</strong>. That's why classList exists — it adds and removes individual classes without destroying the others.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: The Breakthrough
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Breakthrough</h2>
+
+            <div class="hap-note-callout">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230331/hap-brain-explodes_wu0or8.jpg"
+                    alt="HAP having a mind-blowing realization"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>Prof. Teeters:</h3>
+                    <p>"That's the power of the DOM. The page is never finished — it's always ready to change."</p>
+                </div>
+            </div>
+
+            <p class="mt-2">That hit me hard. Every website I'd ever used — every time a notification badge updated, every time a button changed color on hover, every time a form showed an error message — that was JavaScript modifying the DOM. The page wasn't a static document. It was a living thing, always ready to respond.</p>
+
+            <p class="mt-1">And now I could do it too. I could change text, toggle classes, update attributes — all without reloading. The page was mine to modify.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: Inline Styles — And Why Prof. Teeters Discouraged Them
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Inline Styles — And Why Prof. Teeters Discouraged Them</h2>
+
+            <p class="mb-2">I also learned I could change CSS styles directly with JavaScript:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Inline styles with JavaScript:</div>
+                <CodeBlock code={`const energyBar = document.getElementById('energy-bar');
+
+// Set inline styles
+energyBar.style.width = '75%';
+energyBar.style.backgroundColor = 'hsl(120, 60%, 45%)';`} lang="javascript" />
+                <p class="code-comment mt-1">Notice backgroundColor — CSS properties with hyphens become camelCase in JavaScript.</p>
+            </div>
+
+            <p class="mt-2">This works, but Prof. Teeters discouraged it for most situations. Inline styles are hard to maintain, hard to override, and they mix behavior with presentation.</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 What I Learned:</h3>
+                    <p>Instead of setting <code>style.color</code> or <code>style.backgroundColor</code>, I toggle a CSS class that has the styles I want. The styles stay in the stylesheet where they belong, and my JavaScript stays focused on <em>behavior</em>.</p>
+                </div>
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">Better approach — toggle a class:</div>
+                <CodeBlock code={`// Instead of: energyBar.style.backgroundColor = 'hsl(120, 60%, 45%)';
+// Do this:
+energyBar.classList.add('energy-high');
+// The .energy-high class in CSS handles the color`} lang="javascript" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I reached for <code>innerHTML</code> first because the name made sense to me. It took Prof. Teeters showing me an XSS attack to understand why <code>textContent</code> is the safe default.</li>
+                    <li>I tried <code>element.class = 'online'</code> and couldn't figure out why nothing happened. Turns out <code>class</code> is a reserved word in JavaScript — the DOM uses <code>classList</code> instead.</li>
+                    <li>I set <code>style.color = 'hsl(0, 80%, 50%)'</code> directly in JavaScript to make the status red. It worked, but the next day I couldn't find where the color was coming from because it wasn't in my CSS file. Now I toggle classes instead.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: Demo Callout
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>🟠 Try It Yourself:</h3>
+                <p>I built a <a href="/demos/dom-modifier/">DOM Modifier demo</a> where you can change text, toggle classes, update attributes, and even see what innerHTML does with dangerous input (safely!). It's the best way to feel how these methods work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 11: Quick Reference — 6 Tip Cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">🎓 DOM Modification Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>textContent Is the Safe Default</h3>
+                    <p>Use <code>textContent</code> to set text in an element. It never parses HTML, so it can't create an XSS vulnerability.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>Never innerHTML With User Input</h3>
+                    <p><code>innerHTML</code> parses strings as HTML. If that string comes from a user, an attacker can inject scripts that run on your page.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>classList for Classes</h3>
+                    <p>Use <code>classList.add()</code>, <code>.remove()</code>, <code>.toggle()</code>, and <code>.contains()</code>. Never overwrite the class attribute directly.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>setAttribute Overwrites</h3>
+                    <p><code>setAttribute</code> replaces the entire attribute value. It's perfect for <code>data-*</code> and <code>aria-*</code> attributes, but use <code>classList</code> for classes.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>Toggle Classes, Not Inline Styles</h3>
+                    <p>Instead of setting <code>style.color</code> in JavaScript, toggle a CSS class. Keep styles in your stylesheet where they're maintainable.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <div>
+                    <h3>The Page Is Never Finished</h3>
+                    <p>The DOM is always ready to change. Every interactive feature on the web — notifications, form validation, live updates — is JavaScript modifying the DOM.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 12: Bridge to Station 5
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What's Next?</h2>
+
+            <p>I could find elements, read them, and change them. But what if the element I needed didn't exist yet? What if I wanted to add a whole new row to the Robot ID Card — one that wasn't in the original HTML?</p>
+
+            <p class="mt-1">That's when Prof. Teeters introduced me to <code>createElement</code> and <code>appendChild</code>. The DOM wasn't a fixed document anymore — I could <em>build</em> new pieces of it from scratch. 🟠</p>
+        </div>
+    </section>
+
+</StationLayout>

@@ -1,0 +1,415 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+
+const introContent = `
+    <p><strong>I spent five stations learning to work with the DOM</strong> — finding elements, reading them, changing them,
+      building new ones. But when I looked back at my journey, I realized the most important things I learned weren't
+      DOM methods.</p>
+    <p class="mt-1">They were about <strong>HOW</strong> I learned.</p>
+    <p class="mt-1">Every station involved AI in some way. Sometimes the AI helped. Sometimes the AI led me astray.
+      Sometimes the AI said nothing when it should have warned me. And in each case, I had to figure out the right
+      response.</p>
+    <p class="mt-1">That's what this station is about. Not a new DOM method. Not a new JavaScript feature. This is
+      about the framework I built — sometimes painfully — for learning WITH AI. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={6}
+    title="Learning with AI"
+    subtitle="When to push back, when to lean in, and when to think defensively"
+    description="Join HAP as he reflects on his learning journey and builds a framework for working with AI: when to push back, when to lean in, and when to bring your own defensive instinct."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1764180952/hap-meets-grace_v2yifo.jpg"
+    avatarAlt="HAP shaking hands with Grace Hopper, two friendly robots meeting and beginning to work together"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1764180952/hap-meets-grace_v2yifo.jpg"
+    footerReminder="I own my code. The AI makes mistakes. When I don't know enough to judge, I push back and learn before I proceed."
+    labName="The DOM"
+>
+
+    <!-- ============================================================
+         SECTION 1: Looking Back at How I Learned
+         Opening reflection on the 5-station journey
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Looking Back at How I Learned</h2>
+
+            <p>Six stations. Six different DOM concepts. Dozens of mistakes. And somewhere along the way, I stopped
+                being someone who accepted whatever the AI generated and started being someone who <em>owned</em> the
+                code.</p>
+
+            <p class="mt-1">When I look back at my journey through Stations 1 through 5, the technical skills matter —
+                I can find elements, read their content, change their styles, and build new nodes from scratch. But the
+                most important things I learned weren't DOM methods.</p>
+
+            <p class="mt-1">They were about <strong>how I learned</strong>. Every station involved AI in some way. I
+                asked it questions. I trusted its answers. I got burned by its answers. I figured out when to push back,
+                when to lean in, and when to bring my own defensive instincts to the table.</p>
+
+            <p class="mt-1">This is about the framework I built — sometimes painfully — for learning WITH AI.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Callback 1 — When the AI Uses Outdated Code
+         getElementById story from Station 2
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When the AI Uses Outdated Code</h2>
+
+            <p>Back in Station 2, I asked the AI to help me access an element on my Robot ID Card. It gave me
+                <code>getElementById</code> — which works, but it's the old way. I almost moved on. Then I connected
+                the MDN MCP server and asked six specific questions about how <code>querySelector</code> compared to
+                <code>getElementById</code>.</p>
+
+            <p class="mt-1">What I found changed everything. The MDN documentation showed me that
+                <code>querySelector</code> uses the same CSS selector syntax I was already learning, that it's more
+                flexible, and that it's the modern standard. The AI had given me working code, but it wasn't the
+                <em>best</em> code.</p>
+
+            <p class="mt-1">That experience taught me a pattern I've used ever since:</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>The Pattern: Notice, Stop, Interrogate, Understand, Codify</h3>
+                    <p>I noticed something unfamiliar. I stopped instead of accepting it. I interrogated the source
+                        documentation. I understood the difference. And I codified what I learned into a rule I could
+                        follow going forward.</p>
+                    <p class="mt-1"><strong>When the AI generates code with an unfamiliar method, or someone flags
+                        something, don't accept it and don't swap it. Stop and understand WHY.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Callback 2 — When the AI Explains Solid Fundamentals
+         CSS selector help from Station 3
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When the AI Explains Solid Fundamentals</h2>
+
+            <p>Station 3 was different. I needed help understanding CSS selectors — how classes, IDs, and element
+                selectors work together when targeting DOM elements. I asked the AI, and it walked me through the
+                syntax clearly and accurately.</p>
+
+            <p class="mt-1">This time, I didn't push back. I didn't connect to MDN to double-check every detail. And
+                that was the right call. CSS selector syntax is stable, well-documented, fundamental knowledge. The AI
+                wasn't guessing or using outdated patterns — it was explaining something that hasn't changed in years
+                and won't change tomorrow.</p>
+
+            <p class="mt-1">Pushing back isn't the default. It's the response to a specific signal — an unfamiliar
+                method, a suspicious pattern, a claim that doesn't match what I've seen before. When none of those
+                signals are present, pushing back wastes time and builds a habit of distrust that makes learning
+                harder.</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>The Lesson</h3>
+                    <p><strong>Not every AI answer needs pushback. When the knowledge is stable and there are no red
+                        flags — lean in.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Callback 3 — When the AI Doesn't Warn You
+         innerHTML story from Stations 3-4, Grace Hopper callback
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When the AI Does Not Warn You</h2>
+
+            <p>This one still bothers me. Across Stations 3 and 4, I was updating content on my Robot ID Card. The AI
+                generated code that used <code>innerHTML</code> to insert content into the page. It worked perfectly.
+                The AI never mentioned any problems. No warnings, no alternatives, no caveats.</p>
+
+            <p class="mt-1">Then I checked MDN. Right there in the documentation was a security warning about
+                cross-site scripting (XSS) attacks. If user input ever made it into an <code>innerHTML</code> call, an
+                attacker could inject malicious scripts into my page. The AI had given me code with a known security
+                vulnerability and said nothing.</p>
+
+            <p class="mt-1">That's when Grace Hopper's words hit me hardest:</p>
+
+            <div class="hap-note-callout mt-2">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1764180952/hap-meets-grace_v2yifo.jpg"
+                    alt="HAP shaking hands with Grace Hopper, two friendly robots meeting and beginning to work together"
+                    width="200" height="200" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper</h3>
+                    <p>"The AI did not warn you about <code>innerHTML</code>. MDN did. That is why you go to the
+                        source. An AI assistant generates plausible code. A documentation source tells you what that
+                        code actually does — including what can go wrong."</p>
+                </div>
+            </div>
+
+            <p class="mt-2"><strong>The defensive instinct — thinking about what could go wrong — that's something I
+                have to bring myself.</strong> The AI optimizes for "does it work?" I have to also ask "could it
+                break? Could it be exploited? What am I not seeing?"</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Two MCP Servers, Two Jobs
+         MDN MCP vs Context7
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Two MCP Servers, Two Jobs</h2>
+
+            <p>One of the most practical things I learned was that different questions need different sources. I use
+                two MCP servers, and they each have a specific job:</p>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>MDN MCP</h3>
+                    <p><strong>Server:</strong> mcp.mdn.mozilla.net</p>
+                    <p class="mt-1"><strong>Use for:</strong> Web platform questions — HTML elements, CSS properties,
+                        DOM methods, JavaScript APIs. This is where I found the <code>innerHTML</code> security
+                        warning. This is where I compared <code>querySelector</code> to <code>getElementById</code>.
+                        Anything that's part of the browser itself lives here.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Context7</h3>
+                    <p><strong>Use for:</strong> Library and framework questions — Vite configuration, Astro
+                        components, React hooks, framework-specific APIs. When the AI gave me Vite 5 instructions but
+                        I was using Vite 7, Context7 had the versioned docs that showed me the correct syntax.</p>
+                </div>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>The Rule</h3>
+                    <p><strong>Web platform question? MDN MCP. Library or framework question? Context7.</strong>
+                        Knowing which source to reach for is half the battle. The other half is actually reaching for
+                        it instead of trusting the AI's first answer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: The Framework I Built
+         NOTICE → STOP → INTERROGATE → UNDERSTAND → CODIFY
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Framework I Built</h2>
+
+            <p>Across five stations, a pattern kept emerging. Every time I handled an AI interaction well, I followed
+                the same steps. Every time I got burned, I'd skipped one of them. Here's the framework:</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>NOTICE &rarr; STOP &rarr; INTERROGATE &rarr; UNDERSTAND &rarr; CODIFY</h3>
+                    <ul class="mt-1">
+                        <li><strong>NOTICE</strong> — Something is unfamiliar, flagged, or feels off. A method I
+                            haven't seen. A pattern that doesn't match what I've learned. A missing warning.</li>
+                        <li><strong>STOP</strong> — Don't accept it. Don't swap it out for something else. Don't move
+                            on.</li>
+                        <li><strong>INTERROGATE</strong> — Go to the source. Connect the MCP server. Read the actual
+                            documentation. Ask specific questions.</li>
+                        <li><strong>UNDERSTAND</strong> — Know why the code works the way it does. Know what the
+                            tradeoffs are. Know what could go wrong.</li>
+                        <li><strong>CODIFY</strong> — Turn what I learned into a rule I can follow next time without
+                            having to rediscover it.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <p class="mt-2">The meta-lesson is about <em>when</em> each response is appropriate:</p>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>Push Back</h3>
+                    <p>When the AI uses unfamiliar methods, when someone flags a problem, when the code doesn't match
+                        what documentation says. This is the full framework: NOTICE through CODIFY.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Lean In</h3>
+                    <p>When the knowledge is stable and fundamental, when there are no red flags, when the AI is
+                        explaining well-established concepts. Trust — but stay alert for signals.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Think Defensively</h3>
+                    <p>Always. Even when the code works. Especially when the AI doesn't mention any problems. Ask:
+                        "What could go wrong? What isn't the AI telling me? What would MDN say about this?"</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: Forward Pointer — What Comes Next
+         Testing lab preview
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Forward Pointer — What Comes Next</h2>
+
+            <p>Everything I've built so far is awareness. I know to check MDN. I know to push back on unfamiliar
+                methods. I know to think about what could go wrong. But awareness isn't enforcement.</p>
+
+            <p class="mt-1">In the testing lab (Week 3), I'll learn about tools that <em>automate</em> what I've been
+                doing manually — ESLint security plugins that flag dangerous patterns like <code>innerHTML</code>
+                before the code even runs, <code>npm audit</code> that checks dependencies for known vulnerabilities,
+                and Dependabot that watches for security patches in the packages I rely on.</p>
+
+            <p class="mt-1">The framework I built here — NOTICE, STOP, INTERROGATE, UNDERSTAND, CODIFY — won't go
+                away. But it'll have backup. Automated tools that catch the things my eyes miss, especially on long
+                days when I'm tired and the AI's answer looks "close enough."</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: HAP's Confessions
+         Three specific mistakes
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">HAP's Confessions</h2>
+
+        <div class="hap-note-callout mt-2">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>Confession 1: The Wall of Text</h3>
+                <p>Early on, I asked the AI "explain the DOM" and got back a massive wall of text that covered
+                    everything from the history of web browsers to advanced event delegation. I read the whole thing,
+                    understood almost none of it, and felt more confused than when I started. The problem wasn't the
+                    AI — it was my question. "Explain the DOM" is like asking "explain cars." The answer could fill a
+                    book. I learned to ask specific questions: "How does querySelector find an element by its class
+                    name?" gets a useful answer.</p>
+            </div>
+        </div>
+
+        <div class="hap-note-callout mt-2">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>Confession 2: The innerText Incident</h3>
+                <p>The AI told me to use <code>innerText</code> to read element content, and I trusted it without
+                    checking. It worked in my tests, so I moved on. Later I discovered that <code>innerText</code>
+                    triggers a reflow — the browser has to recalculate the layout to figure out what's visually
+                    rendered. For my little Robot ID Card, it didn't matter. But if I'd built that habit into a larger
+                    project with hundreds of elements, the performance cost would have added up. MDN would have told
+                    me about <code>textContent</code> as the better default.</p>
+            </div>
+        </div>
+
+        <div class="hap-note-callout mt-2">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>Confession 3: The Version Mismatch</h3>
+                <p>I asked the AI for help with Vite configuration and got back instructions for Vite 5. I was using
+                    Vite 7. The config syntax had changed, and nothing worked. I spent an hour debugging before I
+                    realized the AI was drawing from outdated training data. That's when I discovered Context7 — it
+                    serves versioned documentation, so when I ask about Vite, I get the docs for the version I'm
+                    actually using.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: Quick Reference — 5 Tip Cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>Push Back When Flagged</h3>
+                    <p>When someone flags an issue with AI-generated code, or when the AI uses a method I haven't seen
+                        before, I don't accept it and I don't swap it. I stop, connect the MCP server, read the
+                        documentation, and understand why before I decide what to do.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>Lean In on Stable Knowledge</h3>
+                    <p>Not everything needs pushback. When the AI explains fundamental, stable concepts — CSS selector
+                        syntax, basic JavaScript operators, HTML element structure — and there are no red flags, I
+                        lean in and learn. Unnecessary skepticism slows me down and builds distrust.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>Bring Your Own Defensive Instinct</h3>
+                    <p>The AI won't warn me about security vulnerabilities, performance costs, or edge cases unless I
+                        ask. The defensive instinct — "what could go wrong?" — is something I have to bring myself.
+                        Always check the documentation, especially when the code works without apparent issues.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>MDN for Web Platform, Context7 for Libraries</h3>
+                    <p>Web platform questions — HTML, CSS, DOM, JavaScript — go to MDN MCP. Library and framework
+                        questions — Vite, Astro, React — go to Context7. Knowing which source to reach for saves time
+                        and gets me accurate, versioned answers.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>Ask Specific Questions</h3>
+                    <p>"Explain the DOM" gets a useless wall of text. "How does querySelector find an element by its
+                        class name?" gets a focused, useful answer. The quality of what I get from AI is directly
+                        proportional to the specificity of what I ask.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: Closing — Lab Complete
+         Full arc summary and celebration
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Lab Complete</h2>
+
+            <div class="hap-note-callout mt-2">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1762699548/hap-celebrating_bljvgl.jpg"
+                    alt="HAP celebrating a coding success"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>Six Stations Complete</h3>
+                    <p>Six stations ago, I thought the page was done once the HTML loaded. Now I know the page is
+                        never done — it's a living document that JavaScript can find, read, change, and build upon.
+                        I learned to access elements with <code>querySelector</code>, read their content with
+                        <code>textContent</code>, change their styles and attributes, and create entirely new nodes
+                        from scratch.</p>
+                    <p class="mt-1">But the bigger lesson was about the process. I started as someone who accepted
+                        whatever the AI generated. Now I push back when something looks wrong, lean in when the
+                        knowledge is solid, and bring my own defensive instincts to every interaction. I own my
+                        code — every line of it, whether I wrote it or the AI did.</p>
+                    <p class="mt-1">That's growth. 🟠</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</StationLayout>

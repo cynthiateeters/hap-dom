@@ -1,107 +1,177 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
 ---
-/**
- * Placeholder Hub Page
- *
- * Replace this file with content from src/templates/hub-template.astro
- *
- * GETTING STARTED:
- * 1. Read docs/designing-labs/hap-narrative-and-scene-design.md
- * 2. Fill out a station blueprint for each station (docs/reference-cards/station-blueprint-template.md)
- * 3. Copy src/templates/hub-template.astro to this location
- * 4. Replace all [PLACEHOLDER_*] markers with your content
- */
-
 import MainLayout from '../layouts/MainLayout.astro';
 
 const introContent = `
-    <p><strong>Welcome to your new HAP Learning Lab!</strong></p>
-    <p>This is a placeholder page. To get started, copy the hub template from
-    <code>src/templates/hub-template.astro</code> and replace this file.</p>
-    <p class="mt-1">Check out the documentation in the <code>docs/</code> folder for guidance
-    on creating your learning lab content. 🟠</p>
+    <p><strong>I thought my Robot ID Card was finished the moment I saved the HTML file.</strong> Then Prof. Teeters showed me something that changed everything: the browser doesn't display my HTML — it builds a living tree called the DOM. And JavaScript can reshape that tree without ever touching the original file.</p>
+    <p class="mt-1">Across six stations, I learned to find elements, read them, change them, build new ones from scratch, and — maybe most importantly — when to trust AI and when to push back. I made a lot of mistakes along the way. I'm sharing all of them.</p>
+    <p class="mt-1">Come learn with me — I promise I won't pretend any of this was easy. 🟠</p>
 `;
 ---
 
 <MainLayout
-    title="HAP's Learning Lab | Getting Started"
-    description="A placeholder page for your new HAP Learning Lab. Replace with your content."
+    title="The DOM | HAP's Learning Lab"
+    description="Join HAP as he discovers the DOM — the browser's living model of the page. Six stations covering finding, reading, changing, and building DOM elements, plus responsible AI collaboration."
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495998/hap-waving_dgzacg.jpg"
     headerTitle="HAP's Learning Lab"
-    headerSubtitle="Your Learning Lab Topic Here"
+    headerSubtitle="The DOM"
     avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-waving_dgzacg.jpg"
     avatarAlt="HAP waving hello"
     introContent={introContent}
+    showIntroImage={false}
     showNavigation={false}
-    footerReminder="Start by reading the documentation in docs/designing-labs/"
+    footerReminder="The DOM is alive. The page is never finished. And I own my code."
 >
 
+    <!-- ============================================================
+         About This Lab Section
+         ============================================================ -->
     <section class="content-section">
         <div class="topic-section">
-            <h2>Getting Started</h2>
+            <h2>About HAP's Learning Lab</h2>
 
-            <div class="analysis-grid">
+            <div class="analysis-grid analysis-grid--two-col">
                 <div class="analysis-point">
-                    <h3>📚 Step 1: Read the docs</h3>
-                    <p>Start with <code>docs/designing-labs/hap-narrative-and-scene-design.md</code></p>
-                    <p class="mt-1">This will help you understand HAP's voice and the station structure.</p>
+                    <h3>🔬 What I Learned</h3>
+                    <p>The DOM is the browser's live model of my page — a tree of objects that JavaScript can read, change, and build on. It's not my HTML file. It's what the browser constructs FROM my HTML file.</p>
+                    <p class="mt-1">I also learned that the page is never finished. Every element can be found, read, modified, or replaced — without a single page reload.</p>
                 </div>
 
                 <div class="analysis-point">
-                    <h3>📝 Step 2: Plan your stations</h3>
-                    <p>Use the blueprint template in <code>docs/reference-cards/station-blueprint-template.md</code></p>
-                    <p class="mt-1">Fill out one blueprint for each of your 6 stations before writing content.</p>
+                    <h3>🎯 How I Practiced</h3>
+                    <p>Every station uses my Robot ID Card as the running example. I find elements on the card, read their text, change their values, toggle their classes, and build new badges from scratch.</p>
+                    <p class="mt-1">Three interactive demos let me experiment with selectors, modifications, and element creation in real time.</p>
                 </div>
 
                 <div class="analysis-point">
-                    <h3>🏗️ Step 3: Create your pages</h3>
-                    <p>Copy templates from <code>src/templates/</code> to <code>src/pages/</code></p>
-                    <p class="mt-1">Replace all <code>[PLACEHOLDER_*]</code> markers with your content.</p>
+                    <h3>🎨 My Philosophy</h3>
+                    <p>I share every mistake I made — the wrong selectors, the security risks I almost missed, the methods that looked right but weren't. Learning from mistakes isn't embarrassing. It's the fastest path to understanding.</p>
+                    <p class="mt-1">Prof. Teeters and Grace Hopper helped me along the way, and I credit them when they did.</p>
                 </div>
 
                 <div class="analysis-point">
-                    <h3>✅ Step 4: Validate</h3>
-                    <p>Use the Claude Skills in <code>skills/</code> to validate your content</p>
-                    <p class="mt-1">Run <code>npm run build</code> to check for errors.</p>
+                    <h3>🤔 My Advice</h3>
+                    <p>Go through the stations in order — each one builds on the last. Try the code examples in your browser console. Break things on purpose. That's how I learned.</p>
+                    <p class="mt-1">And when AI generates code for the DOM, remember: working code isn't always good code. I own every line, whether I wrote it or AI did.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="content-section">
-        <div class="tips-container">
-            <h2 class="section-heading-centered">🎓 Quick Reference</h2>
+    <!-- ============================================================
+         Learning Stations Grid
+         ============================================================ -->
+    <div class="content-container">
+        <section class="content-section">
+            <h2 class="section-heading-centered">Learning Stations</h2>
+            <nav aria-label="Learning stations">
+                <div class="overview-grid">
 
-            <div class="tip-card">
-                <div class="tip-number">1</div>
-                <div>
-                    <h3>Hub template</h3>
-                    <p><code>src/templates/hub-template.astro</code> → <code>src/pages/index.astro</code></p>
-                </div>
-            </div>
+                    <a href="/stations/station1/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">🌳</span> Station 1: The Page Is Alive</h3>
+                        <p><strong>Focus:</strong> What the DOM is and how the browser builds it</p>
+                        <p class="station-description">I thought my HTML file WAS the page. Then Prof. Teeters showed me the browser builds a living tree — the DOM — and JavaScript talks to THAT, not my file. Mind. Blown.</p>
+                        <p class="station-cta">→ Visit Station 1</p>
+                    </a>
 
-            <div class="tip-card">
-                <div class="tip-number">2</div>
-                <div>
-                    <h3>Station template</h3>
-                    <p><code>src/templates/station-template.astro</code> → <code>src/pages/stations/station[1-6].astro</code></p>
-                </div>
-            </div>
+                    <a href="/stations/station2/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">🔍</span> Station 2: Finding Things</h3>
+                        <p><strong>Focus:</strong> querySelector and pushing back on AI</p>
+                        <p class="station-description">The AI gave me getElementById. It worked. Grace said one word: "Outdated." What happened next changed how I work with AI forever.</p>
+                        <p class="station-cta">→ Visit Station 2</p>
+                    </a>
 
-            <div class="tip-card">
-                <div class="tip-number">3</div>
-                <div>
-                    <h3>HAP images</h3>
-                    <p>See the image inventory in <code>skills/hap-image-validation/</code></p>
-                </div>
-            </div>
+                    <a href="/stations/station3/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">📖</span> Station 3: Reading the Room</h3>
+                        <p><strong>Focus:</strong> textContent, innerHTML, innerText, and getAttribute</p>
+                        <p class="station-description">Three ways to read the same element, three different answers. Grace drew a line between textContent and innerText — and warned me about innerHTML's dark side.</p>
+                        <p class="station-cta">→ Visit Station 3</p>
+                    </a>
 
-            <div class="tip-card">
-                <div class="tip-number">4</div>
-                <div>
-                    <h3>Development server</h3>
-                    <p>Run <code>npm run dev</code> to start the development server at localhost:4321</p>
+                    <a href="/stations/station4/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">✏️</span> Station 4: Changing Things</h3>
+                        <p><strong>Focus:</strong> Modifying text, classes, and attributes safely</p>
+                        <p class="station-description">I reached for innerHTML to change text. Prof. Teeters showed me XSS. My stomach dropped. Then I discovered the safe way — and had my biggest breakthrough yet.</p>
+                        <p class="station-cta">→ Visit Station 4</p>
+                    </a>
+
+                    <a href="/stations/station5/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">🔨</span> Station 5: Building New Things</h3>
+                        <p><strong>Focus:</strong> createElement, appendChild, and remove</p>
+                        <p class="station-description">What if the element I need doesn't exist yet? I learned to create elements from scratch, configure them backstage, and attach them to the page. Plus: the NodeList gotcha.</p>
+                        <p class="station-cta">→ Visit Station 5</p>
+                    </a>
+
+                    <a href="/stations/station6/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">🤖</span> Station 6: Learning with AI</h3>
+                        <p><strong>Focus:</strong> When to push back, lean in, or think defensively</p>
+                        <p class="station-description">The framework I built for working with AI: notice, stop, interrogate, understand, codify. Plus two MCP servers that connect AI to authoritative sources.</p>
+                        <p class="station-cta">→ Visit Station 6</p>
+                    </a>
+
                 </div>
+            </nav>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         Interactive Demos Section
+         ============================================================ -->
+    <div class="content-container">
+        <section class="content-section">
+            <h2 class="section-heading-centered">Interactive Demos</h2>
+            <div class="overview-grid">
+
+                <a href="/demos/selector-playground/" class="insight-card station-card-link">
+                    <h3>🔬 Selector Playground</h3>
+                    <p>Type CSS selectors, see what matches on the Robot ID Card, and compare textContent, innerHTML, and innerText side by side.</p>
+                    <p class="station-cta">→ Try the Demo</p>
+                </a>
+
+                <a href="/demos/dom-modifier/" class="insight-card station-card-link">
+                    <h3>🔬 DOM Modifier</h3>
+                    <p>Change text, toggle classes, update attributes on a live Robot ID Card. Includes a safe XSS simulation in the danger zone.</p>
+                    <p class="station-cta">→ Try the Demo</p>
+                </a>
+
+                <a href="/demos/badge-builder/" class="insight-card station-card-link">
+                    <h3>🔬 Badge Builder</h3>
+                    <p>Create skill badges from scratch and add them to the Robot ID Card. Click to remove. Watch the create-configure-attach pattern in action.</p>
+                    <p class="station-cta">→ Try the Demo</p>
+                </a>
+
             </div>
-        </div>
-    </section>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         Reference / Cheat Sheets Section
+         ============================================================ -->
+    <div class="content-container">
+        <section class="content-section">
+            <h2 class="section-heading-centered">Reference</h2>
+            <div class="overview-grid">
+
+                <a href="/cheat-sheets/pushing-back/" class="insight-card station-card-link">
+                    <h3>How I Learned to Push Back and Why</h3>
+                    <p>The story of the first time I pushed back on AI-generated code — and the notice-stop-interrogate-understand-codify framework I built from it.</p>
+                </a>
+
+                <a href="/cheat-sheets/selectors-and-reading/" class="insight-card station-card-link">
+                    <h3>CSS Selectors and DOM Reading Methods</h3>
+                    <p>Quick reference for CSS selector syntax, querySelector vs querySelectorAll, and the differences between textContent, innerHTML, and innerText.</p>
+                </a>
+
+                <a href="/cheat-sheets/dom-security/" class="insight-card station-card-link">
+                    <h3>DOM Security Awareness</h3>
+                    <p>XSS risks with innerHTML, the safe code path, sanitization libraries, CSP headers, and the safety hierarchy for DOM manipulation.</p>
+                </a>
+
+            </div>
+        </section>
+    </div>
 
 </MainLayout>

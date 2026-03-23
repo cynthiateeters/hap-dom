@@ -1,0 +1,702 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+    title="DOM Modifier | HAP's Learning Lab"
+    description="Interactive demo for practicing DOM modification: textContent, classList, setAttribute, and safe innerHTML exploration."
+    headerTitle="DOM Modifier"
+    headerSubtitle="Interactive Demo"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230817/hap-scientist_safwtg.jpg"
+    avatarAlt="HAP in scientist mode with lab equipment"
+    introContent="<p>This is my DOM modification playground. Try changing text, toggling classes, and updating attributes on the Robot ID Card below. I even included a safe way to see what innerHTML does with dangerous input. 🟠</p>"
+    showNavigation={false}
+    footerReminder="textContent for safe text, classList for classes, setAttribute for attributes. Never innerHTML with user input."
+>
+
+    <!-- Robot ID Card -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">Robot ID Card</h2>
+        <div class="demo-card-container">
+            <div class="robot-card" id="robot-card">
+                <div class="card-header">
+                    <span class="robot-emoji">🤖</span>
+                    <h2>Robot <span class="highlight">ID Card</span></h2>
+                </div>
+                <div class="card-section">
+                    <div class="info-row"><span class="label">Name</span><span id="robot-name">HAP-7000</span></div>
+                    <div class="info-row"><span class="label">Model</span><span id="robot-model">ProtoBot v7</span></div>
+                    <div class="info-row"><span class="label">Status</span><span id="status-message" data-status="offline" class="status-row">Offline</span></div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-task" id="btn-task">Complete Task</button>
+                    <button class="btn btn-rest" id="btn-rest">Rest</button>
+                </div>
+            </div>
+        </div>
+        <div class="demo-element-display" id="element-display">
+            <strong>Current HTML:</strong>
+            <pre id="html-output"></pre>
+        </div>
+    </section>
+
+    <!-- Controls Panel -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">Controls</h2>
+
+        <!-- Preset Buttons -->
+        <div class="demo-presets">
+            <h3>Quick Presets</h3>
+            <div class="preset-buttons">
+                <button class="demo-preset-btn" id="preset-online">Set Status to Online</button>
+                <button class="demo-preset-btn" id="preset-toggle">Toggle .online Class</button>
+                <button class="demo-preset-btn" id="preset-data">Update data-status</button>
+                <button class="demo-preset-btn demo-preset-danger" id="preset-xss">Try XSS (Safe)</button>
+                <button class="demo-preset-btn" id="preset-reset">Reset Card</button>
+            </div>
+        </div>
+
+        <!-- Text Changes -->
+        <div class="demo-control-panel">
+            <h3>Text Changes (textContent)</h3>
+            <div class="demo-control-row">
+                <label for="text-target">Target:</label>
+                <select id="text-target" class="demo-select">
+                    <option value="robot-name">#robot-name</option>
+                    <option value="robot-model">#robot-model</option>
+                    <option value="status-message">#status-message</option>
+                </select>
+            </div>
+            <div class="demo-control-row">
+                <label for="text-value">New text:</label>
+                <input type="text" id="text-value" class="demo-input" placeholder="Enter new text...">
+            </div>
+            <button class="demo-action-btn" id="btn-set-text">Set textContent</button>
+        </div>
+
+        <!-- Class Toggle -->
+        <div class="demo-control-panel">
+            <h3>Class Toggle (classList)</h3>
+            <div class="demo-control-row">
+                <label for="class-name">Class:</label>
+                <select id="class-name" class="demo-select">
+                    <option value="online">online</option>
+                    <option value="offline">offline</option>
+                    <option value="active">active</option>
+                    <option value="highlight">highlight</option>
+                    <option value="error">error</option>
+                </select>
+            </div>
+            <button class="demo-action-btn" id="btn-toggle-class">Toggle Class</button>
+            <div class="demo-class-display">
+                <strong>Current classList on #status-message:</strong>
+                <code id="class-output">status-row</code>
+            </div>
+        </div>
+
+        <!-- Attribute Editor -->
+        <div class="demo-control-panel">
+            <h3>Attribute Editor (setAttribute)</h3>
+            <div class="demo-control-row">
+                <label for="attr-name">Attribute:</label>
+                <input type="text" id="attr-name" class="demo-input" placeholder="e.g. data-status" value="data-status">
+            </div>
+            <div class="demo-control-row">
+                <label for="attr-value">Value:</label>
+                <input type="text" id="attr-value" class="demo-input" placeholder="e.g. online">
+            </div>
+            <button class="demo-action-btn" id="btn-set-attr">Set Attribute</button>
+        </div>
+
+        <!-- DANGER ZONE -->
+        <div class="demo-control-panel demo-danger-zone">
+            <button class="demo-danger-toggle" id="btn-danger-toggle">Show Danger Zone (innerHTML)</button>
+            <div class="demo-danger-content" id="danger-content" hidden>
+                <div class="demo-danger-warning">
+                    <strong>Warning:</strong> This is a <strong>safe simulation</strong>. The innerHTML input below does NOT execute scripts. It shows what WOULD happen if innerHTML were used with untrusted input — the string is displayed as escaped text to demonstrate the risk.
+                </div>
+                <div class="demo-control-row">
+                    <label for="danger-input">innerHTML string:</label>
+                    <input type="text" id="danger-input" class="demo-input demo-input-danger" placeholder='<img src="x" onerror="alert(\'hacked!\')">'>
+                </div>
+                <button class="demo-action-btn demo-action-danger" id="btn-danger-inject">Simulate innerHTML</button>
+                <div class="demo-danger-result" id="danger-result" hidden>
+                    <p><strong>What innerHTML would do:</strong></p>
+                    <pre id="danger-output"></pre>
+                    <p class="demo-danger-explain">In a real page, the browser would parse this as HTML and execute any scripts or event handlers. Using <code>textContent</code> instead would display this as literal text — safe and harmless.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Log -->
+        <div class="demo-control-panel">
+            <h3>Action Log</h3>
+            <div class="demo-log" id="action-log">
+                <p class="demo-log-entry">Ready. Try a preset or use the controls above.</p>
+            </div>
+        </div>
+    </section>
+
+</MainLayout>
+
+<style>
+    /* Robot Card Styles */
+    .demo-card-container {
+        display: flex;
+        justify-content: center;
+        margin: 1.5rem 0;
+    }
+
+    .robot-card {
+        background: hsl(220, 20%, 18%);
+        border: 2px solid hsl(30, 90%, 55%);
+        border-radius: 12px;
+        padding: 1.5rem;
+        max-width: 360px;
+        width: 100%;
+        font-family: inherit;
+    }
+
+    .robot-card .card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid hsl(220, 15%, 30%);
+    }
+
+    .robot-card .robot-emoji {
+        font-size: 2rem;
+    }
+
+    .robot-card .card-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: hsl(0, 0%, 95%);
+    }
+
+    .robot-card .highlight {
+        color: hsl(30, 90%, 55%);
+    }
+
+    .robot-card .card-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .robot-card .info-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.4rem 0;
+    }
+
+    .robot-card .label {
+        color: hsl(220, 10%, 60%);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .robot-card .info-row span:last-child {
+        color: hsl(0, 0%, 90%);
+        font-weight: 600;
+    }
+
+    .robot-card .status-row {
+        color: hsl(0, 60%, 60%);
+    }
+
+    .robot-card .status-row.online {
+        color: hsl(120, 60%, 50%);
+    }
+
+    .robot-card .card-actions {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .robot-card .btn {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: opacity 0.2s;
+    }
+
+    .robot-card .btn:hover {
+        opacity: 0.85;
+    }
+
+    .robot-card .btn-task {
+        background: hsl(30, 90%, 55%);
+        color: hsl(0, 0%, 10%);
+    }
+
+    .robot-card .btn-rest {
+        background: hsl(220, 15%, 30%);
+        color: hsl(0, 0%, 90%);
+    }
+
+    /* Element display */
+    .demo-element-display {
+        background: hsl(220, 20%, 14%);
+        border: 1px solid hsl(220, 15%, 25%);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-top: 1rem;
+        font-size: 0.85rem;
+    }
+
+    .demo-element-display pre {
+        margin: 0.5rem 0 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+        color: hsl(180, 50%, 65%);
+        font-size: 0.8rem;
+    }
+
+    /* Presets */
+    .demo-presets {
+        margin-bottom: 1.5rem;
+    }
+
+    .demo-presets h3 {
+        margin-bottom: 0.75rem;
+    }
+
+    .preset-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .demo-preset-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid hsl(30, 90%, 55%);
+        background: hsl(220, 20%, 18%);
+        color: hsl(30, 90%, 55%);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        font-weight: 600;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .demo-preset-btn:hover {
+        background: hsl(30, 90%, 55%);
+        color: hsl(0, 0%, 10%);
+    }
+
+    .demo-preset-danger {
+        border-color: hsl(0, 70%, 55%);
+        color: hsl(0, 70%, 55%);
+    }
+
+    .demo-preset-danger:hover {
+        background: hsl(0, 70%, 55%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    /* Control panels */
+    .demo-control-panel {
+        background: hsl(220, 20%, 16%);
+        border: 1px solid hsl(220, 15%, 25%);
+        border-radius: 8px;
+        padding: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .demo-control-panel h3 {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+        color: hsl(30, 90%, 55%);
+    }
+
+    .demo-control-row {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .demo-control-row label {
+        min-width: 5rem;
+        font-size: 0.85rem;
+        color: hsl(220, 10%, 70%);
+    }
+
+    .demo-select,
+    .demo-input {
+        flex: 1;
+        padding: 0.5rem 0.75rem;
+        background: hsl(220, 20%, 12%);
+        border: 1px solid hsl(220, 15%, 30%);
+        border-radius: 4px;
+        color: hsl(0, 0%, 90%);
+        font-size: 0.85rem;
+        font-family: inherit;
+    }
+
+    .demo-select:focus,
+    .demo-input:focus {
+        outline: 2px solid hsl(30, 90%, 55%);
+        outline-offset: 1px;
+    }
+
+    .demo-input-danger {
+        border-color: hsl(0, 70%, 40%);
+    }
+
+    .demo-action-btn {
+        padding: 0.5rem 1.25rem;
+        background: hsl(30, 90%, 55%);
+        color: hsl(0, 0%, 10%);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        margin-top: 0.25rem;
+        transition: opacity 0.2s;
+    }
+
+    .demo-action-btn:hover {
+        opacity: 0.85;
+    }
+
+    .demo-action-btn:focus-visible {
+        outline: 2px solid hsl(0, 0%, 100%);
+        outline-offset: 2px;
+    }
+
+    .demo-action-danger {
+        background: hsl(0, 70%, 55%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    /* Class display */
+    .demo-class-display {
+        margin-top: 0.75rem;
+        padding: 0.5rem 0.75rem;
+        background: hsl(220, 20%, 12%);
+        border-radius: 4px;
+        font-size: 0.85rem;
+    }
+
+    .demo-class-display code {
+        color: hsl(180, 50%, 65%);
+    }
+
+    /* Danger zone */
+    .demo-danger-zone {
+        border-color: hsl(0, 70%, 35%);
+    }
+
+    .demo-danger-toggle {
+        background: none;
+        border: 1px solid hsl(0, 70%, 55%);
+        color: hsl(0, 70%, 55%);
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 0.85rem;
+        width: 100%;
+        transition: background 0.2s, color 0.2s;
+    }
+
+    .demo-danger-toggle:hover {
+        background: hsl(0, 70%, 55%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    .demo-danger-content {
+        margin-top: 1rem;
+    }
+
+    .demo-danger-warning {
+        background: hsl(0, 70%, 15%);
+        border: 1px solid hsl(0, 70%, 35%);
+        border-radius: 6px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        color: hsl(0, 70%, 80%);
+        line-height: 1.5;
+    }
+
+    .demo-danger-result {
+        margin-top: 1rem;
+        padding: 1rem;
+        background: hsl(0, 70%, 10%);
+        border: 1px solid hsl(0, 70%, 30%);
+        border-radius: 6px;
+    }
+
+    .demo-danger-result pre {
+        margin: 0.5rem 0;
+        white-space: pre-wrap;
+        word-break: break-all;
+        color: hsl(0, 70%, 70%);
+        font-size: 0.8rem;
+    }
+
+    .demo-danger-explain {
+        font-size: 0.8rem;
+        color: hsl(220, 10%, 60%);
+        margin-top: 0.5rem;
+    }
+
+    /* Log */
+    .demo-log {
+        max-height: 200px;
+        overflow-y: auto;
+        background: hsl(220, 20%, 12%);
+        border-radius: 4px;
+        padding: 0.75rem;
+        font-size: 0.8rem;
+        font-family: 'Source Code Pro', monospace;
+    }
+
+    .demo-log-entry {
+        margin: 0 0 0.25rem;
+        padding: 0.25rem 0;
+        border-bottom: 1px solid hsl(220, 15%, 20%);
+        color: hsl(120, 40%, 65%);
+    }
+
+    .demo-log-entry:last-child {
+        border-bottom: none;
+    }
+
+    .demo-log-warn {
+        color: hsl(0, 70%, 65%);
+    }
+
+    /* Active/error card states */
+    .robot-card .status-row.active {
+        font-weight: 700;
+    }
+
+    .robot-card .status-row.error {
+        color: hsl(0, 80%, 60%);
+    }
+</style>
+
+<script is:inline>
+(function () {
+    'use strict';
+
+    // Elements
+    const statusMessage = document.getElementById('status-message');
+    const robotName = document.getElementById('robot-name');
+    const robotModel = document.getElementById('robot-model');
+    const htmlOutput = document.getElementById('html-output');
+    const classOutput = document.getElementById('class-output');
+    const actionLog = document.getElementById('action-log');
+
+    // Original values for reset
+    const originals = {
+        'robot-name': 'HAP-7000',
+        'robot-model': 'ProtoBot v7',
+        'status-message': 'Offline'
+    };
+    const originalClasses = 'status-row';
+    const originalDataStatus = 'offline';
+
+    function getTargetElement(id) {
+        return document.getElementById(id);
+    }
+
+    function updateHtmlDisplay() {
+        const card = document.getElementById('status-message');
+        if (card && htmlOutput) {
+            const parent = card.closest('.card-section');
+            if (parent) {
+                htmlOutput.textContent = parent.innerHTML.trim();
+            }
+        }
+    }
+
+    function updateClassDisplay() {
+        if (statusMessage && classOutput) {
+            classOutput.textContent = statusMessage.className || '(none)';
+        }
+    }
+
+    function log(message, isWarn) {
+        if (!actionLog) return;
+        const entry = document.createElement('p');
+        entry.className = 'demo-log-entry' + (isWarn ? ' demo-log-warn' : '');
+        entry.textContent = message;
+        actionLog.prepend(entry);
+    }
+
+    // Initial display
+    updateHtmlDisplay();
+    updateClassDisplay();
+
+    // Text Changes
+    var btnSetText = document.getElementById('btn-set-text');
+    if (btnSetText) {
+        btnSetText.addEventListener('click', function () {
+            var targetId = document.getElementById('text-target').value;
+            var newText = document.getElementById('text-value').value;
+            var el = getTargetElement(targetId);
+            if (el && newText) {
+                el.textContent = newText;
+                log('textContent: #' + targetId + ' = "' + newText + '"');
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Class Toggle
+    var btnToggleClass = document.getElementById('btn-toggle-class');
+    if (btnToggleClass) {
+        btnToggleClass.addEventListener('click', function () {
+            var className = document.getElementById('class-name').value;
+            if (statusMessage) {
+                statusMessage.classList.toggle(className);
+                var action = statusMessage.classList.contains(className) ? 'added' : 'removed';
+                log('classList.toggle: ' + action + ' "' + className + '" on #status-message');
+                updateClassDisplay();
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Attribute Editor
+    var btnSetAttr = document.getElementById('btn-set-attr');
+    if (btnSetAttr) {
+        btnSetAttr.addEventListener('click', function () {
+            var attrName = document.getElementById('attr-name').value;
+            var attrValue = document.getElementById('attr-value').value;
+            if (statusMessage && attrName) {
+                statusMessage.setAttribute(attrName, attrValue);
+                log('setAttribute: #status-message[' + attrName + '] = "' + attrValue + '"');
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Danger Zone Toggle
+    var btnDangerToggle = document.getElementById('btn-danger-toggle');
+    var dangerContent = document.getElementById('danger-content');
+    if (btnDangerToggle && dangerContent) {
+        btnDangerToggle.addEventListener('click', function () {
+            var isHidden = dangerContent.hidden;
+            dangerContent.hidden = !isHidden;
+            btnDangerToggle.textContent = isHidden
+                ? 'Hide Danger Zone (innerHTML)'
+                : 'Show Danger Zone (innerHTML)';
+        });
+    }
+
+    // Danger Zone Simulate
+    var btnDangerInject = document.getElementById('btn-danger-inject');
+    if (btnDangerInject) {
+        btnDangerInject.addEventListener('click', function () {
+            var dangerInput = document.getElementById('danger-input').value;
+            var dangerResult = document.getElementById('danger-result');
+            var dangerOutput = document.getElementById('danger-output');
+            if (dangerResult && dangerOutput && dangerInput) {
+                dangerResult.hidden = false;
+                // SAFE: display as escaped text, never execute
+                dangerOutput.textContent = dangerInput;
+                log('SIMULATED innerHTML: "' + dangerInput + '" (not executed)', true);
+            }
+        });
+    }
+
+    // Preset: Set Status to Online
+    var presetOnline = document.getElementById('preset-online');
+    if (presetOnline) {
+        presetOnline.addEventListener('click', function () {
+            if (statusMessage) {
+                statusMessage.textContent = 'Online';
+                log('Preset: textContent set to "Online"');
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Preset: Toggle .online Class
+    var presetToggle = document.getElementById('preset-toggle');
+    if (presetToggle) {
+        presetToggle.addEventListener('click', function () {
+            if (statusMessage) {
+                statusMessage.classList.toggle('online');
+                var has = statusMessage.classList.contains('online');
+                log('Preset: classList.toggle("online") — now ' + (has ? 'present' : 'removed'));
+                updateClassDisplay();
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Preset: Update data-status
+    var presetData = document.getElementById('preset-data');
+    if (presetData) {
+        presetData.addEventListener('click', function () {
+            if (statusMessage) {
+                var current = statusMessage.getAttribute('data-status');
+                var next = current === 'online' ? 'offline' : 'online';
+                statusMessage.setAttribute('data-status', next);
+                log('Preset: setAttribute("data-status", "' + next + '")');
+                updateHtmlDisplay();
+            }
+        });
+    }
+
+    // Preset: Try XSS (Safe)
+    var presetXss = document.getElementById('preset-xss');
+    if (presetXss) {
+        presetXss.addEventListener('click', function () {
+            // Show danger zone if hidden
+            if (dangerContent && dangerContent.hidden) {
+                dangerContent.hidden = false;
+                btnDangerToggle.textContent = 'Hide Danger Zone (innerHTML)';
+            }
+            var dangerInput = document.getElementById('danger-input');
+            var dangerResult = document.getElementById('danger-result');
+            var dangerOutput = document.getElementById('danger-output');
+            var xssString = '<img src="x" onerror="alert(\'hacked!\')">';
+            if (dangerInput) dangerInput.value = xssString;
+            if (dangerResult && dangerOutput) {
+                dangerResult.hidden = false;
+                dangerOutput.textContent = xssString;
+            }
+            log('Preset: XSS simulation — string displayed as text (SAFE)', true);
+        });
+    }
+
+    // Preset: Reset
+    var presetReset = document.getElementById('preset-reset');
+    if (presetReset) {
+        presetReset.addEventListener('click', function () {
+            if (robotName) robotName.textContent = originals['robot-name'];
+            if (robotModel) robotModel.textContent = originals['robot-model'];
+            if (statusMessage) {
+                statusMessage.textContent = originals['status-message'];
+                statusMessage.className = originalClasses;
+                statusMessage.setAttribute('data-status', originalDataStatus);
+            }
+            log('Preset: Card reset to original values');
+            updateHtmlDisplay();
+            updateClassDisplay();
+        });
+    }
+})();
+</script>

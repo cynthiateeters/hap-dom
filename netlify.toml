@@ -1,0 +1,43 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# Ignore paths that should not trigger rebuilds
+[build.processing]
+  skip_processing = false
+
+# Files/directories excluded from the deploy
+# Netlify only deploys the publish directory (dist/),
+# so source files are never uploaded. This section
+# prevents unnecessary build triggers on changes to
+# non-source files.
+[build.ignore]
+  # Not supported natively — use ignore command below
+
+# Skip rebuilds when only non-source files change
+[context.production]
+  command = "npm run build"
+
+# Security and performance headers
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https://res.cloudinary.com; font-src 'self'; connect-src 'self'"
+
+# Cache static assets aggressively
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

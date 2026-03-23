@@ -1,0 +1,478 @@
+---
+/**
+ * Badge Builder — Interactive demo for Station 5
+ * Practice the Create → Configure → Attach pattern with DOM elements
+ */
+import MainLayout from '../../layouts/MainLayout.astro';
+
+const introContent = `
+    <p><strong>Practice the Create → Configure → Attach pattern!</strong> Type a badge name and click "Create Badge" to add it to the Robot ID Card. Click any badge to remove it. The "What's Happening" panel shows the JavaScript running behind each action. &#x1F7E0;</p>
+`;
+---
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+<MainLayout
+    title="Badge Builder | HAP's Learning Lab"
+    description="Interactive demo for practicing createElement, appendChild, and remove — the create-configure-attach pattern from Station 5."
+    headerTitle="Badge Builder"
+    headerSubtitle="Interactive Demo"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230817/hap-scientist_safwtg.jpg"
+    avatarAlt="HAP in scientist mode with lab equipment"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="Create → Configure → Attach. Click a badge to remove it."
+>
+
+    <section class="content-section">
+
+        <!-- Robot ID Card -->
+        <div class="robot-card">
+            <div class="card-header">
+                <span class="robot-emoji">&#x1F916;</span>
+                <h2>Robot <span class="highlight">ID Card</span></h2>
+            </div>
+            <div class="card-section">
+                <div class="info-row"><span class="label">Name</span><span id="robot-name">HAP-7000</span></div>
+                <div class="info-row"><span class="label">Model</span><span id="robot-model">ProtoBot v7</span></div>
+            </div>
+            <div class="badge-container">
+                <h3>Skill Badges</h3>
+                <div id="badge-area"></div>
+                <p class="badge-count"><span id="badge-count">0</span> badges earned</p>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="demo-controls">
+            <div class="input-row">
+                <label for="badge-input" class="visually-hidden">Badge text</label>
+                <input type="text" id="badge-input" placeholder="Type a badge name..." maxlength="20" aria-label="Badge text">
+                <button type="button" id="create-btn" class="btn btn-primary">Create Badge</button>
+            </div>
+            <div class="preset-row">
+                <button type="button" class="btn btn-preset" data-badge="JavaScript">Add JavaScript</button>
+                <button type="button" class="btn btn-preset" data-badge="DOM">Add DOM</button>
+                <button type="button" class="btn btn-preset" data-badge="CSS">Add CSS</button>
+                <button type="button" class="btn btn-clear" id="clear-btn">Clear All</button>
+            </div>
+        </div>
+
+        <!-- What's Happening Panel -->
+        <div class="whats-happening">
+            <h3>What's Happening</h3>
+            <pre id="code-output"><code>// Click a button to see the JavaScript code here...</code></pre>
+        </div>
+
+        <!-- Back link -->
+        <div class="back-link">
+            <a href="/stations/station5/">← Back to Station 5: Building New Things</a>
+        </div>
+
+    </section>
+
+</MainLayout>
+
+<style>
+    /* Robot ID Card */
+    .robot-card {
+        max-width: 28rem;
+        margin: 0 auto 2rem;
+        border: 2px solid hsl(30, 70%, 50%);
+        border-radius: 1rem;
+        overflow: hidden;
+        background: hsl(0, 0%, 100%);
+        box-shadow: 0 4px 12px hsl(0, 0%, 0%, 0.1);
+    }
+
+    .card-header {
+        background: hsl(220, 20%, 18%);
+        color: hsl(0, 0%, 100%);
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .card-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+    }
+
+    .robot-emoji {
+        font-size: 2rem;
+    }
+
+    .highlight {
+        color: hsl(30, 90%, 55%);
+    }
+
+    .card-section {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid hsl(0, 0%, 90%);
+    }
+
+    .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.35rem 0;
+    }
+
+    .info-row .label {
+        font-weight: 700;
+        color: hsl(220, 15%, 40%);
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+    }
+
+    .badge-container {
+        padding: 1rem 1.5rem;
+        text-align: center;
+    }
+
+    .badge-container h3 {
+        margin: 0 0 0.75rem;
+        font-size: 0.9rem;
+        color: hsl(220, 15%, 40%);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    #badge-area {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        min-height: 2.5rem;
+        padding: 0.5rem;
+        border: 2px dashed hsl(0, 0%, 85%);
+        border-radius: 0.5rem;
+        transition: border-color 0.2s;
+    }
+
+    #badge-area:empty {
+        border-color: hsl(0, 0%, 85%);
+    }
+
+    #badge-area:not(:empty) {
+        border-color: hsl(30, 70%, 50%);
+        border-style: solid;
+    }
+
+    .badge-count {
+        margin: 0.5rem 0 0;
+        font-size: 0.85rem;
+        color: hsl(220, 15%, 50%);
+    }
+
+    /* Badge elements */
+    :global(.badge) {
+        display: inline-block;
+        padding: 0.3rem 0.75rem;
+        background: hsl(30, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+        border-radius: 1rem;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 0.15s, opacity 0.3s, background 0.15s;
+        animation: badge-in 0.3s ease-out;
+        user-select: none;
+    }
+
+    :global(.badge:hover) {
+        background: hsl(0, 65%, 50%);
+        transform: scale(1.05);
+    }
+
+    :global(.badge:focus-visible) {
+        outline: 2px solid hsl(220, 80%, 55%);
+        outline-offset: 2px;
+    }
+
+    :global(.badge.removing) {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    @keyframes badge-in {
+        from {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Controls */
+    .demo-controls {
+        max-width: 28rem;
+        margin: 0 auto 2rem;
+    }
+
+    .input-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .input-row input {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        border: 2px solid hsl(0, 0%, 80%);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: border-color 0.2s;
+    }
+
+    .input-row input:focus {
+        outline: none;
+        border-color: hsl(30, 70%, 50%);
+    }
+
+    .preset-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        font-family: inherit;
+        transition: background 0.15s, transform 0.1s;
+    }
+
+    .btn:active {
+        transform: scale(0.97);
+    }
+
+    .btn:focus-visible {
+        outline: 2px solid hsl(220, 80%, 55%);
+        outline-offset: 2px;
+    }
+
+    .btn-primary {
+        background: hsl(30, 80%, 50%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    .btn-primary:hover {
+        background: hsl(30, 80%, 42%);
+    }
+
+    .btn-primary:disabled {
+        background: hsl(0, 0%, 75%);
+        cursor: not-allowed;
+    }
+
+    .btn-preset {
+        background: hsl(220, 20%, 93%);
+        color: hsl(220, 20%, 30%);
+    }
+
+    .btn-preset:hover {
+        background: hsl(220, 20%, 85%);
+    }
+
+    .btn-clear {
+        background: hsl(0, 65%, 92%);
+        color: hsl(0, 65%, 40%);
+        margin-left: auto;
+    }
+
+    .btn-clear:hover {
+        background: hsl(0, 65%, 85%);
+    }
+
+    /* What's Happening Panel */
+    .whats-happening {
+        max-width: 36rem;
+        margin: 0 auto 2rem;
+        background: hsl(220, 20%, 15%);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+        overflow: hidden;
+    }
+
+    .whats-happening h3 {
+        margin: 0 0 0.75rem;
+        color: hsl(30, 90%, 55%);
+        font-size: 0.85rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .whats-happening pre {
+        margin: 0;
+        padding: 0;
+        background: none;
+        overflow-x: auto;
+    }
+
+    .whats-happening code {
+        color: hsl(120, 30%, 70%);
+        font-size: 0.85rem;
+        line-height: 1.6;
+        white-space: pre;
+    }
+
+    /* Back link */
+    .back-link {
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .back-link a {
+        color: hsl(30, 70%, 45%);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    .visually-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+</style>
+
+<script is:inline>
+(function () {
+    const MAX_BADGES = 8;
+    const badgeArea = document.getElementById('badge-area');
+    const badgeCountEl = document.getElementById('badge-count');
+    const badgeInput = document.getElementById('badge-input');
+    const createBtn = document.getElementById('create-btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const codeOutput = document.querySelector('#code-output code');
+    const presetBtns = document.querySelectorAll('.btn-preset');
+
+    function getBadgeCount() {
+        return badgeArea.querySelectorAll('.badge').length;
+    }
+
+    function updateCount() {
+        badgeCountEl.textContent = getBadgeCount();
+        createBtn.disabled = getBadgeCount() >= MAX_BADGES;
+    }
+
+    function showCode(lines) {
+        codeOutput.textContent = lines.join('\n');
+    }
+
+    function addBadge(text) {
+        if (!text.trim() || getBadgeCount() >= MAX_BADGES) return;
+
+        var badge = document.createElement('span');
+        badge.textContent = text.trim();
+        badge.classList.add('badge');
+        badge.setAttribute('role', 'button');
+        badge.setAttribute('tabindex', '0');
+        badge.setAttribute('aria-label', 'Remove badge: ' + text.trim());
+        badge.title = 'Click to remove';
+
+        badge.addEventListener('click', function () {
+            removeBadge(badge);
+        });
+        badge.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                removeBadge(badge);
+            }
+        });
+
+        badgeArea.appendChild(badge);
+        updateCount();
+
+        showCode([
+            "// Create → Configure → Attach",
+            "const badge = document.createElement('span');",
+            "badge.textContent = '" + text.trim() + "';",
+            "badge.classList.add('badge');",
+            "document.querySelector('#badge-area').appendChild(badge);",
+            "",
+            "// Badge count: " + getBadgeCount() + " / " + MAX_BADGES
+        ]);
+    }
+
+    function removeBadge(badge) {
+        var badgeText = badge.textContent;
+        badge.classList.add('removing');
+        setTimeout(function () {
+            badge.remove();
+            updateCount();
+            showCode([
+                "// Find and remove the badge",
+                "const badge = document.querySelector('.badge');",
+                "// badge.textContent was '" + badgeText + "'",
+                "badge.remove();",
+                "",
+                "// Badge count: " + getBadgeCount() + " / " + MAX_BADGES
+            ]);
+        }, 300);
+    }
+
+    function clearAll() {
+        var badges = badgeArea.querySelectorAll('.badge');
+        var count = badges.length;
+        badges.forEach(function (badge) {
+            badge.classList.add('removing');
+        });
+        setTimeout(function () {
+            badgeArea.innerHTML = '';
+            updateCount();
+            showCode([
+                "// Remove all badges",
+                "const badges = document.querySelectorAll('.badge');",
+                "// Found " + count + " badges",
+                "badges.forEach(badge => badge.remove());",
+                "",
+                "// Badge count: 0 / " + MAX_BADGES
+            ]);
+        }, 300);
+    }
+
+    createBtn.addEventListener('click', function () {
+        addBadge(badgeInput.value);
+        badgeInput.value = '';
+        badgeInput.focus();
+    });
+
+    badgeInput.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            addBadge(badgeInput.value);
+            badgeInput.value = '';
+        }
+    });
+
+    clearBtn.addEventListener('click', clearAll);
+
+    presetBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+            addBadge(btn.dataset.badge);
+        });
+    });
+
+    updateCount();
+})();
+</script>

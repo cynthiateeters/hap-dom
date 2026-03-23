@@ -1,0 +1,169 @@
+---
+/**
+ * Cheat Sheet: CSS Selectors and DOM Reading Methods
+ * Companion reference for Station 3: Reading the Room
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<MainLayout
+    title="CSS Selectors and DOM Reading Methods | HAP's Learning Lab"
+    description="Quick reference for CSS selector syntax in JavaScript and DOM reading methods: textContent, innerHTML, innerText, and getAttribute."
+    headerTitle="CSS Selectors and DOM Reading Methods"
+    headerSubtitle="Quick Reference"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495999/hap-confused-map_q8q0ej.jpg"
+    avatarAlt="HAP looking confused while studying a map"
+    introContent="<p>Everything I keep forgetting about selectors and reading methods, all in one place. I made this so I'd stop looking things up every five minutes. 🟠</p>"
+    showNavigation={false}
+    footerReminder="textContent for text, innerHTML for markup, getAttribute for attributes."
+>
+
+    <!-- ============================================================
+         CSS Selector Syntax
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>CSS Selector Syntax</h2>
+
+            <p class="mb-2">These are the same selectors from CSS stylesheets — querySelector uses identical syntax.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3><code>.class</code></h3>
+                    <p>Selects by class name. Example: <code>querySelector('.card-header')</code> finds the first element with class <code>card-header</code>.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>#id</code></h3>
+                    <p>Selects by ID. Example: <code>querySelector('#robot-name')</code> finds the element with ID <code>robot-name</code>.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>tag</code></h3>
+                    <p>Selects by tag name. Example: <code>querySelector('h2')</code> finds the first <code>&lt;h2&gt;</code> element.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>parent child</code></h3>
+                    <p>Descendant selector. Example: <code>querySelector('.card-header h2')</code> finds an <code>&lt;h2&gt;</code> anywhere inside <code>.card-header</code>.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>parent > child</code></h3>
+                    <p>Direct child selector. Example: <code>querySelector('.card-header > h2')</code> finds an <code>&lt;h2&gt;</code> that is a direct child of <code>.card-header</code>.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>[attr]</code></h3>
+                    <p>Attribute selector. Example: <code>querySelector('[data-status]')</code> finds the first element with a <code>data-status</code> attribute.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3><code>[attr="val"]</code></h3>
+                    <p>Attribute value selector. Example: <code>querySelector('[data-status="online"]')</code> finds elements where <code>data-status</code> equals <code>"online"</code>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         querySelector vs querySelectorAll
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>querySelector vs querySelectorAll</h2>
+
+            <div class="prompt-box">
+                <div class="prompt-label">querySelector — first match only:</div>
+                <CodeBlock code={`const header = document.querySelector('.card-header');
+// Returns: one Element, or null if nothing matches`} lang="javascript" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">querySelectorAll — all matches:</div>
+                <CodeBlock code={`const rows = document.querySelectorAll('.info-row');
+// Returns: a NodeList of all matching elements (can be empty)
+// Loop with forEach:
+rows.forEach(row => console.log(row.textContent));`} lang="javascript" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Reading Methods Comparison
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Reading Methods Comparison</h2>
+
+            <p class="mb-2">Three ways to read from the same element — three different results.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>textContent</h3>
+                    <p><strong>Returns:</strong> Plain text<br>
+                    <strong>Hidden elements:</strong> Included<br>
+                    <strong>HTML tags:</strong> Stripped<br>
+                    <strong>Performance:</strong> Fast<br>
+                    <strong>Best for:</strong> Reading text safely. The recommended default.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>innerText</h3>
+                    <p><strong>Returns:</strong> Visible text only<br>
+                    <strong>Hidden elements:</strong> Excluded<br>
+                    <strong>HTML tags:</strong> Stripped<br>
+                    <strong>Performance:</strong> Slower (checks layout)<br>
+                    <strong>Best for:</strong> When visibility matters — reading what the user actually sees.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>innerHTML</h3>
+                    <p><strong>Returns:</strong> HTML markup as a string<br>
+                    <strong>Hidden elements:</strong> Included<br>
+                    <strong>HTML tags:</strong> Preserved<br>
+                    <strong>Performance:</strong> Fast<br>
+                    <strong>Best for:</strong> Reading HTML structure. Dangerous when used for writing.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         getAttribute()
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>getAttribute()</h2>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Reading attributes from elements:</div>
+                <CodeBlock code={`const el = document.querySelector('#status-message');
+
+el.getAttribute('data-status');  // "online"
+el.getAttribute('id');           // "status-message"
+el.getAttribute('class');        // "status active" (full string, NOT an array)`} lang="javascript" />
+                <p class="code-comment mt-1">Remember: <code>getAttribute('class')</code> returns one space-separated string, even when there are multiple classes.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Back to Station link
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>🟠 Back to the Station:</h3>
+                <p>This cheat sheet goes with <a href="/stations/station3/">Station 3: Reading the Room</a>. Head back there for the full story of how I learned all this — including Grace's warning about innerHTML.</p>
+            </div>
+        </div>
+    </section>
+
+</MainLayout>
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->

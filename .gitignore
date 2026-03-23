@@ -32,3 +32,9 @@ lighthouse-reports/
 
 reports/
 .specstory/
+# Claude Code worktrees and settings
+.claude/worktrees/
+.claude/settings.json
+
+# Local Netlify folder
+.netlify

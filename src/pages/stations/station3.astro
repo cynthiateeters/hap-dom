@@ -1,0 +1,412 @@
+---
+/**
+ * Station 3: Reading the Room
+ *
+ * Primary concept: Once you have an element, you can read its text, HTML, and attributes.
+ * Code role: Comparative (same element read with textContent, innerHTML, innerText — different results)
+ * Characters: HAP (narrator), Grace Hopper (textContent vs innerText + innerHTML danger warning)
+ */
+
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>Station 2 gave me querySelector.</strong> I was confident. I knew it was the modern way to find elements. I knew it used CSS selectors. I was ready.</p>
+    <p class="mt-1">So I typed this: <code>document.querySelector('robot-name')</code> — and got <code>null</code>. Nothing. The element was RIGHT THERE on the page, but querySelector couldn't find it.</p>
+    <p class="mt-1">Then it hit me — I'd used querySelector without actually knowing how to write a CSS selector. I had the tool but I didn't speak its language.</p>
+    <p class="mt-1">This time, I didn't push back. I asked for help. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={3}
+    title="Reading the Room"
+    subtitle="How to read text, HTML, and attributes from DOM elements"
+    description="Join HAP as he learns CSS selector syntax and discovers three ways to read DOM elements: textContent, innerHTML, and innerText. Grace draws important distinctions."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495999/hap-confused-map_q8q0ej.jpg"
+    avatarAlt="HAP looking confused while studying a map"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495999/hap-confused-map_q8q0ej.jpg"
+    nextStationTitle="Changing Things"
+    footerReminder="textContent for text, innerHTML for markup, getAttribute for attributes. And remember — Grace says innerHTML is dangerous for a reason."
+    labName="The DOM"
+    cheatSheetUrl="/cheat-sheets/selectors-and-reading/"
+    cheatSheetTitle="CSS Selectors and DOM Reading Methods"
+    demoUrl="/demos/selector-playground/"
+    demoLabel="Selector Playground"
+>
+
+    <!-- ============================================================
+         SECTION 1: "I Had the Tool but Not the Language"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>I Had the Tool but Not the Language</h2>
+
+            <p class="mb-2">Here's what I typed, full of confidence:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">My first attempt:</div>
+                <CodeBlock code={`const name = document.querySelector('robot-name');
+console.log(name);  // null — nothing found!`} lang="javascript" />
+                <p class="code-comment mt-1">No dot, no hash — I was searching for a <code>&lt;robot-name&gt;</code> HTML tag that doesn't exist.</p>
+            </div>
+
+            <p class="mt-2">I stared at the screen. The element was right there in my HTML — <code>&lt;span id="robot-name"&gt;</code> — but querySelector returned <code>null</code>. I had the right tool from Station 2, but I didn't know how to tell it what to look for.</p>
+
+            <p class="mt-1">This time, I didn't push back. I asked for help.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: "Leaning on AI — The Right Call This Time"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Leaning on AI — The Right Call This Time</h2>
+
+            <p class="mb-2">I described the error to an AI assistant: "I'm using querySelector with the element's ID but getting null." The response was clear:</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Bare Word = Tag Name</h3>
+                    <p><code>'div'</code> or <code>'span'</code> — searches for an HTML element by its tag name. That's what <code>'robot-name'</code> was doing — looking for a <code>&lt;robot-name&gt;</code> tag.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Dot = Class</h3>
+                    <p><code>'.card-header'</code> — the dot prefix means "find an element with this class." Same dot from CSS stylesheets.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Hash = ID</h3>
+                    <p><code>'#robot-name'</code> — the hash prefix means "find the element with this ID." Same hash from CSS stylesheets.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Brackets = Attribute</h3>
+                    <p><code>'[data-status]'</code> — square brackets match elements by their attributes. Same syntax from CSS.</p>
+                </div>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 The Lightbulb Moment:</h3>
+                    <p>Wait — the dot and hash from my CSS stylesheets? That's the SAME syntax? querySelector uses CSS selector syntax because it IS CSS selector syntax. Everything I'd learned writing stylesheets transferred directly.</p>
+                    <p class="mt-1">In Station 2, I pushed back when I thought I was being steered wrong. That was the right call there. But this time, I had a knowledge gap, not a disagreement. Pushing back isn't the default — it's the response to a specific signal.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: "The Selector Toolkit"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Selector Toolkit</h2>
+
+            <p class="mb-2">Here are the selectors I practiced on the Robot ID Card:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">CSS selectors in JavaScript:</div>
+                <CodeBlock code={`// By ID — finds the one element with this ID
+const name = document.querySelector('#robot-name');
+
+// By class — finds the FIRST element with this class
+const header = document.querySelector('.card-header');
+
+// By tag — finds the FIRST element of this type
+const heading = document.querySelector('h2');
+
+// Descendant selector — class + tag combined
+const headerTitle = document.querySelector('.card-header h2');
+
+// By attribute — finds elements with this attribute
+const statusEl = document.querySelector('[data-status]');`} lang="javascript" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">querySelectorAll — when there are multiple matches:</div>
+                <CodeBlock code={`// Returns a NodeList of ALL matching elements, not just the first
+const allRows = document.querySelectorAll('.info-row');
+console.log(allRows.length);  // 3 — every element with class "info-row"`} lang="javascript" />
+                <p class="code-comment mt-1"><code>querySelector</code> returns one element (or null). <code>querySelectorAll</code> returns a collection of all matches.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: "Now That I Found It... What Can I Read?"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Now That I Found It... What Can I Read?</h2>
+
+            <p class="mb-2">Finding an element was only half the challenge. Once I had it, I needed to read what was inside. Here's the HTML structure of the card header I was working with:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">The card-header HTML:</div>
+                <CodeBlock code={`<div class="card-header">
+    <span class="robot-emoji">🤖</span>
+    <h2>Robot <span class="highlight">ID Card</span></h2>
+</div>`} lang="html" />
+            </div>
+
+            <p class="mt-2">I assumed there'd be one way to read the contents. There are three — and they each return something different.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: "Three Ways to Read — Three Different Answers"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Three Ways to Read — Three Different Answers</h2>
+
+            <p class="mb-2">I ran all three reading methods on the same <code>.card-header</code> element. The results surprised me:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Reading the card-header three ways:</div>
+                <CodeBlock code={`const header = document.querySelector('.card-header');
+
+// textContent — ALL text, including hidden elements
+console.log(header.textContent);
+// "🤖\\n    Robot ID Card"
+
+// innerHTML — the raw HTML markup inside
+console.log(header.innerHTML);
+// '<span class="robot-emoji">🤖</span>\\n    <h2>Robot <span class="highlight">ID Card</span></h2>'
+
+// innerText — only VISIBLE text, layout-aware
+console.log(header.innerText);
+// "🤖\\nRobot ID Card"`} lang="javascript" />
+            </div>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>textContent</h3>
+                    <p>Returns all text content, including text inside hidden elements. Fast. Does not trigger a page reflow. This is the safe default for reading text.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>innerText</h3>
+                    <p>Returns only visible text — it's aware of CSS styling. If an element is hidden with <code>display: none</code>, innerText skips it. Slower because it checks layout.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>innerHTML</h3>
+                    <p>Returns the raw HTML markup as a string — tags and all. Powerful for reading structure, but dangerous for writing (more on that in a moment).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: "Grace Drew a Line"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Grace Drew a Line</h2>
+
+            <p class="mb-2">I mentioned to Grace Hopper that textContent and innerText seemed like the same thing. She corrected me immediately.</p>
+
+            <div class="warning-box">
+                <p><strong>Grace Hopper:</strong> "They are not the same. <code>textContent</code> returns all text content of a node and its descendants, including text within hidden elements. <code>innerText</code> is aware of styling and returns only the text that is visually rendered. The distinction matters when elements are hidden with CSS."</p>
+            </div>
+
+            <p class="mt-2">She was right, of course. If I had a <code>&lt;span style="display: none"&gt;secret&lt;/span&gt;</code> inside an element, <code>textContent</code> would include "secret" but <code>innerText</code> would not. For most cases, <code>textContent</code> is the right choice — it's faster and more predictable.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: "innerHTML — Powerful and Dangerous"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>innerHTML — Powerful and Dangerous</h2>
+
+            <p class="mb-2">When I discovered innerHTML, I got excited. I could read the entire HTML structure of any element as a string! I started imagining all the ways I could use it to build dynamic pages.</p>
+
+            <p>Grace shut that down fast.</p>
+
+            <div class="warning-box mt-2">
+                <p><strong>Grace Hopper:</strong> "innerHTML is powerful. That is precisely why it is dangerous. When you use innerHTML to write content, the browser parses any HTML in the string — including script tags and event handlers. The original designers of the DOM did not anticipate how it would be exploited. Do not repeat their oversight."</p>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 What I Took Away:</h3>
+                    <p>innerHTML is fine for <em>reading</em> — when I need to see the HTML structure inside an element. But using it for <em>writing</em> content opens the door to security vulnerabilities. Grace's warning planted a seed — I'll learn more about this at Station 4 when I start changing things.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: "Reading Attributes"
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Reading Attributes</h2>
+
+            <p class="mb-2">Text content isn't the only thing worth reading. Elements also have attributes — the extra information tucked inside their opening tags.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">getAttribute() examples:</div>
+                <CodeBlock code={`const statusEl = document.querySelector('#status-message');
+
+// Read the data-status attribute
+console.log(statusEl.getAttribute('data-status'));  // "online"
+
+// Read the id attribute
+console.log(statusEl.getAttribute('id'));  // "status-message"
+
+// Read a class attribute — returns the FULL string
+const header = document.querySelector('.card-header');
+console.log(header.getAttribute('class'));  // "card-header"
+// NOT an array! Just one big string, even with multiple classes`} lang="javascript" />
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 Gotcha I Discovered:</h3>
+                    <p><code>getAttribute('class')</code> returns the entire class string — like <code>"card-header active highlighted"</code>. It doesn't return an array. If an element has multiple classes, they all come back as one space-separated string. I spent twenty minutes trying to figure out why my comparison wasn't working before I realized this.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">What You'll Learn at This Station</h2>
+
+        <div class="intro-box">
+            <p><strong>HAP's Discovery:</strong> Selectors are the language of querySelector, and once I found an element, I had three different ways to read it — each returning something different. Here are the three key insights I walked away with:</p>
+        </div>
+
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">🎯</span> CSS Selectors Are the Key</h3>
+                <p class="stat-large">#id .class tag</p>
+                <p>querySelector uses the same selector syntax from CSS stylesheets — dots for classes, hashes for IDs, bare words for tags.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">📖</span> Three Reading Methods</h3>
+                <p class="stat-large stat-teal">textContent</p>
+                <p>textContent, innerHTML, and innerText all read from elements — but each returns something different. textContent is the safe default.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">🔍</span> Attributes Hold Data</h3>
+                <p class="stat-large stat-brown">getAttribute()</p>
+                <p>Elements carry extra information in attributes. getAttribute() reads them, but watch out — class comes back as a string, not an array.</p>
+            </div>
+        </div>
+
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I wrote <code>querySelector('robot-name')</code> without the hash and got null. Spent ten minutes checking if the element existed before realizing I was searching for an HTML tag called <code>&lt;robot-name&gt;</code>.</li>
+                    <li>I used <code>innerHTML</code> when I only needed the text. Got back a string full of <code>&lt;span&gt;</code> tags and had to parse it. <code>textContent</code> would have given me exactly what I needed.</li>
+                    <li>I thought <code>textContent</code> and <code>innerText</code> were identical until a hidden element tripped me up. Grace's correction saved me from a subtle bug.</li>
+                    <li>I assumed <code>getAttribute('class')</code> would return an array of class names. Nope — one long string. My <code>=== 'active'</code> comparison failed silently on an element with multiple classes.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: Demo Callout
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <div class="hap-note-content">
+                <h3>🟠 Try It Yourself:</h3>
+                <p>I built a <a href="/demos/selector-playground/">Selector Playground</a> where I can type any CSS selector and see what querySelector finds — plus the textContent, innerHTML, and innerText side by side. It made all of this click for me.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 11: Quick Reference — 6 Tip Cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">🎓 Selectors and Reading Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>CSS Selectors in JS</h3>
+                    <p>querySelector uses CSS selector syntax: <code>#id</code> for IDs, <code>.class</code> for classes, <code>tag</code> for elements, <code>[attr]</code> for attributes. The same syntax from stylesheets.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>querySelector vs querySelectorAll</h3>
+                    <p><code>querySelector</code> returns the first match (or null). <code>querySelectorAll</code> returns a NodeList of every match. Use the right one for the job.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>textContent — The Safe Default</h3>
+                    <p>Returns all text, including hidden content. Fast and predictable. When in doubt, use <code>textContent</code> for reading text from elements.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>innerHTML — Powerful but Dangerous</h3>
+                    <p>Returns HTML markup as a string. Great for reading structure, but writing with it opens security risks. Grace says: "Do not repeat their oversight."</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>innerText — Visibility-Aware</h3>
+                    <p>Returns only visible text. Skips hidden elements. Slower than textContent because it checks CSS layout. Use when visibility matters.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <div>
+                    <h3>getAttribute() for Attributes</h3>
+                    <p>Reads any attribute: <code>getAttribute('data-status')</code>, <code>getAttribute('id')</code>. Remember that <code>getAttribute('class')</code> returns a string, not an array.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 12: Closing — Bridge to Station 4
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What's Next?</h2>
+
+            <p>So far, I've learned to find elements (Station 2) and read what's inside them (this station). But reading is watching from the sidelines. What happens when I start CHANGING things?</p>
+
+            <p class="mt-1">At Station 4, I'll learn to modify text, update attributes, and change styles — turning my read-only relationship with the DOM into a two-way conversation. And I'll find out exactly why Grace warned me about innerHTML. 🟠</p>
+        </div>
+    </section>
+
+</StationLayout>
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->

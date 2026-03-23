@@ -1,0 +1,481 @@
+---
+/**
+ * Selector Playground — Interactive Demo for Station 3
+ *
+ * Lets students type CSS selectors and see what querySelector finds,
+ * with side-by-side results for textContent, innerHTML, and innerText.
+ */
+
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+    title="Selector Playground | HAP's Learning Lab"
+    description="Interactive demo: type CSS selectors and see what querySelector finds, with textContent, innerHTML, and innerText results side by side."
+    headerTitle="Selector Playground"
+    headerSubtitle="Interactive Demo"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230817/hap-scientist_safwtg.jpg"
+    avatarAlt="HAP in scientist mode with lab equipment"
+    introContent="<p>Type any CSS selector below and see what querySelector finds. I built this to practice — it shows textContent, innerHTML, and innerText side by side so the differences are obvious. 🟠</p>"
+    showNavigation={false}
+    footerReminder="querySelector uses CSS selectors — the same syntax from your stylesheets."
+>
+
+    <section class="content-section">
+        <!-- Robot ID Card -->
+        <div class="demo-card-container">
+            <h2 class="section-heading-centered">Robot ID Card</h2>
+            <div id="demo-card" class="robot-card">
+                <div class="card-header">
+                    <span class="robot-emoji">🤖</span>
+                    <h2>Robot <span class="highlight">ID Card</span></h2>
+                </div>
+                <div class="card-section">
+                    <div class="info-row"><span class="label">Name</span><span id="robot-name">HAP-7000</span></div>
+                    <div class="info-row"><span class="label">Model</span><span id="robot-model">ProtoBot v7</span></div>
+                    <div class="info-row"><span class="label">Status</span><span id="status-message" data-status="online">Online</span></div>
+                </div>
+                <div class="card-actions">
+                    <button class="btn btn-task" id="btn-task">Complete Task</button>
+                    <button class="btn btn-rest" id="btn-rest">Rest</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Selector Input -->
+        <div class="selector-input-area">
+            <label for="selector-input" class="selector-label">Enter a CSS selector:</label>
+            <div class="selector-row">
+                <input type="text" id="selector-input" class="selector-input" placeholder=".card-header" autocomplete="off" spellcheck="false">
+                <button id="select-btn" class="select-button">Select</button>
+            </div>
+            <div class="preset-buttons">
+                <span class="preset-label">Try:</span>
+                <button class="preset-btn" data-selector=".card-header">.card-header</button>
+                <button class="preset-btn" data-selector="#robot-name">#robot-name</button>
+                <button class="preset-btn" data-selector="h2">h2</button>
+                <button class="preset-btn" data-selector=".info-row">.info-row</button>
+                <button class="preset-btn" data-selector="[data-status]">[data-status]</button>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div id="results-panel" class="results-panel" hidden>
+            <div class="results-header">
+                <span id="match-count" class="match-count"></span>
+            </div>
+            <div class="results-tabs">
+                <button class="tab-btn active" data-tab="textContent">textContent</button>
+                <button class="tab-btn" data-tab="innerHTML">innerHTML</button>
+                <button class="tab-btn" data-tab="innerText">innerText</button>
+            </div>
+            <div class="results-body">
+                <pre id="result-output" class="result-output"></pre>
+            </div>
+        </div>
+
+        <!-- Error display -->
+        <div id="error-display" class="error-display" hidden></div>
+
+        <!-- Back link -->
+        <div class="back-link-container">
+            <a href="/stations/station3/" class="back-link">← Back to Station 3: Reading the Room</a>
+        </div>
+    </section>
+
+</MainLayout>
+
+<style>
+    .demo-card-container {
+        margin-block-end: 2rem;
+    }
+
+    .robot-card {
+        background: hsl(210, 20%, 98%);
+        border: 2px solid hsl(210, 15%, 85%);
+        border-radius: 12px;
+        padding: 1.5rem;
+        max-width: 400px;
+        margin-inline: auto;
+        font-family: inherit;
+    }
+
+    .robot-card .card-header {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-block-end: 1rem;
+        padding-block-end: 0.75rem;
+        border-block-end: 2px solid hsl(30, 90%, 55%);
+    }
+
+    .robot-card .robot-emoji {
+        font-size: 2rem;
+    }
+
+    .robot-card .card-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        color: hsl(210, 25%, 25%);
+    }
+
+    .robot-card .highlight {
+        color: hsl(30, 90%, 45%);
+    }
+
+    .robot-card .card-section {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-block-end: 1rem;
+    }
+
+    .robot-card .info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.4rem 0.75rem;
+        background: hsl(0, 0%, 100%);
+        border-radius: 6px;
+        border: 1px solid hsl(210, 15%, 90%);
+    }
+
+    .robot-card .label {
+        font-weight: 700;
+        color: hsl(210, 20%, 40%);
+    }
+
+    .robot-card .card-actions {
+        display: flex;
+        gap: 0.75rem;
+    }
+
+    .robot-card .btn {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+
+    .robot-card .btn-task {
+        background: hsl(145, 55%, 42%);
+        color: hsl(0, 0%, 100%);
+    }
+
+    .robot-card .btn-rest {
+        background: hsl(210, 15%, 75%);
+        color: hsl(210, 25%, 20%);
+    }
+
+    /* Highlight matched elements */
+    .robot-card :global(.demo-highlight) {
+        outline: 3px solid hsl(30, 100%, 50%);
+        outline-offset: 2px;
+        background: hsl(30, 100%, 95%) !important;
+        transition: outline 0.2s, background 0.2s;
+    }
+
+    /* Selector input area */
+    .selector-input-area {
+        margin-block-end: 1.5rem;
+    }
+
+    .selector-label {
+        display: block;
+        font-weight: 700;
+        margin-block-end: 0.5rem;
+        color: hsl(210, 25%, 25%);
+    }
+
+    .selector-row {
+        display: flex;
+        gap: 0.5rem;
+        margin-block-end: 0.75rem;
+    }
+
+    .selector-input {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        font-size: 1rem;
+        font-family: 'Source Code Pro', monospace;
+        border: 2px solid hsl(210, 15%, 80%);
+        border-radius: 6px;
+        background: hsl(0, 0%, 100%);
+        color: hsl(210, 25%, 15%);
+    }
+
+    .selector-input:focus {
+        outline: none;
+        border-color: hsl(30, 90%, 55%);
+        box-shadow: 0 0 0 3px hsl(30, 90%, 55%, 0.2);
+    }
+
+    .select-button {
+        padding: 0.6rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 700;
+        background: hsl(30, 90%, 55%);
+        color: hsl(0, 0%, 100%);
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+    .select-button:hover {
+        background: hsl(30, 90%, 45%);
+    }
+
+    .select-button:focus-visible {
+        outline: 3px solid hsl(30, 90%, 55%);
+        outline-offset: 2px;
+    }
+
+    .preset-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    .preset-label {
+        font-weight: 600;
+        color: hsl(210, 20%, 40%);
+        font-size: 0.9rem;
+    }
+
+    .preset-btn {
+        padding: 0.3rem 0.75rem;
+        font-size: 0.85rem;
+        font-family: 'Source Code Pro', monospace;
+        background: hsl(210, 20%, 95%);
+        border: 1px solid hsl(210, 15%, 80%);
+        border-radius: 4px;
+        cursor: pointer;
+        color: hsl(210, 25%, 30%);
+    }
+
+    .preset-btn:hover {
+        background: hsl(30, 80%, 92%);
+        border-color: hsl(30, 90%, 55%);
+    }
+
+    .preset-btn:focus-visible {
+        outline: 3px solid hsl(30, 90%, 55%);
+        outline-offset: 2px;
+    }
+
+    /* Results panel */
+    .results-panel {
+        background: hsl(210, 20%, 98%);
+        border: 2px solid hsl(210, 15%, 85%);
+        border-radius: 8px;
+        overflow: hidden;
+        margin-block-end: 1.5rem;
+    }
+
+    .results-header {
+        padding: 0.75rem 1rem;
+        background: hsl(210, 15%, 92%);
+        border-block-end: 1px solid hsl(210, 15%, 85%);
+    }
+
+    .match-count {
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: hsl(210, 25%, 30%);
+    }
+
+    .results-tabs {
+        display: flex;
+        border-block-end: 1px solid hsl(210, 15%, 85%);
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+        font-family: 'Source Code Pro', monospace;
+        font-weight: 600;
+        background: hsl(210, 15%, 95%);
+        border: none;
+        border-inline-end: 1px solid hsl(210, 15%, 85%);
+        cursor: pointer;
+        color: hsl(210, 20%, 45%);
+    }
+
+    .tab-btn:last-child {
+        border-inline-end: none;
+    }
+
+    .tab-btn.active {
+        background: hsl(0, 0%, 100%);
+        color: hsl(30, 90%, 45%);
+        box-shadow: inset 0 -3px 0 hsl(30, 90%, 55%);
+    }
+
+    .tab-btn:hover:not(.active) {
+        background: hsl(210, 15%, 90%);
+    }
+
+    .tab-btn:focus-visible {
+        outline: 3px solid hsl(30, 90%, 55%);
+        outline-offset: -3px;
+    }
+
+    .results-body {
+        padding: 1rem;
+    }
+
+    .result-output {
+        font-family: 'Source Code Pro', monospace;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        word-break: break-all;
+        margin: 0;
+        color: hsl(210, 25%, 20%);
+        min-height: 2rem;
+    }
+
+    /* Error display */
+    .error-display {
+        padding: 0.75rem 1rem;
+        background: hsl(0, 80%, 95%);
+        border: 2px solid hsl(0, 70%, 70%);
+        border-radius: 8px;
+        color: hsl(0, 70%, 35%);
+        font-weight: 600;
+        margin-block-end: 1.5rem;
+    }
+
+    /* Back link */
+    .back-link-container {
+        text-align: center;
+        margin-block-start: 1rem;
+    }
+
+    .back-link {
+        color: hsl(30, 90%, 40%);
+        font-weight: 600;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        text-decoration: underline;
+    }
+
+    .back-link:focus-visible {
+        outline: 3px solid hsl(30, 90%, 55%);
+        outline-offset: 2px;
+    }
+</style>
+
+<script is:inline>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectorInput = document.getElementById('selector-input');
+        var selectBtn = document.getElementById('select-btn');
+        var resultsPanel = document.getElementById('results-panel');
+        var matchCount = document.getElementById('match-count');
+        var resultOutput = document.getElementById('result-output');
+        var errorDisplay = document.getElementById('error-display');
+        var demoCard = document.getElementById('demo-card');
+        var tabBtns = document.querySelectorAll('.tab-btn');
+        var presetBtns = document.querySelectorAll('.preset-btn');
+
+        var currentElement = null;
+        var activeTab = 'textContent';
+
+        function clearHighlights() {
+            var highlighted = demoCard.querySelectorAll('.demo-highlight');
+            highlighted.forEach(function (el) {
+                el.classList.remove('demo-highlight');
+            });
+        }
+
+        function showError(msg) {
+            errorDisplay.textContent = msg;
+            errorDisplay.hidden = false;
+            resultsPanel.hidden = true;
+        }
+
+        function hideError() {
+            errorDisplay.hidden = true;
+        }
+
+        function displayResult() {
+            if (!currentElement) return;
+            var value = '';
+            if (activeTab === 'textContent') {
+                value = currentElement.textContent;
+            } else if (activeTab === 'innerHTML') {
+                value = currentElement.innerHTML;
+            } else if (activeTab === 'innerText') {
+                value = currentElement.innerText;
+            }
+            resultOutput.textContent = value;
+        }
+
+        function runSelector() {
+            var selector = selectorInput.value.trim();
+            if (!selector) return;
+
+            clearHighlights();
+            hideError();
+
+            try {
+                var allMatches = demoCard.querySelectorAll(selector);
+                if (allMatches.length === 0) {
+                    showError('No elements matched the selector: ' + selector);
+                    currentElement = null;
+                    return;
+                }
+
+                allMatches.forEach(function (el) {
+                    el.classList.add('demo-highlight');
+                });
+
+                currentElement = allMatches[0];
+                var countText = allMatches.length === 1
+                    ? 'querySelector found 1 element'
+                    : 'querySelectorAll found ' + allMatches.length + ' elements (showing first)';
+                matchCount.textContent = countText;
+
+                resultsPanel.hidden = false;
+                displayResult();
+            } catch (e) {
+                showError('Invalid selector: ' + selector);
+                currentElement = null;
+            }
+        }
+
+        selectBtn.addEventListener('click', runSelector);
+
+        selectorInput.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter') {
+                runSelector();
+            }
+        });
+
+        tabBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                tabBtns.forEach(function (b) { b.classList.remove('active'); });
+                btn.classList.add('active');
+                activeTab = btn.getAttribute('data-tab');
+                displayResult();
+            });
+        });
+
+        presetBtns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                selectorInput.value = btn.getAttribute('data-selector');
+                runSelector();
+            });
+        });
+    });
+</script>
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->

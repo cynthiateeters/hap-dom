@@ -1,0 +1,277 @@
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+---
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p>After Station 1, I understood that the DOM was a living tree of objects. But understanding the tree exists and actually finding something IN it are two different problems.</p>
+    <p class="mt-1">I wanted to change the robot's name on my Robot ID Card. The card had a <code>&lt;span&gt;</code> with <code>id='robot-name'</code> holding the text 'HAP-7000'. I knew <code>document</code> was my way in. But <code>document</code> is the WHOLE tree. I needed to reach one specific branch.</p>
+    <p class="mt-1">So I asked my AI coding agent to help me grab that element. What happened next changed how I work with AI forever. 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={2}
+    title="Finding Things"
+    subtitle="How JavaScript locates elements in the DOM tree"
+    labName="The DOM"
+    nextStationTitle="Reading the Room"
+    cheatSheetUrl="/cheat-sheets/pushing-back/"
+    cheatSheetTitle="How I Learned to Push Back and Why"
+    footerReminder="querySelector uses CSS selectors — the same syntax from your stylesheets. One modern method replaces several legacy ones."
+    description="Join HAP as he discovers querySelector and learns to push back on AI-generated code. A lesson in code ownership and the notice-stop-interrogate-understand-codify pattern."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP studying on his laptop"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495998/hap-laptop_xiewar.jpg"
+>
+
+    <!-- ============================================================
+         SECTION 1: I Needed to Find the Robot's Name
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>I Needed to Find the Robot's Name</h2>
+
+            <p class="mb-2">I had my Robot ID Card rendered in the browser. The DOM tree was right there in DevTools — I could see every node, every branch. But seeing the tree and reaching into it to grab a specific element? Those felt like completely different skills.</p>
+
+            <p class="mb-2">I knew the <code>&lt;span id="robot-name"&gt;</code> element held the text "HAP-7000." I knew <code>document</code> was the root of the tree. What I did not know was the syntax to connect those two ideas.</p>
+
+            <p>So I did what felt natural — I asked my AI coding agent: <em>"How do I grab the element with id robot-name?"</em></p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: The AI's Answer Worked... But Grace Said One Word
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The AI's Answer Worked... But Grace Said One Word</h2>
+
+            <p class="mb-2">The AI agent gave me this:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">What the AI generated:</div>
+                <CodeBlock code={`const robotName = document.getElementById('robot-name');`} lang="javascript" />
+                <p class="code-comment mt-1">I pasted it in, ran it, and it worked. The element came back. I was ready to move on.</p>
+            </div>
+
+            <p class="mt-2 mb-2">Then Grace Hopper appeared in the sidebar. She looked at the code and said one word:</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper:</h3>
+                    <p><strong>"Outdated."</strong></p>
+                </div>
+            </div>
+
+            <p class="mt-2">One word. No explanation. That is how Grace works — she tells you WHAT to notice. The rest is my job. She does not hold your hand. She points, and then she waits to see if you are curious enough to follow.</p>
+
+            <p class="mt-1">I almost ignored her. The code <em>worked</em>. Why would I question working code?</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: I Decided to Push Back
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>I Decided to Push Back</h2>
+
+            <p class="mb-2">Instead of asking the AI to "fix it," I decided to understand WHY Grace flagged it. I connected the MDN MCP server and asked a chain of six questions. Each answer led to the next question:</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>Question 1</h3>
+                    <p><strong>"What is getElementById?"</strong> — It is a method from DOM Level 1, the original DOM specification from the late 1990s.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Question 2</h3>
+                    <p><strong>"When was it introduced?"</strong> — DOM Level 1, standardized in 1998. That is nearly three decades ago.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Question 3</h3>
+                    <p><strong>"What is the modern replacement?"</strong> — <code>querySelector()</code>, part of the Selectors API.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Question 4</h3>
+                    <p><strong>"How does querySelector differ?"</strong> — It uses any CSS selector, not only IDs. The same selector syntax from my stylesheets works in JavaScript.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Question 5</h3>
+                    <p><strong>"Can querySelector do everything getElementById does?"</strong> — Yes, and more. It handles classes, attributes, pseudo-selectors, and complex combinators.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Question 6</h3>
+                    <p><strong>"Performance differences?"</strong> — Technically getElementById is faster in microbenchmarks, but the difference is irrelevant in any real application.</p>
+                </div>
+            </div>
+
+            <p class="mt-2">I kept going until I felt understanding click. One question would not have been enough. It took the full chain — each answer revealing the next question I needed to ask.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: What I Understood After Pushing Back
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What I Understood After Pushing Back</h2>
+
+            <p class="mb-2"><code>getElementById</code> is a 1990s tool that only finds elements by their ID attribute. <code>querySelector</code> uses CSS selectors — the same syntax I already knew from writing stylesheets — and can find elements by ID, class, tag, attribute, or any combination.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">The legacy way (getElementById):</div>
+                <CodeBlock code={`const robotName = document.getElementById('robot-name');`} lang="javascript" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">The modern way (querySelector):</div>
+                <CodeBlock code={`const robotName = document.querySelector('#robot-name');`} lang="javascript" />
+                <p class="code-comment mt-1">Notice the <code>#</code> — it is the same CSS selector syntax used in stylesheets. The <code>#</code> means "find by ID."</p>
+            </div>
+
+            <div class="warning-box mt-2">
+                <p><strong>I always have to remember that the AI Agent makes mistakes and that I own this code. When I don't know myself, I push back and find a way to learn before I proceed.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: Grace Validated What I'd Earned
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Grace Validated What I'd Earned</h2>
+
+            <p class="mb-2">After I rewrote the code with <code>querySelector</code> and explained my reasoning in a comment, Grace appeared again:</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>Grace Hopper:</h3>
+                    <p><strong>"That is the correct instinct, HAP."</strong></p>
+                </div>
+            </div>
+
+            <p class="mt-2">She validated the <em>process</em>, not the answer. She did not say "good code." She said "correct instinct." The instinct to stop, question, and understand before proceeding — that is what mattered to her.</p>
+
+            <p class="mt-1">I named the pattern I had followed: <strong>notice → stop → interrogate → understand → codify</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: I Edited AGENTS.md
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>I Edited AGENTS.md</h2>
+
+            <p class="mb-2">Understanding something is one thing. Making sure the AI does not repeat the mistake is another. I opened my project's <code>AGENTS.md</code> file — the file that gives instructions to my AI coding agent — and added two rules:</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Rules I added to AGENTS.md:</div>
+                <CodeBlock code={`## DOM API Rules
+- Use querySelector/querySelectorAll exclusively. Never use getElementById,
+  getElementsByClassName, or getElementsByTagName.
+- Before generating DOM API code, consult the MDN MCP server to verify
+  the recommended modern approach.`} lang="markdown" />
+            </div>
+
+            <p class="mt-2">This is the "codify" step — the last piece of the pattern. When I learn something important, I write it down where it will have an effect. Not in a notebook I will forget about, but in the file that controls how the AI generates code for this project.</p>
+
+            <p class="mt-1">The full pattern: <strong>notice → stop → interrogate → understand → codify</strong>.</p>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         HAP's Confession
+         ============================================================ -->
+    <section class="content-section">
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I almost moved on with the working <code>getElementById</code> code. Working code felt like finished code. It took Grace's single word to make me pause.</li>
+                    <li>My first instinct was to ask the AI to "fix it" instead of learning WHY it needed fixing. That would have given me a better line of code but zero understanding.</li>
+                    <li>I almost stopped after one question. "What is getElementById?" felt like enough. But the six-question chain is what gave me real understanding — each answer unlocked the next question.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Quick Reference
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">Finding Things Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>querySelector Replaces getElementById</h3>
+                    <p><code>document.querySelector('#robot-name')</code> does everything <code>document.getElementById('robot-name')</code> does, plus it works with any CSS selector — classes, attributes, combinators, and more.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>CSS Selectors Are the Key</h3>
+                    <p>The string inside <code>querySelector()</code> is a CSS selector — the same syntax from stylesheets. <code>#id</code>, <code>.class</code>, <code>tag</code>, <code>[attribute]</code> all work. One syntax for CSS and JavaScript.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>Working Code Does Not Equal Good Code</h3>
+                    <p>Code that runs without errors can still be outdated, fragile, or hard to maintain. The fact that it works is necessary but not sufficient.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>Push Back on AI-Generated Code</h3>
+                    <p>When something feels off — or when someone like Grace flags it — do not ask the AI to fix it. Ask questions until I understand the problem myself. Then decide what to do.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>Codify What I Learn</h3>
+                    <p>Understanding is fragile if it stays in my head. Writing rules in <code>AGENTS.md</code> means the AI will follow what I learned on every future generation. That is the codify step.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Bridge to Station 3
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What's Next</h2>
+
+            <p>I felt confident. I had <code>querySelector</code>. I had a pattern for pushing back. I was ready to find any element on the page.</p>
+
+            <p class="mt-1">So I tried <code>document.querySelector('robot-name')</code> — and nothing happened. No error. No element. It returned <code>null</code>.</p>
+
+            <p class="mt-1">Knowing the <em>method</em> and knowing how to write <em>selectors</em> are two different skills. In Station 3, I learned exactly how CSS selectors work inside <code>querySelector</code> — and why that missing <code>#</code> made all the difference. 🟠</p>
+        </div>
+    </section>
+
+</StationLayout>

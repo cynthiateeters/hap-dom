@@ -4,9 +4,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project overview
 
-**HAP's Learning Lab** - An Astro-based static site template for creating 6-station educational experiences. HAP (HyBit A. ProtoBot) is Prof. Teeters' apprentice who guides students through hands-on learning with his friendly first-person narrative.
+**HAP's Learning Lab: The DOM** — A 6-station Astro site where HAP guides beginner JavaScript students through DOM access and manipulation using a Robot ID Card as the running example.
 
-To create a new lab, fork this repository and customize.
+- **Repo:** https://github.com/cynthiateeters/hap-dom
+- **Live site:** https://hap-dom.netlify.app/
+- **Local path:** /Users/cynthiateeters/Documents/Teaching/ai-augmented/HAP/hap-dom
+- **MK channel:** hap-dom (all memory-keeper items use this channel)
+- **Forked from:** https://github.com/cynthiateeters/hap-lab-astro-template
 
 ## Commands
 
@@ -14,7 +18,26 @@ To create a new lab, fork this repository and customize.
 npm run dev        # Start dev server at localhost:4321
 npm run build      # Production build to dist/
 npm run preview    # Preview production build
+npm test           # Run Playwright review tests (needs preview server running)
+npm run test:review # Run static checks + Playwright tests
 ```
+
+## Automated review
+
+The site has a two-layer automated review pipeline. See `reports/automated-review-workflow.md` for the full spec.
+
+- **Layer 1 — Static analysis** (`tests/review/static-checks.sh`): voice compliance, copyright, CSS colors, image URLs, heading case, internal links, navigation contracts. No server needed.
+- **Layer 2 — Playwright** (`tests/review/*.spec.ts`): smoke tests with screenshots at desktop + mobile, axe-core accessibility, navigation integrity, demo functionality. Requires `npm run preview` running on localhost:4321.
+- Screenshots are written to `reports/screenshots/` as real `.png` files (uses `@playwright/test` npm package, not a Playwright MCP server).
+
+### Navigation contracts
+
+Stations, cheat sheets, and demos are linked by StationLayout props. When adding or modifying pages, keep these in sync:
+
+- Stations 2, 3, 4 have `cheatSheetUrl`/`cheatSheetTitle` props
+- Stations 3, 4, 5 have `demoUrl`/`demoLabel` props
+- Station 1 has an embedded demo (no separate page)
+- Hub page (`index.astro`) must link to all 6 stations, 3 demos, 3 cheat sheets
 
 ## Architecture
 

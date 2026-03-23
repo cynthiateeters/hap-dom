@@ -1,0 +1,361 @@
+---
+/**
+ * Station 5: Building New Things
+ * Primary concept: Creating new DOM elements from scratch and adding/removing them
+ * Code role: Reinforcement (builds on all prior skills)
+ * Characters: HAP only
+ */
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+const introContent = `
+    <p><strong>By Station 4, I had a full toolkit for working with elements that already existed on the page.</strong> I could find them, read them, change their text, toggle their classes, update their attributes. But every element I'd touched was one that was already in my HTML file &mdash; already part of the blueprint.</p>
+    <p class="mt-1">Then I had an idea: what if I could add skill badges to my Robot ID Card? The card didn't have any badges in the HTML. There was no badge element to find.</p>
+    <p class="mt-1">I'd need to create something from nothing. &#x1F7E0;</p>
+`;
+---
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+-->
+
+<StationLayout
+    stationNumber={5}
+    title="Building New Things"
+    subtitle="Creating, configuring, and removing DOM elements from scratch"
+    labName="The DOM"
+    nextStationTitle="Learning with AI"
+    demoUrl="/demos/badge-builder/"
+    demoLabel="Badge Builder"
+    footerReminder="Create → Configure → Attach. And remember: this pattern is safe by default — no innerHTML, no injection risk."
+    description="Join HAP as he learns to create new DOM elements with createElement, configure them backstage, and attach them with appendChild. Plus removing elements and the NodeList gotcha."
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230490/hap-has-tools_kgoeys.jpg"
+    avatarAlt="HAP holding his toolbox full of development tools"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1763230490/hap-has-tools_kgoeys.jpg"
+>
+
+    <!-- ============================================================
+         SECTION 1: What If the Element Doesn't Exist Yet?
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">What You'll Learn at This Station</h2>
+
+        <div class="intro-box">
+            <p><strong>HAP's Discovery:</strong> Everything I'd done so far involved elements that were already sitting in my HTML. But what happens when the element I need doesn't exist yet? It turns out the DOM lets me build new elements from scratch, configure them however I want, and then place them exactly where I need them. Here are the three big ideas from this station.</p>
+        </div>
+
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">&#x1F3D7;&#xFE0F;</span> Create From Scratch</h3>
+                <p class="stat-large">createElement()</p>
+                <p>The DOM gives me a method to conjure brand-new elements that don't exist in the HTML yet. They start invisible, floating in memory, waiting to be configured.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">&#x1F3AD;</span> Configure Backstage</h3>
+                <p class="stat-large stat-teal">textContent + classList</p>
+                <p>Before putting an element on the page, I set it up completely &mdash; text, classes, attributes &mdash; so it appears fully styled. No flash of broken content.</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">&#x1F4CC;</span> Attach When Ready</h3>
+                <p class="stat-large stat-brown">appendChild()</p>
+                <p>Only when the element is fully configured do I attach it to the page. One method call and it's live. And remove() takes it away just as easily.</p>
+            </div>
+        </div>
+
+        <!-- HAP's Confession -->
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>I spent twenty minutes wondering why my badge wasn't showing up on the page. I'd created it, configured it, styled it... but forgot to call <code>appendChild()</code>. The element was just floating in memory, fully dressed with nowhere to go.</li>
+                    <li>I tried <code>document.remove()</code> to delete a badge and got a TypeError. Turns out <code>remove()</code> belongs to the element itself, not to <code>document</code>. The element removes <em>itself</em>.</li>
+                    <li>I appended a badge to the page <em>before</em> adding its text and class. For a split second, an empty unstyled <code>&lt;span&gt;</code> flashed on screen before the text appeared. Configure backstage, attach when ready!</li>
+                    <li>I tried <code>badges.textContent</code> on a NodeList from <code>querySelectorAll</code> and got <code>undefined</code>. A NodeList is a collection, not a single element. I needed <code>forEach</code> to work with each badge individually.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: The Three-Step Pattern
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Three-Step Pattern: Create, Configure, Attach</h2>
+
+            <p class="mb-2">This was the moment everything clicked for me. Adding a new element to the page always follows the same three steps. Once I saw the pattern, I couldn't unsee it.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">The three-step pattern:</div>
+                <CodeBlock code={`// Step 1: CREATE — make an empty element in memory
+const badge = document.createElement('span');
+
+// Step 2: CONFIGURE — set it up "backstage"
+badge.textContent = 'JavaScript';
+badge.classList.add('badge');
+
+// Step 3: ATTACH — put it on the page
+const cardActions = document.querySelector('.card-actions');
+cardActions.appendChild(badge);`} lang="javascript" />
+                <p class="code-comment mt-1"><code>createElement</code> makes an empty element that exists only in memory. It's not on the page yet &mdash; it's backstage, invisible to the user. I configure it with all the text and classes it needs. Then <code>appendChild</code> places it inside another element, and it becomes visible.</p>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>&#x1F7E0; My Mental Model:</h3>
+                    <p>I think of it like building a LEGO piece in my hand before snapping it onto the set. I don't glue a blank brick to the model and then try to paint it &mdash; I prepare it first, then attach it. <code>createElement</code> is grabbing a blank brick. Configuring is shaping and painting it. <code>appendChild</code> is snapping it into place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Why the Order Matters
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Why the Order Matters</h2>
+
+            <p class="mb-2">I learned this the hard way. When I attached the element <em>before</em> configuring it, something weird happened.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Wrong order (causes a flash of unstyled content):</div>
+                <CodeBlock code={`const badge = document.createElement('span');
+
+// Attaching BEFORE configuring — bad idea!
+document.querySelector('.card-actions').appendChild(badge);
+
+// Now the empty, unstyled span is already visible...
+badge.textContent = 'JavaScript';  // text pops in
+badge.classList.add('badge');       // styles pop in`} lang="javascript" />
+                <p class="code-comment mt-1">For a brief moment, an empty <code>&lt;span&gt;</code> appeared on the page with no text and no styling. Then the text popped in, then the styles applied. It looked janky and broken. The fix is always: configure backstage, attach when ready.</p>
+            </div>
+
+            <div class="warning-box mt-2">
+                <p><strong>Remember:</strong> Configure backstage, attach when ready. This avoids the flash of unstyled content that confuses users and looks unprofessional.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Building Multiple Badges
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Building Multiple Badges</h2>
+
+            <p class="mb-2">Once I had the three-step pattern, I realized I was repeating myself every time I wanted a new badge. That's when I wrapped it in a helper function.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">A helper function for creating badges:</div>
+                <CodeBlock code={`function addBadge(text) {
+  const badge = document.createElement('span');
+  badge.textContent = text;
+  badge.classList.add('badge');
+  document.querySelector('.card-actions').appendChild(badge);
+}
+
+addBadge('JavaScript');
+addBadge('DOM');
+addBadge('CSS');`} lang="javascript" />
+                <p class="code-comment mt-1">Same three-step pattern every time &mdash; create, configure, attach &mdash; but now wrapped in a reusable function. Each call adds a fully-configured badge to the page. Three lines instead of fifteen.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: The NodeList Gotcha
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The NodeList Gotcha</h2>
+
+            <p class="mb-2">This was the first time I needed <code>querySelectorAll</code> instead of <code>querySelector</code>. I had multiple badges and wanted to work with all of them. But the result wasn't what I expected.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">NodeList is not an element:</div>
+                <CodeBlock code={`const badges = document.querySelectorAll('.badge');
+
+// This does NOT work:
+badges.textContent;  // → undefined!
+
+// A NodeList is a collection. Use forEach:
+badges.forEach(badge => console.log(badge.textContent));
+// → "JavaScript"
+// → "DOM"
+// → "CSS"`} lang="javascript" />
+                <p class="code-comment mt-1"><code>querySelectorAll</code> returns a <strong>NodeList</strong> &mdash; a collection of elements, not a single element. A NodeList doesn't have <code>textContent</code> or <code>classList</code> because those belong to individual elements. I need to use <code>forEach</code> to work with each element inside the collection.</p>
+            </div>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>querySelector</h3>
+                    <p>Returns <strong>one element</strong> (the first match). I can use <code>textContent</code>, <code>classList</code>, and other element properties directly on the result.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>querySelectorAll</h3>
+                    <p>Returns a <strong>NodeList</strong> (all matches). I need <code>forEach</code> to access individual elements. The NodeList itself has no element properties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Removing Elements
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Removing Elements</h2>
+
+            <p class="mb-2">Adding elements is great, but sometimes I need to take them away. I learned that removal is surprisingly simple &mdash; once I stopped making one specific mistake.</p>
+
+            <div class="prompt-box">
+                <div class="prompt-label">Removing an element from the page:</div>
+                <CodeBlock code={`// Find the element I want to remove
+const cssBadge = document.querySelector('.badge:last-child');
+
+// Remove it
+cssBadge.remove();`} lang="javascript" />
+                <p class="code-comment mt-1">The element removes <em>itself</em>. I call <code>remove()</code> on the element, and it disappears from the page. Clean and simple.</p>
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">My wrong attempt:</div>
+                <CodeBlock code={`// I tried this first — WRONG!
+document.remove();
+// → TypeError: document.remove is not a function`} lang="javascript" />
+                <p class="code-comment mt-1">I assumed <code>remove()</code> lived on <code>document</code>, like <code>querySelector</code> does. But <code>remove()</code> is a method on individual elements, not on the document. The element removes itself &mdash; <code>document</code> doesn't remove things for me.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: The Safe Pattern, Reinforced
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>The Safe Pattern, Reinforced</h2>
+
+            <p class="mb-2">Here's something that made me feel really good about what I'd learned. Every technique in this station &mdash; <code>createElement</code>, <code>textContent</code>, <code>classList.add</code>, <code>appendChild</code> &mdash; follows the safe pattern from Station 4.</p>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>textContent, Not innerHTML</h3>
+                    <p>I set badge text with <code>textContent</code>, which treats everything as plain text. No HTML gets parsed, so no injection risk.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>classList.add, Not className</h3>
+                    <p>I add classes with <code>classList.add()</code>, which only adds what I specify. No accidental overwriting, no string concatenation vulnerabilities.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>createElement, Not HTML Strings</h3>
+                    <p>I build elements with <code>createElement()</code>, not by writing HTML strings. The browser creates a proper DOM node, not a string that could contain malicious code.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>Safe by Default</h3>
+                    <p>The create-configure-attach pattern is inherently safe. No <code>innerHTML</code> means no injection risk. I'm building with the DOM API, not writing raw HTML.</p>
+                </div>
+            </div>
+
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>&#x1F7E0; The Build Pattern Is Inherently Safe:</h3>
+                    <p>When I create elements with <code>createElement</code> and set text with <code>textContent</code>, there's no way for malicious HTML or scripts to sneak in. The safe pattern isn't just a rule to follow &mdash; it's built into the way this approach works. I'm not avoiding <code>innerHTML</code> on purpose here; I'm using tools that never needed it in the first place.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: Demo Callout
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Try It: Badge Builder Demo</h2>
+
+            <p class="mb-2">I built an interactive demo where I can practice the create-configure-attach pattern. I can type badge text, click to create badges, and click badges to remove them. The "What's Happening" panel shows the JavaScript code that runs with each action.</p>
+
+            <div class="hap-note-callout">
+                <div class="hap-note-content">
+                    <h3>&#x1F52C; Interactive Demo:</h3>
+                    <p>Head over to the <a href="/demos/badge-builder/">Badge Builder</a> to practice creating and removing DOM elements in real time. Every button click maps to real DOM methods &mdash; the same ones from this station.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: Quick Reference — 5 Tip Cards
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">&#x1F393; Element Creation Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>Create, Configure, Attach</h3>
+                    <p>Always follow the three-step pattern: <code>createElement()</code> to build it, set <code>textContent</code> and <code>classList</code> to configure it, and <code>appendChild()</code> to place it on the page. Configure backstage, attach when ready.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>appendChild Adds to the End</h3>
+                    <p><code>parentElement.appendChild(newChild)</code> always adds the new element as the <strong>last child</strong> of the parent. Each new badge appears after the previous ones.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>remove() Is on the Element</h3>
+                    <p>Call <code>element.remove()</code> on the element itself, not on <code>document</code>. The element removes itself from wherever it lives in the DOM.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>NodeList Is Not an Element</h3>
+                    <p><code>querySelectorAll</code> returns a NodeList (a collection), not a single element. Use <code>forEach</code> to work with each element. <code>nodeList.textContent</code> gives <code>undefined</code>.</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>This Pattern Is Safe by Default</h3>
+                    <p><code>createElement</code> + <code>textContent</code> + <code>classList.add</code> + <code>appendChild</code> &mdash; no <code>innerHTML</code>, no injection risk. The build pattern is inherently safe.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: Closing — Bridge to Station 6
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What's Next: The Bigger Picture</h2>
+
+            <p class="mb-2">I took a moment to look back at where I'd been. Five stations. Five sets of skills. I can find elements, read their content, change their text, toggle their classes, update their attributes, and now &mdash; create entirely new elements from scratch and remove them when they're no longer needed.</p>
+
+            <p class="mb-2">That's a real toolkit. Not just a list of methods, but a way of thinking about the page as something I can shape and rebuild.</p>
+
+            <p>But the journey taught me something beyond DOM methods. It taught me <em>how to learn</em>. How to read error messages, how to test assumptions, how to break things and figure out why. That's what Station 6 is about &mdash; not a new DOM concept, but a new way of learning. &#x1F7E0;</p>
+        </div>
+    </section>
+
+</StationLayout>

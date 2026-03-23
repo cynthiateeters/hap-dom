@@ -9,7 +9,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "playwright test",
+    "test:review": "bash tests/review/static-checks.sh && playwright test"
   },
   "dependencies": {
     "astro": "^5.16.15"
@@ -22,5 +24,9 @@
     "static-site"
   ],
   "author": "Cynthia Teeters",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
+    "@playwright/test": "^1.58.2"
+  }
 }
