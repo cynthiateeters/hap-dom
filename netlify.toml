@@ -5,21 +5,9 @@
 [build.environment]
   NODE_VERSION = "22"
 
-# Ignore paths that should not trigger rebuilds
+# Skip rebuilds when only docs/reports change
 [build.processing]
   skip_processing = false
-
-# Files/directories excluded from the deploy
-# Netlify only deploys the publish directory (dist/),
-# so source files are never uploaded. This section
-# prevents unnecessary build triggers on changes to
-# non-source files.
-[build.ignore]
-  # Not supported natively — use ignore command below
-
-# Skip rebuilds when only non-source files change
-[context.production]
-  command = "npm run build"
 
 # Security and performance headers
 [[headers]]
