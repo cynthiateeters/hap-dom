@@ -57,7 +57,7 @@ const introContent = `
 
             <div class="prompt-box">
                 <div class="prompt-label">My first attempt:</div>
-                <CodeBlock code={`const statusMessage = document.getElementById('status-message');
+                <CodeBlock code={`const statusMessage = document.querySelector('#status-message');
 statusMessage.innerHTML = 'Online';
 // It worked! The card now said "Online"`} lang="javascript" />
                 <p class="code-comment mt-1">I was so proud of myself. The status changed right there on the page, no reload needed.</p>
@@ -112,7 +112,7 @@ statusMessage.innerHTML = userInput;
 
             <div class="prompt-box">
                 <div class="prompt-label">The safe way to change text:</div>
-                <CodeBlock code={`const statusMessage = document.getElementById('status-message');
+                <CodeBlock code={`const statusMessage = document.querySelector('#status-message');
 statusMessage.textContent = 'Online';
 // Same result — but SAFE`} lang="javascript" />
                 <p class="code-comment mt-1">textContent treats everything as plain text. It never parses HTML.</p>
@@ -171,7 +171,7 @@ statusMessage.textContent = userInput;
 
             <div class="prompt-box mt-2">
                 <div class="prompt-label">classList methods:</div>
-                <CodeBlock code={`const status = document.getElementById('status-message');
+                <CodeBlock code={`const status = document.querySelector('#status-message');
 
 status.classList.add('online');        // Add a class
 status.classList.remove('offline');    // Remove a class
@@ -193,7 +193,7 @@ status.classList.contains('online');   // Returns true or false`} lang="javascri
 
             <div class="prompt-box">
                 <div class="prompt-label">Setting an attribute:</div>
-                <CodeBlock code={`const status = document.getElementById('status-message');
+                <CodeBlock code={`const status = document.querySelector('#status-message');
 
 // Read the current value
 console.log(status.getAttribute('data-status')); // "offline"
@@ -246,7 +246,7 @@ console.log(status.getAttribute('data-status')); // "online"`} lang="javascript"
 
             <div class="prompt-box">
                 <div class="prompt-label">Inline styles with JavaScript:</div>
-                <CodeBlock code={`const energyBar = document.getElementById('energy-bar');
+                <CodeBlock code={`const energyBar = document.querySelector('#energy-bar');
 
 // Set inline styles
 energyBar.style.width = '75%';

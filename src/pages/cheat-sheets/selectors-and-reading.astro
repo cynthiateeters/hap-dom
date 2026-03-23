@@ -12,7 +12,7 @@ import CodeBlock from '../../components/CodeBlock.astro';
     title="CSS Selectors and DOM Reading Methods | HAP's Learning Lab"
     description="Quick reference for CSS selector syntax in JavaScript and DOM reading methods: textContent, innerHTML, innerText, and getAttribute."
     headerTitle="CSS Selectors and DOM Reading Methods"
-    headerSubtitle="Quick Reference"
+    headerSubtitle="📋 Cheat Sheet"
     avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495999/hap-confused-map_q8q0ej.jpg"
     avatarAlt="HAP looking confused while studying a map"
     introContent="<p>Everything I keep forgetting about selectors and reading methods, all in one place. I made this so I'd stop looking things up every five minutes. 🟠</p>"
@@ -162,7 +162,26 @@ el.getAttribute('class');        // "status active" (full string, NOT an array)`
         </div>
     </section>
 
+    <section class="content-section">
+        <div class="back-link">
+            <a href="/stations/station3/">← Back to Station 3: Reading the Room</a>
+        </div>
+    </section>
+
 </MainLayout>
+
+<style is:global>
+    .subtitle {
+        display: inline-block;
+        background: var(--teal-accent);
+        color: var(--cream-white);
+        padding: 0.3rem 1.2rem;
+        border-radius: 2rem;
+        font-weight: 700;
+        font-size: clamp(0.85rem, 1.5vw + 0.3rem, 1rem);
+        letter-spacing: 0.03em;
+    }
+</style>
 <!--
 HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
 HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.

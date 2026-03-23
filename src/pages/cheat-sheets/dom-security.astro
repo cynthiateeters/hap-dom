@@ -11,7 +11,7 @@ import CodeBlock from '../../components/CodeBlock.astro';
     title="DOM Security Awareness | HAP's Learning Lab"
     description="Quick reference for DOM security: XSS prevention, safe coding patterns, sanitization libraries, and Content Security Policy headers."
     headerTitle="DOM Security Awareness"
-    headerSubtitle="Quick Reference"
+    headerSubtitle="📋 Cheat Sheet"
     avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1763230464/hap-sconcerned-laptop_frh5ua.jpg"
     avatarAlt="HAP looking concerned while coding"
     introContent="<p>innerHTML is powerful — and that's exactly why it's dangerous. Here's what I learned about keeping the DOM safe. 🟠</p>"
@@ -214,4 +214,23 @@ element.innerHTML = cleanHTML;
         </div>
     </section>
 
+    <section class="content-section">
+        <div class="back-link">
+            <a href="/stations/station4/">← Back to Station 4: Changing Things</a>
+        </div>
+    </section>
+
 </MainLayout>
+
+<style is:global>
+    .subtitle {
+        display: inline-block;
+        background: var(--teal-accent);
+        color: var(--cream-white);
+        padding: 0.3rem 1.2rem;
+        border-radius: 2rem;
+        font-weight: 700;
+        font-size: clamp(0.85rem, 1.5vw + 0.3rem, 1rem);
+        letter-spacing: 0.03em;
+    }
+</style>

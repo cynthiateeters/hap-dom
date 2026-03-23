@@ -2,7 +2,7 @@
 /**
  * CodeBlock.astro - Wrapper for Astro's Code component with HAP theme
  *
- * Uses min-light theme with copy button functionality
+ * Uses css-variables theme with copy button functionality
  *
  * Usage:
  *   <CodeBlock code={`your code here`} lang="css" />
@@ -22,7 +22,7 @@ const { code, lang } = Astro.props;
 ---
 
 <div class='code-block-wrapper'>
-  <Code code={code} lang={lang} theme='min-light' />
+  <Code code={code} lang={lang} theme='css-variables' />
   <button class='copy-button' aria-label='Copy code to clipboard'>Copy</button>
 </div>
 

@@ -849,6 +849,7 @@ h4 {
   margin-bottom: 1rem;
 }
 
+
 .intro-box {
   background: var(--peach-background);
   border-radius: var(--radius);
@@ -1333,6 +1334,23 @@ h4 {
   font-weight: 600;
   color: var(--teal-darker);
   /* WCAG AA compliant: 4.5:1 contrast ratio */
+}
+
+/* Back-to-station link on demo and cheat sheet pages */
+.back-link {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.back-link a {
+  color: hsl(30, 70%, 45%);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.back-link a:hover {
+  text-decoration: underline;
 }
 
 .footer-tagline {

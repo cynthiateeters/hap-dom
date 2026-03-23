@@ -15,20 +15,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev        # Start dev server at localhost:4321
-npm run build      # Production build to dist/
-npm run preview    # Preview production build
-npm test           # Run Playwright review tests (needs preview server running)
+npm run dev         # Start dev server at localhost:4321
+npm run build       # Production build to dist/
+npm run preview     # Preview production build
+npm test            # Run Playwright review tests (auto-starts server via npx serve dist)
 npm run test:review # Run static checks + Playwright tests
 ```
 
 ## Automated review
 
-The site has a two-layer automated review pipeline. See `reports/automated-review-workflow.md` for the full spec.
+The site has a three-layer automated review pipeline. See `reports/automated-review-workflow.md` for the full spec.
 
 - **Layer 1 — Static analysis** (`tests/review/static-checks.sh`): voice compliance, copyright, CSS colors, image URLs, heading case, internal links, navigation contracts. No server needed.
-- **Layer 2 — Playwright** (`tests/review/*.spec.ts`): smoke tests with screenshots at desktop + mobile, axe-core accessibility, navigation integrity, demo functionality. Requires `npm run preview` running on localhost:4321.
-- Screenshots are written to `reports/screenshots/` as real `.png` files (uses `@playwright/test` npm package, not a Playwright MCP server).
+- **Layer 2 — Playwright browser tests** (`tests/review/smoke.spec.ts`, `navigation.spec.ts`, `accessibility.spec.ts`, `demos.spec.ts`): smoke tests with screenshots at desktop (1280x800) + mobile (375x667), axe-core WCAG AA accessibility, navigation integrity, demo functionality. Server auto-started by Playwright config (`npx serve dist` on port 3000).
+- **Layer 3 — Content quality** (`tests/review/content-quality.spec.ts`): word counts, reading time, character appearance verification, screenshot gallery generation.
+- Screenshots are written to `reports/screenshots/{desktop,mobile}/` as real `.png` files (uses `@playwright/test` npm package, not a Playwright MCP server).
+- Generated reports: `reports/content-quality-report.md`, `reports/review-gallery.html` (filterable screenshot gallery).
 
 ### Navigation contracts
 
@@ -61,6 +63,19 @@ StationLayout (stationNumber, title, subtitle, introContent, ...)
         ├── Navigation.astro (station dots, prev/next)
         ├── <slot /> (station content)
         └── Footer.astro (copyright, reminder)
+```
+
+### Test infrastructure
+
+```text
+playwright.config.ts           # Desktop + mobile projects, auto-starts npx serve dist on port 3000
+tests/review/
+├── static-checks.sh           # Layer 1: grep-based static analysis (7 checks)
+├── smoke.spec.ts              # Layer 2.2: page load, screenshots, content, code blocks
+├── navigation.spec.ts         # Layer 2.3: internal links, prev/next chain, banners
+├── accessibility.spec.ts      # Layer 2.4: axe-core WCAG AA on all 13 pages
+├── demos.spec.ts              # Layer 2.5: interactive demo functionality
+└── content-quality.spec.ts    # Layer 3: word counts, character matrix, gallery
 ```
 
 ### Syntax highlighting

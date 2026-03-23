@@ -121,7 +121,7 @@ const introContent = `
     </tr>
   </tbody>
 </table>`} lang="html" />
-                <p class="code-comment mt-1">The browser added a <code>&lt;tbody&gt;</code> element that I never typed. The construction crew added something the blueprint didn't include &mdash; because the DOM spec requires it.</p>
+                <p class="code-comment mt-1">The browser added a <code>&lt;tbody&gt;</code> element that I never typed. The construction crew added something the blueprint didn't include &mdash; because the browser has strict rules about how tables must be structured.</p>
             </div>
 
             <div class="hap-note-callout mt-2">
@@ -347,7 +347,7 @@ console.log(typeof document);
         font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: var(--light-brown);
+        color: hsl(24, 22%, 40%);
         margin-bottom: 0.5rem;
     }
 

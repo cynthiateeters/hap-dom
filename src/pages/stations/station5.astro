@@ -76,7 +76,7 @@ HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are pr
                     <li>I spent twenty minutes wondering why my badge wasn't showing up on the page. I'd created it, configured it, styled it... but forgot to call <code>appendChild()</code>. The element was just floating in memory, fully dressed with nowhere to go.</li>
                     <li>I tried <code>document.remove()</code> to delete a badge and got a TypeError. Turns out <code>remove()</code> belongs to the element itself, not to <code>document</code>. The element removes <em>itself</em>.</li>
                     <li>I appended a badge to the page <em>before</em> adding its text and class. For a split second, an empty unstyled <code>&lt;span&gt;</code> flashed on screen before the text appeared. Configure backstage, attach when ready!</li>
-                    <li>I tried <code>badges.textContent</code> on a NodeList from <code>querySelectorAll</code> and got <code>undefined</code>. A NodeList is a collection, not a single element. I needed <code>forEach</code> to work with each badge individually.</li>
+                    <li>I tried <code>badges.textContent</code> on the result of <code>querySelectorAll</code> and got <code>undefined</code>. Turns out <code>querySelectorAll</code> gives back a whole collection, not a single element. I had to use <code>forEach</code> to work with each badge one at a time.</li>
                 </ul>
             </div>
         </div>
@@ -185,12 +185,12 @@ addBadge('CSS');`} lang="javascript" />
 // This does NOT work:
 badges.textContent;  // → undefined!
 
-// A NodeList is a collection. Use forEach:
+// It's a collection, not one element. Use forEach to loop through:
 badges.forEach(badge => console.log(badge.textContent));
 // → "JavaScript"
 // → "DOM"
 // → "CSS"`} lang="javascript" />
-                <p class="code-comment mt-1"><code>querySelectorAll</code> returns a <strong>NodeList</strong> &mdash; a collection of elements, not a single element. A NodeList doesn't have <code>textContent</code> or <code>classList</code> because those belong to individual elements. I need to use <code>forEach</code> to work with each element inside the collection.</p>
+                <p class="code-comment mt-1"><code>querySelectorAll</code> returns a <strong>NodeList</strong> &mdash; basically a collection of elements, not a single one. That tripped me up because I expected it to work like <code>querySelector</code>. The collection itself doesn't have <code>textContent</code> or <code>classList</code> &mdash; those belong to individual elements inside it. <code>forEach</code> runs a bit of code once for each element in the collection. (If that syntax looks unfamiliar, don't worry &mdash; the pattern is what matters here.)</p>
             </div>
 
             <div class="analysis-grid mt-2">

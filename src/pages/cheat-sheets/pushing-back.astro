@@ -10,7 +10,7 @@ import CodeBlock from '../../components/CodeBlock.astro';
 <MainLayout
     title="How I Learned to Push Back and Why | HAP's Learning Lab"
     headerTitle="How I Learned to Push Back and Why"
-    headerSubtitle="Quick Reference"
+    headerSubtitle="📋 Cheat Sheet"
     avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-laptop_xiewar.jpg"
     avatarAlt="HAP studying on his laptop"
     introContent="<p>This is the story of the first time I pushed back on AI-generated code — and the framework I built from it. 🟠</p>"
@@ -216,4 +216,23 @@ import CodeBlock from '../../components/CodeBlock.astro';
         </div>
     </section>
 
+    <section class="content-section">
+        <div class="back-link">
+            <a href="/stations/station2/">← Back to Station 2: Finding Things</a>
+        </div>
+    </section>
+
 </MainLayout>
+
+<style is:global>
+    .subtitle {
+        display: inline-block;
+        background: var(--teal-accent);
+        color: var(--cream-white);
+        padding: 0.3rem 1.2rem;
+        border-radius: 2rem;
+        font-weight: 700;
+        font-size: clamp(0.85rem, 1.5vw + 0.3rem, 1rem);
+        letter-spacing: 0.03em;
+    }
+</style>

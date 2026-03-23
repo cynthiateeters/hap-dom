@@ -251,75 +251,23 @@ const introContent = `
     </section>
 
     <!-- ============================================================
-         SECTION 7: Forward Pointer — What Comes Next
-         Testing lab preview
+         HAP's Confession
          ============================================================ -->
     <section class="content-section">
-        <div class="topic-section">
-            <h2>Forward Pointer — What Comes Next</h2>
-
-            <p>Everything I've built so far is awareness. I know to check MDN. I know to push back on unfamiliar
-                methods. I know to think about what could go wrong. But awareness isn't enforcement.</p>
-
-            <p class="mt-1">In the testing lab (Week 3), I'll learn about tools that <em>automate</em> what I've been
-                doing manually — ESLint security plugins that flag dangerous patterns like <code>innerHTML</code>
-                before the code even runs, <code>npm audit</code> that checks dependencies for known vulnerabilities,
-                and Dependabot that watches for security patches in the packages I rely on.</p>
-
-            <p class="mt-1">The framework I built here — NOTICE, STOP, INTERROGATE, UNDERSTAND, CODIFY — won't go
-                away. But it'll have backup. Automated tools that catch the things my eyes miss, especially on long
-                days when I'm tired and the AI's answer looks "close enough."</p>
-        </div>
-    </section>
-
-    <!-- ============================================================
-         SECTION 8: HAP's Confessions
-         Three specific mistakes
-         ============================================================ -->
-    <section class="content-section">
-        <h2 class="section-heading-centered">HAP's Confessions</h2>
+        <h2 class="section-heading-centered">HAP's Confession</h2>
 
         <div class="hap-note-callout mt-2">
             <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
                 alt="HAP surrounded by tangled code with an 'oops' expression"
                 width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
             <div class="hap-note-content">
-                <h3>Confession 1: The Wall of Text</h3>
-                <p>Early on, I asked the AI "explain the DOM" and got back a massive wall of text that covered
-                    everything from the history of web browsers to advanced event delegation. I read the whole thing,
-                    understood almost none of it, and felt more confused than when I started. The problem wasn't the
-                    AI — it was my question. "Explain the DOM" is like asking "explain cars." The answer could fill a
-                    book. I learned to ask specific questions: "How does querySelector find an element by its class
-                    name?" gets a useful answer.</p>
-            </div>
-        </div>
-
-        <div class="hap-note-callout mt-2">
-            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
-                alt="HAP surrounded by tangled code with an 'oops' expression"
-                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
-            <div class="hap-note-content">
-                <h3>Confession 2: The innerText Incident</h3>
+                <h3>The innerText Incident</h3>
                 <p>The AI told me to use <code>innerText</code> to read element content, and I trusted it without
                     checking. It worked in my tests, so I moved on. Later I discovered that <code>innerText</code>
                     triggers a reflow — the browser has to recalculate the layout to figure out what's visually
                     rendered. For my little Robot ID Card, it didn't matter. But if I'd built that habit into a larger
                     project with hundreds of elements, the performance cost would have added up. MDN would have told
                     me about <code>textContent</code> as the better default.</p>
-            </div>
-        </div>
-
-        <div class="hap-note-callout mt-2">
-            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
-                alt="HAP surrounded by tangled code with an 'oops' expression"
-                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
-            <div class="hap-note-content">
-                <h3>Confession 3: The Version Mismatch</h3>
-                <p>I asked the AI for help with Vite configuration and got back instructions for Vite 5. I was using
-                    Vite 7. The config syntax had changed, and nothing worked. I spent an hour debugging before I
-                    realized the AI was drawing from outdated training data. That's when I discovered Context7 — it
-                    serves versioned documentation, so when I ask about Vite, I get the docs for the version I'm
-                    actually using.</p>
             </div>
         </div>
     </section>

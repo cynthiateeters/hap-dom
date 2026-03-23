@@ -141,6 +141,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
         </div>
     </section>
 
+    <section class="content-section">
+        <div class="back-link">
+            <a href="/stations/station4/">← Back to Station 4: Changing Things</a>
+        </div>
+    </section>
+
 </MainLayout>
 
 <style>
@@ -251,6 +257,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
     /* Element display */
     .demo-element-display {
         background: hsl(220, 20%, 14%);
+        color: hsl(0, 0%, 90%);
         border: 1px solid hsl(220, 15%, 25%);
         border-radius: 8px;
         padding: 1rem;
@@ -264,6 +271,10 @@ import MainLayout from '../../layouts/MainLayout.astro';
         word-break: break-all;
         color: hsl(180, 50%, 65%);
         font-size: 0.8rem;
+    }
+
+    .demo-class-display {
+        color: hsl(0, 0%, 90%);
     }
 
     /* Presets */
@@ -299,12 +310,12 @@ import MainLayout from '../../layouts/MainLayout.astro';
     }
 
     .demo-preset-danger {
-        border-color: hsl(0, 70%, 55%);
-        color: hsl(0, 70%, 55%);
+        border-color: hsl(0, 75%, 68%);
+        color: hsl(0, 75%, 68%);
     }
 
     .demo-preset-danger:hover {
-        background: hsl(0, 70%, 55%);
+        background: hsl(0, 75%, 68%);
         color: hsl(0, 0%, 100%);
     }
 
@@ -405,8 +416,8 @@ import MainLayout from '../../layouts/MainLayout.astro';
 
     .demo-danger-toggle {
         background: none;
-        border: 1px solid hsl(0, 70%, 55%);
-        color: hsl(0, 70%, 55%);
+        border: 1px solid hsl(0, 75%, 68%);
+        color: hsl(0, 75%, 68%);
         padding: 0.5rem 1rem;
         border-radius: 6px;
         cursor: pointer;
@@ -417,7 +428,7 @@ import MainLayout from '../../layouts/MainLayout.astro';
     }
 
     .demo-danger-toggle:hover {
-        background: hsl(0, 70%, 55%);
+        background: hsl(0, 75%, 68%);
         color: hsl(0, 0%, 100%);
     }
 
