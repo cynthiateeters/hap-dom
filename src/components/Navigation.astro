@@ -1,0 +1,55 @@
+---
+/**
+ * Navigation.astro - HAP Learning Lab navigation component
+ *
+ * Provides station-to-station navigation and hub link.
+ * Use position="top" for the top navigation bar.
+ * Use position="bottom" for the bottom pagination.
+ */
+
+interface Props {
+  position: 'top' | 'bottom';
+  stationNumber?: number;
+  totalStations?: number;
+  prevStation?: { url: string; label: string };
+  nextStation?: { url: string; label: string };
+  hubUrl?: string;
+}
+
+const {
+  position,
+  stationNumber,
+  totalStations = 6,
+  prevStation,
+  nextStation,
+  hubUrl = '/'
+} = Astro.props;
+
+const isTopNav = position === 'top';
+const ariaLabel = isTopNav ? 'Page navigation' : 'Station pagination';
+const navClass = isTopNav ? 'page-navigation top-nav' : 'page-navigation bottom-nav';
+---
+
+<nav aria-label={ariaLabel} class={navClass}>
+    <a href={hubUrl} class="nav-link hub-link">
+        {isTopNav ? '🏠 Back to Hub' : '🏠 Hub'}
+    </a>
+
+    {stationNumber && isTopNav && (
+        <div class="page-position" data-page={stationNumber}>
+            Station {stationNumber} of {totalStations}
+        </div>
+    )}
+
+    {prevStation && !isTopNav && (
+        <a href={prevStation.url} class="nav-link prev-link">
+            ← {prevStation.label}
+        </a>
+    )}
+
+    {nextStation && !isTopNav && (
+        <a href={nextStation.url} class="nav-link next-link">
+            Next: {nextStation.label} →
+        </a>
+    )}
+</nav>

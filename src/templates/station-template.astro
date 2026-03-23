@@ -1,0 +1,235 @@
+---
+/**
+ * Station Template - HAP Learning Lab (Stations 1-5)
+ *
+ * ============================================================
+ * BEFORE USING THIS TEMPLATE:
+ * ============================================================
+ * 1. Complete the station blueprint (docs/reference-cards/station-blueprint-template.md)
+ * 2. Review HAP voice guidelines (docs/reference-cards/hap-voice-card.md)
+ * 3. Select HAP poses from the image inventory (.claude/skills/hap-image-validation/)
+ *    Choose poses that match narrative moments: hap-broke-things for confessions,
+ *    hap-brain-explodes for breakthroughs (max 1 per station), hap-celebrating for victories.
+ *    Use /hap-pose or /grace-pose skills to generate new images if the inventory lacks a match.
+ *
+ * ============================================================
+ * LEARNING INTENT (paste from your blueprint):
+ * ============================================================
+ * - Primary concept: [ONE idea students must walk away with]
+ * - Supporting concepts: [Ideas that reinforce but don't compete]
+ * - Explicit non-goals: [What this station does NOT teach]
+ *
+ * ============================================================
+ * CODE EXAMPLE ROLE (choose one):
+ * ============================================================
+ * [ ] Illustrative - Shows how something works
+ * [ ] Diagnostic - Helps identify problems
+ * [ ] Comparative - Shows before/after or options
+ * [ ] Reinforcement - Practices a learned concept
+ *
+ * ============================================================
+ * TEMPLATE USAGE:
+ * ============================================================
+ * 1. Copy to src/pages/stations/station[N].astro
+ * 2. Update stationNumber (1-5) - use station6-template for Station 6
+ * 3. Replace all [PLACEHOLDER_*] markers
+ * 4. Add content sections inside the StationLayout slot
+ * 5. Validate with Claude Skills before committing
+ * 6. Run `npm run build` to verify
+ *
+ * ============================================================
+ * CODE BLOCKS:
+ * ============================================================
+ * Use the CodeBlock component for syntax-highlighted code:
+ *   <CodeBlock code={`your code here`} lang="css" />
+ * Supported languages: html, css, javascript, json, markdown, bash, text, nunjucks
+ */
+
+// NOTE: When you copy this to src/pages/stations/, these imports will work correctly
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+// [PLACEHOLDER_INTRO_CONTENT]
+// Write HAP's introduction in first-person voice.
+// Include his initial confusion, what Prof. Teeters said, and the "aha" moment.
+// End with "Let me show you..." and 🟠
+const introContent = `
+    <p><strong>Welcome to Station [N]!</strong> [PLACEHOLDER_OPENING_LINE]</p>
+    <p class="mt-1">[PLACEHOLDER_HAPS_QUESTION]</p>
+    <p class="mt-1">Prof. Teeters [PLACEHOLDER_PROF_RESPONSE]</p>
+    <p class="mt-1">[PLACEHOLDER_AHA_MOMENT]</p>
+    <p class="mt-1">Let me show you [PLACEHOLDER_TRANSITION]... 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={1}
+    title="[PLACEHOLDER_STATION_TITLE]"
+    subtitle="[PLACEHOLDER_SUBTITLE]"
+    description="[PLACEHOLDER_META_DESCRIPTION - 150-160 characters for SEO]"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759497938/[PLACEHOLDER_HAP_IMAGE].jpg"
+    avatarAlt="[PLACEHOLDER_ALT_TEXT - describe HAP's pose and context]"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759497938/[PLACEHOLDER_OG_IMAGE].jpg"
+    nextStationTitle="[PLACEHOLDER_NEXT_STATION_TITLE]"
+    footerReminder="[PLACEHOLDER_FOOTER_REMINDER - HAP's memorable takeaway]"
+    labName="[PLACEHOLDER_LAB_NAME]"
+    cheatSheetUrl="[PLACEHOLDER_CHEAT_SHEET_URL - e.g. /cheat-sheets/station1-commands/ or remove if none]"
+    cheatSheetTitle="[PLACEHOLDER_CHEAT_SHEET_TITLE - e.g. Station 1 Command Reference]"
+>
+
+    <!-- ============================================================
+         SECTION 1: What You'll Learn
+         Always the first section. 3 insight cards + HAP's Confession.
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">What You'll Learn at This Station</h2>
+
+        <!-- HAP's discovery introduction -->
+        <div class="intro-box">
+            <p><strong>HAP's Discovery:</strong> [PLACEHOLDER_DISCOVERY_INTRO - What HAP learned and why it matters. End with reference to the 3 insights below.]</p>
+        </div>
+
+        <!-- 3 Insight cards - always exactly 3 -->
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">[EMOJI_1]</span> [PLACEHOLDER_INSIGHT_1_TITLE]</h3>
+                <p class="stat-large">[PLACEHOLDER_STAT_1]</p>
+                <p>[PLACEHOLDER_INSIGHT_1_DESCRIPTION]</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">[EMOJI_2]</span> [PLACEHOLDER_INSIGHT_2_TITLE]</h3>
+                <p class="stat-large stat-teal">[PLACEHOLDER_STAT_2]</p>
+                <p>[PLACEHOLDER_INSIGHT_2_DESCRIPTION]</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">[EMOJI_3]</span> [PLACEHOLDER_INSIGHT_3_TITLE]</h3>
+                <p class="stat-large stat-brown">[PLACEHOLDER_STAT_3]</p>
+                <p>[PLACEHOLDER_INSIGHT_3_DESCRIPTION]</p>
+            </div>
+        </div>
+
+        <!-- HAP's Confession - mistakes he made learning this topic -->
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1763230414/hap-broke-things_qtbum4.jpg"
+                alt="HAP surrounded by tangled code with an 'oops' expression"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession:</h3>
+                <ul>
+                    <li>[PLACEHOLDER_CONFESSION_1 - A specific mistake HAP made]</li>
+                    <li>[PLACEHOLDER_CONFESSION_2 - Another mistake, possibly involving Grace Hopper correcting him]</li>
+                    <li>[PLACEHOLDER_CONFESSION_3 - A third mistake with lesson learned]</li>
+                    <li>[PLACEHOLDER_CONFESSION_4 - Optional fourth mistake]</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: Main Topic
+         The core educational content for this station.
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>[PLACEHOLDER_SECTION_2_TITLE]</h2>
+
+            <p class="mb-2">[PLACEHOLDER_SECTION_2_INTRO]</p>
+
+            <!-- Analysis grid for comparing/contrasting concepts -->
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_POINT_1_TITLE]</h3>
+                    <p>[PLACEHOLDER_POINT_1_CONTENT]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_POINT_2_TITLE]</h3>
+                    <p>[PLACEHOLDER_POINT_2_CONTENT]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_POINT_3_TITLE]</h3>
+                    <p>[PLACEHOLDER_POINT_3_CONTENT]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_POINT_4_TITLE]</h3>
+                    <p>[PLACEHOLDER_POINT_4_CONTENT]</p>
+                </div>
+            </div>
+
+            <!-- HAP note callout -->
+            <div class="hap-note-callout mt-2">
+                <div class="hap-note-content">
+                    <h3>🟠 [PLACEHOLDER_CALLOUT_TITLE]:</h3>
+                    <p>[PLACEHOLDER_CALLOUT_CONTENT]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: Additional Topic (optional)
+         Add more sections as needed for the station's content.
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>[PLACEHOLDER_SECTION_3_TITLE]</h2>
+
+            <p class="mb-2">[PLACEHOLDER_SECTION_3_INTRO]</p>
+
+            <!-- Code example box (if applicable) -->
+            <div class="prompt-box">
+                <div class="prompt-label">[PLACEHOLDER_CODE_LABEL]:</div>
+                <CodeBlock code={`[PLACEHOLDER_CODE_EXAMPLE]`} lang="[LANGUAGE]" />
+                <p class="code-comment mt-1">[PLACEHOLDER_CODE_EXPLANATION]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION: Quick Reference
+         Always the last content section. 4-6 tip cards summarizing key points.
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">🎓 [PLACEHOLDER_TOPIC] Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>[PLACEHOLDER_TIP_1_TITLE]</h3>
+                    <p>[PLACEHOLDER_TIP_1_CONTENT]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>[PLACEHOLDER_TIP_2_TITLE]</h3>
+                    <p>[PLACEHOLDER_TIP_2_CONTENT]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>[PLACEHOLDER_TIP_3_TITLE]</h3>
+                    <p>[PLACEHOLDER_TIP_3_CONTENT]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>[PLACEHOLDER_TIP_4_TITLE]</h3>
+                    <p>[PLACEHOLDER_TIP_4_CONTENT]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</StationLayout>

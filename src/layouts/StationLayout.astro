@@ -1,0 +1,124 @@
+---
+/**
+ * StationLayout.astro - Layout wrapper for station pages
+ *
+ * Wraps MainLayout with station-specific defaults and auto-calculates
+ * prev/next navigation based on station number.
+ *
+ * Usage:
+ *   <StationLayout
+ *     stationNumber={1}
+ *     title="Your Station Title"
+ *     subtitle="Your subtitle"
+ *     description="Meta description for SEO"
+ *     avatarImage="cloudinary-url"
+ *     avatarAlt="HAP description"
+ *     introContent={introContentVariable}
+ *   >
+ *     <!-- Your station content here -->
+ *   </StationLayout>
+ */
+
+import MainLayout from './MainLayout.astro';
+
+interface Props {
+  stationNumber: number;
+  title: string;
+  subtitle: string;
+  description: string;
+  avatarImage: string;
+  avatarAlt: string;
+  introContent: string;
+  ogImage?: string;
+  nextStationTitle?: string;
+  footerReminder?: string;
+  labName?: string;
+  demoUrl?: string;
+  demoLabel?: string;
+  cheatSheetUrl?: string;
+  cheatSheetTitle?: string;
+}
+
+const {
+  stationNumber,
+  title,
+  subtitle,
+  description,
+  avatarImage,
+  avatarAlt,
+  introContent,
+  ogImage,
+  nextStationTitle,
+  footerReminder,
+  labName = "Your Learning Lab Topic",
+  demoUrl,
+  demoLabel,
+  cheatSheetUrl,
+  cheatSheetTitle,
+} = Astro.props;
+
+// Auto-calculate navigation based on station number
+const prevStation = stationNumber > 1
+  ? { url: `/stations/station${stationNumber - 1}/`, label: `Station ${stationNumber - 1}` }
+  : undefined;
+
+const nextStation = stationNumber < 6
+  ? {
+      url: `/stations/station${stationNumber + 1}/`,
+      label: nextStationTitle
+        ? `Station ${stationNumber + 1} - ${nextStationTitle}`
+        : `Station ${stationNumber + 1}`
+    }
+  : undefined;
+
+// Build page title with lab name
+const pageTitle = `${title} | HAP's Learning Lab: ${labName}`;
+const headerTitle = `Station ${stationNumber}: ${title}`;
+---
+
+<MainLayout
+  title={pageTitle}
+  description={description}
+  ogImage={ogImage}
+  headerTitle={headerTitle}
+  headerSubtitle={subtitle}
+  avatarImage={avatarImage}
+  avatarAlt={avatarAlt}
+  introContent={introContent}
+  showNavigation={true}
+  stationNumber={stationNumber}
+  prevStation={prevStation}
+  nextStation={nextStation}
+  footerReminder={footerReminder}
+>
+  {demoUrl && demoLabel && (
+    <div class="demo-banner">
+      <span class="demo-banner-icon">🔬</span>
+      <span>Try it yourself:</span>
+      <a href={demoUrl} class="demo-banner-link">{demoLabel} →</a>
+    </div>
+  )}
+  {cheatSheetUrl && cheatSheetTitle && (
+    <div class="cheat-sheet-banner">
+      <p class="cheat-sheet-banner-label">Quick Reference</p>
+      <a href={cheatSheetUrl} class="cheat-sheet-banner-link">
+        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_80,c_limit/canvas/hap/grace-inventory-icon"
+          alt="" width="80" height="80" decoding="async" loading="eager"
+          class="cheat-sheet-banner-icon" />
+        <span>{cheatSheetTitle} →</span>
+      </a>
+    </div>
+  )}
+  <slot />
+  {cheatSheetUrl && cheatSheetTitle && (
+    <div class="cheat-sheet-banner">
+      <p class="cheat-sheet-banner-label">Quick Reference</p>
+      <a href={cheatSheetUrl} class="cheat-sheet-banner-link">
+        <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_80,c_limit/canvas/hap/grace-inventory-icon"
+          alt="" width="80" height="80" decoding="async" loading="lazy"
+          class="cheat-sheet-banner-icon" />
+        <span>{cheatSheetTitle} →</span>
+      </a>
+    </div>
+  )}
+</MainLayout>

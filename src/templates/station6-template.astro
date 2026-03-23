@@ -1,0 +1,636 @@
+---
+/**
+ * Station 6 Template - AI Assistance for [TOPIC]
+ *
+ * IMPORTANT: Station 6 has a FIXED 12-section structure that MUST be followed.
+ * This station ALWAYS teaches responsible AI assistance for your topic.
+ *
+ * TEMPLATE USAGE:
+ * 1. Copy to src/pages/stations/station6.astro
+ * 2. Replace all [PLACEHOLDER_*] markers
+ * 3. Follow the 12-section structure exactly
+ * 4. Run `npm run build` to verify
+ *
+ * THE 12 SECTIONS (do not change order or remove):
+ * 1. What You'll Learn (3 insight cards + HAP's confession)
+ * 2. What AI Can and Can't Do
+ * 3. [First Specific Topic Example with AI]
+ * 4. [Second Specific Topic Example with AI]
+ * 5. AI for [Topic] Accessibility
+ * 6. Optimizing [Topic] Performance with AI
+ * 7. Try It Yourself: AI [Topic] Challenge
+ * 8. HAP's Rules for Working with AI (6 numbered rules)
+ * 9. Advanced Prompt Strategies
+ * 10. When NOT to Use AI
+ * 11. Quick Reference: AI [Topic] Tasks
+ * 12. Learning Objectives Checklist
+ *
+ * HAP'S VOICE IN STATION 6:
+ * - First-person reflection on using AI while learning Stations 1-5
+ * - Shares specific examples of prompts that worked/failed
+ * - References Prof. Teeters' guidance on responsible AI use
+ * - Shows prompt evolution from vague to detailed
+ * - Emphasizes verification and accountability
+ *
+ * KEY THEMES:
+ * - AI as assistant, not replacement
+ * - Accessibility is non-negotiable (always request explicitly)
+ * - Performance requires explicit prompting
+ * - Verification is mandatory (you own the code)
+ * - Detailed prompts get better results
+ * - Understanding beats speed
+ */
+
+import StationLayout from '../../layouts/StationLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+
+// HAP's introduction - story about discovering AI for this topic
+const introContent = `
+    <p><strong>Welcome to Station 6!</strong> After learning all about [STATIONS_1-5_TOPICS], I was feeling pretty
+      confident. Then I discovered that AI could help me [TASK] in seconds instead of hours! I was so excited — I
+      asked an AI for [SPECIFIC_EXAMPLE], got beautiful code back, and shipped it immediately. Then Prof. Teeters
+      tested it and found a critical problem: [SPECIFIC_ISSUE].</p>
+    <p class="mt-1">She sat me down and explained: "HAP, AI can generate code faster than you can type, but it doesn't
+      care about your users the way you should. You own every line of code, whether you wrote it or AI did."</p>
+    <p class="mt-1">That lesson changed how I work with AI completely. Let me show you what I learned about using AI
+      responsibly for [TOPIC] — the prompts that work, the verification that's mandatory, and the rules that keep
+      users safe! 🟠</p>
+`;
+---
+
+<StationLayout
+    stationNumber={6}
+    title="AI Assistance for [PLACEHOLDER_TOPIC]"
+    subtitle="AI helps code faster, but you're still responsible for [PLACEHOLDER_QUALITY_ASPECT]"
+    description="[PLACEHOLDER_META_DESCRIPTION - Join HAP as he learns to use AI responsibly for [TOPIC]. Discover effective prompting, accessibility verification, and the rules for working with AI. 150-160 characters]"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-laptop_xiewar.jpg"
+    avatarAlt="HAP (HyBit A. ProtoBot) studying on his laptop"
+    introContent={introContent}
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495998/hap-laptop_xiewar.jpg"
+    footerReminder="[PLACEHOLDER_FOOTER_REMINDER - HAP's memorable quote about AI responsibility for this topic]"
+    labName="[PLACEHOLDER_LAB_NAME]"
+>
+
+    <!-- ============================================================
+         SECTION 1: What You'll Learn
+         3 insight cards about AI assistance + HAP's biggest AI mistake
+         ============================================================ -->
+    <section class="content-section">
+        <h2 class="section-heading-centered">What You'll Learn</h2>
+
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">⚡</span> [PLACEHOLDER_INSIGHT_1_TITLE]</h3>
+                <p class="stat-large">[PLACEHOLDER_TIME_SAVINGS_OR_METRIC]</p>
+                <p><strong>[PLACEHOLDER_KEY_PRINCIPLE_1]</strong></p>
+                <p>[PLACEHOLDER_HAP_STORY_1 - What he did wrong, what Prof. Teeters taught, what he does now. ~150 words]</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">🎯</span> [PLACEHOLDER_INSIGHT_2_TITLE]</h3>
+                <p class="stat-large stat-teal">[PLACEHOLDER_KEY_METRIC_2]</p>
+                <p><strong>[PLACEHOLDER_KEY_PRINCIPLE_2]</strong></p>
+                <p>[PLACEHOLDER_HAP_STORY_2 - Example of vague vs detailed prompts. ~150 words]</p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">✅</span> [PLACEHOLDER_INSIGHT_3_TITLE]</h3>
+                <p class="stat-large stat-brown">[PLACEHOLDER_RESPONSIBILITY_PHRASE]</p>
+                <p><strong>[PLACEHOLDER_KEY_PRINCIPLE_3]</strong></p>
+                <p>[PLACEHOLDER_HAP_STORY_3 - About ownership and accountability. ~150 words]</p>
+            </div>
+        </div>
+
+        <!-- HAP's confession about biggest AI mistake -->
+        <div class="hap-note-callout">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1759495999/hap-confused-map_q8q0ej.jpg"
+                alt="HAP looking confused while studying a map"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>HAP's Confession: [PLACEHOLDER_MISTAKE_TITLE]</h3>
+                <p>[PLACEHOLDER_CONFESSION_PARA_1 - What HAP did wrong. ~100 words]</p>
+                <p class="mt-1">[PLACEHOLDER_CONFESSION_PARA_2 - The consequences. ~100 words]</p>
+                <p class="mt-1">[PLACEHOLDER_CONFESSION_PARA_3 - The lesson learned. ~100 words]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 2: What AI Can and Can't Do
+         Strengths and weaknesses grid
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>What AI Can and Can't Do</h2>
+            <p class="mb-2">[PLACEHOLDER_INTRO - HAP's unrealistic expectations, Prof. Teeters teaching boundaries. ~100 words]</p>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>AI Excels At</h3>
+                    <ul class="mt-1">
+                        <li><strong>[PLACEHOLDER_STRENGTH_1]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_STRENGTH_2]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_STRENGTH_3]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_STRENGTH_4]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_STRENGTH_5]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_STRENGTH_6]:</strong> [Explanation]</li>
+                    </ul>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>AI Struggles With</h3>
+                    <ul class="mt-1">
+                        <li><strong>[PLACEHOLDER_WEAKNESS_1]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_WEAKNESS_2]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_WEAKNESS_3]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_WEAKNESS_4]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_WEAKNESS_5]:</strong> [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_WEAKNESS_6]:</strong> [Explanation]</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hap-note-callout mt-3">
+                <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1759495998/hap-laptop_xiewar.jpg"
+                    alt="HAP working on his laptop"
+                    width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+                <div class="hap-note-content">
+                    <h3>HAP's Takeaway: [PLACEHOLDER_LESSON_TITLE]</h3>
+                    <p>[PLACEHOLDER_TAKEAWAY_PARA_1 - Where AI excelled. ~75 words]</p>
+                    <p class="mt-1">[PLACEHOLDER_TAKEAWAY_PARA_2 - Where AI failed. ~75 words]</p>
+                    <p class="mt-1">[PLACEHOLDER_TAKEAWAY_PARA_3 - The realization. ~75 words]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 3: First Specific Topic Example with AI
+         Vague prompt → Bad output → Detailed prompt → Good output
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>[PLACEHOLDER_CREATING/BUILDING] [PLACEHOLDER_SPECIFIC_TASK_1] with AI</h2>
+            <p class="mb-2">[PLACEHOLDER_INTRO - Why HAP tried this first, early disasters, what he learned. ~100 words]</p>
+
+            <h3 class="mt-3">Before I Learned to Write Good Prompts</h3>
+            <p class="mt-1">[PLACEHOLDER_VAGUE_PROMPT_INTRO - Why it was bad. ~50 words]</p>
+
+            <div class="warning-box mt-2">
+                <h3>❌ Vague Prompt Produces Unusable Code</h3>
+                <p><strong>My vague prompt:</strong></p>
+                <div class="prompt-box mt-1">
+                    <div class="prompt-label">What I Asked AI:</div>
+                    <CodeBlock code={`[PLACEHOLDER_VAGUE_PROMPT - one sentence, no details]`} lang="text" />
+                </div>
+
+                <p class="mt-2"><strong>What AI generated:</strong></p>
+                <CodeBlock code={`/* Generic AI output without proper constraints */
+[PLACEHOLDER_BAD_CODE_EXAMPLE]
+/* ❌ [PROBLEM_1] */
+/* ❌ [PROBLEM_2] */
+/* ❌ [PROBLEM_3] */`} lang="css" />
+
+                <p class="mt-1"><strong>Problems with this code:</strong></p>
+                <ul class="mt-1">
+                    <li><strong>[PLACEHOLDER_PROBLEM_1]</strong> — [Explanation]</li>
+                    <li><strong>[PLACEHOLDER_PROBLEM_2]</strong> — [Explanation]</li>
+                    <li><strong>[PLACEHOLDER_PROBLEM_3]</strong> — [Explanation]</li>
+                </ul>
+            </div>
+
+            <h3 class="mt-3">The Prompt I Learned to Write</h3>
+            <p class="mt-1">[PLACEHOLDER_GOOD_PROMPT_INTRO - How Prof. Teeters showed him. ~50 words]</p>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ Detailed Prompt with All Requirements:</div>
+                <CodeBlock code={`[PLACEHOLDER_DETAILED_PROMPT with specific requirements:
+- [REQUIREMENT_1]
+- [REQUIREMENT_2]
+- [REQUIREMENT_3]
+- [REQUIREMENT_4]
+- [REQUIREMENT_5]]`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">What AI Generates with a Good Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ AI Output with Detailed Constraints:</div>
+                <CodeBlock code={`/* Professional AI output with proper constraints */
+[PLACEHOLDER_GOOD_CODE_EXAMPLE]
+/* ✅ [POSITIVE_1] */
+/* ✅ [POSITIVE_2] */
+/* ✅ [POSITIVE_3] */`} lang="css" />
+                <p class="code-comment mt-1"><strong>Why this code is better:</strong> [PLACEHOLDER_IMPROVEMENTS]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 4: Second Specific Topic Example with AI
+         More complex task requiring even more specificity
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>[PLACEHOLDER_GENERATING/CREATING] [PLACEHOLDER_SPECIFIC_TASK_2] with AI</h2>
+            <p class="mb-2">[PLACEHOLDER_INTRO - More complex than first task. ~100 words]</p>
+
+            <h3 class="mt-3">The Task: [PLACEHOLDER_SPECIFIC_EXAMPLE]</h3>
+            <p class="mt-1">[PLACEHOLDER_TASK_DESCRIPTION - Why more complex. ~75 words]</p>
+
+            <h3 class="mt-3">My Effective Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ Comprehensive Prompt:</div>
+                <CodeBlock code={`[PLACEHOLDER_COMPREHENSIVE_PROMPT with all details:
+- [REQUIREMENT_1]
+- [REQUIREMENT_2]
+- [REQUIREMENT_3]
+- [REQUIREMENT_4]
+- [REQUIREMENT_5]
+- [REQUIREMENT_6]]`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">AI-Generated Code</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ Professional Output:</div>
+                <CodeBlock code={`/* [PLACEHOLDER_TASK_DESCRIPTION] */
+[PLACEHOLDER_COMPLETE_CODE_EXAMPLE]`} lang="css" />
+                <p class="code-comment mt-1"><strong>Why this is excellent:</strong> [PLACEHOLDER_QUALITIES]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 5: AI for [Topic] Accessibility
+         CRITICAL: AI constantly forgets accessibility
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>AI for [PLACEHOLDER_TOPIC] Accessibility</h2>
+            <p class="mb-2"><strong>This is where AI fails most consistently, and it's the most important issue to understand.</strong> [PLACEHOLDER_INTRO - Why accessibility matters, how AI forgets it. ~100 words]</p>
+
+            <h3 class="mt-3">The Problem: AI Constantly Forgets Accessibility</h3>
+            <p class="mt-1">[PLACEHOLDER_PROBLEM_STORY - Discovering NONE had accessibility. ~75 words]</p>
+
+            <h3 class="mt-3">The Solution: Make Accessibility Explicit in Every Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ Accessibility-First Prompt Template:</div>
+                <CodeBlock code={`Create [TASK_DESCRIPTION] with these CRITICAL accessibility requirements:
+
+MANDATORY accessibility features:
+- [PLACEHOLDER_ACCESSIBILITY_1]
+- [PLACEHOLDER_ACCESSIBILITY_2]
+- [PLACEHOLDER_ACCESSIBILITY_3]
+- [PLACEHOLDER_ACCESSIBILITY_4]
+- [PLACEHOLDER_ACCESSIBILITY_5]
+
+[Then add your other technical requirements...]`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">Before and After: Accessibility Comparison</h3>
+
+            <div class="warning-box mt-2">
+                <h3>❌ AI Code WITHOUT Accessibility Request</h3>
+                <CodeBlock code={`/* [TASK] - AI generated without accessibility prompt */
+[PLACEHOLDER_CODE_WITHOUT_ACCESSIBILITY]
+
+/* ❌ NO [ACCESSIBILITY_FEATURE] - VIOLATES WCAG */`} lang="css" />
+                <p class="mt-1"><strong>This code is dangerous.</strong> [PLACEHOLDER_HARM_DESCRIPTION]</p>
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ AI Code WITH Accessibility Request:</div>
+                <CodeBlock code={`/* [TASK] - AI generated WITH accessibility requirements */
+[PLACEHOLDER_CODE_WITH_ACCESSIBILITY]
+
+/* ✅ Accessibility: [FEATURE_DESCRIPTION] */`} lang="css" />
+                <p class="code-comment mt-1"><strong>This code is safe.</strong> [PLACEHOLDER_SAFETY_EXPLANATION]</p>
+            </div>
+
+            <div class="hap-note-callout mt-3">
+                <div class="hap-note-content">
+                    <h3>HAP's Accessibility Checklist: Non-Negotiable Rules</h3>
+                    <ul class="mt-1">
+                        <li><strong>[PLACEHOLDER_RULE_1]</strong> — [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_RULE_2]</strong> — [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_RULE_3]</strong> — [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_RULE_4]</strong> — [Explanation]</li>
+                        <li><strong>[PLACEHOLDER_RULE_5]</strong> — [Explanation]</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 6: Optimizing [Topic] Performance with AI
+         Performance requires explicit prompting
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Optimizing [PLACEHOLDER_TOPIC] Performance with AI</h2>
+            <p class="mb-2">[PLACEHOLDER_INTRO - AI needs explicit guidance for performance. ~100 words]</p>
+
+            <h3 class="mt-3">The Performance-Focused Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ Performance Optimization Prompt:</div>
+                <CodeBlock code={`Optimize this [TASK] for [DEVICE/CONTEXT] performance with these requirements:
+
+Performance constraints:
+- [PLACEHOLDER_PERF_1]
+- [PLACEHOLDER_PERF_2]
+- [PLACEHOLDER_PERF_3]
+- [PLACEHOLDER_PERF_4]
+
+[Then describe the task...]`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">Before and After: Performance Comparison</h3>
+
+            <div class="warning-box mt-2">
+                <h3>❌ [PLACEHOLDER_POOR_PERFORMANCE_DESCRIPTION]</h3>
+                <CodeBlock code={`/* [TASK] - [PERFORMANCE_PROBLEM] */
+[PLACEHOLDER_SLOW_CODE]
+/* ❌ [PROBLEM_1] */
+/* ❌ [PROBLEM_2] */`} lang="css" />
+            </div>
+
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">✅ [PLACEHOLDER_OPTIMIZED_DESCRIPTION]</div>
+                <CodeBlock code={`/* [TASK] - Optimized */
+[PLACEHOLDER_FAST_CODE]
+/* ✅ [BENEFIT_1] */
+/* ✅ [BENEFIT_2] */`} lang="css" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 7: Try It Yourself - AI Challenge
+         Hands-on practice with requirements
+         ============================================================ -->
+    <section class="content-section">
+        <h2>Try It Yourself: AI [PLACEHOLDER_TOPIC] Challenge</h2>
+        <p class="mt-1">Ready to practice everything you've learned? This challenge tests your prompt crafting skills, your verification process, and your ability to apply concepts from Stations 1-5 through AI collaboration.</p>
+
+        <div class="challenge-box mt-2">
+            <h3>🎯 The Challenge: [PLACEHOLDER_CHALLENGE_TITLE]</h3>
+            <p class="mt-1">[PLACEHOLDER_CHALLENGE_DESCRIPTION - ~50 words]</p>
+
+            <h4 class="mt-2">Requirements:</h4>
+            <ul class="mt-1">
+                <li><strong>Performance:</strong> [PLACEHOLDER_PERF_REQ]</li>
+                <li><strong>Accessibility:</strong> [PLACEHOLDER_A11Y_REQ]</li>
+                <li><strong>Usability:</strong> [PLACEHOLDER_UX_REQ]</li>
+                <li><strong>Timing:</strong> [PLACEHOLDER_TIMING_REQ]</li>
+                <li><strong>Maintainability:</strong> [PLACEHOLDER_MAINT_REQ]</li>
+            </ul>
+
+            <h4 class="mt-2">Your Mission (5 Steps):</h4>
+            <ol class="mt-1">
+                <li><strong>Craft a detailed prompt</strong> with all requirements specified</li>
+                <li><strong>Review AI's response</strong> against the requirements checklist</li>
+                <li><strong>Test [PLACEHOLDER_TESTING_METHOD]</strong></li>
+                <li><strong>Verify [PLACEHOLDER_VERIFICATION_ASPECT]</strong></li>
+                <li><strong>Refine if needed</strong> with follow-up prompts</li>
+            </ol>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 8: HAP's Rules for Working with AI
+         6 numbered rules (non-negotiable)
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">HAP's Rules for Working with AI</h2>
+            <p class="mb-2">After months of working with AI for [PLACEHOLDER_TOPIC], I've developed six non-negotiable rules. These aren't suggestions — they're requirements that Prof. Teeters approves and enforces.</p>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_1_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_1_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_2_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_2_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_3_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_3_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_4_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_4_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">5</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_5_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_5_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">6</div>
+                <div>
+                    <h3>[PLACEHOLDER_RULE_6_TITLE]</h3>
+                    <p>[PLACEHOLDER_RULE_6_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 9: Advanced Prompt Strategies
+         Iteration, troubleshooting, safety prompts
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Advanced Prompt Strategies</h2>
+            <p class="mb-2">Real AI collaboration isn't one-shot perfection — it's conversational refinement. Prof. Teeters calls this "conversational refinement" and it's how professionals actually work with AI.</p>
+
+            <h3 class="mt-3">Refinement Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">Refinement Prompt:</div>
+                <CodeBlock code={`Revise this [TASK] code. Keep the same technical approach
+but adjust [ASPECT] to feel more [GOAL].
+
+Current code:
+[paste the code AI generated]
+
+Make it [SPECIFIC_IMPROVEMENT_REQUEST].`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">Debugging Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">Debugging Prompt:</div>
+                <CodeBlock code={`This [TASK] doesn't work correctly: [describe issue].
+
+Current code:
+[paste the problematic code]
+
+Explain what might be wrong with the current implementation,
+then provide a corrected version that maintains [REQUIREMENTS].`} lang="text" />
+            </div>
+
+            <h3 class="mt-3">Safe Refactoring Prompt</h3>
+            <div class="prompt-box mt-2">
+                <div class="prompt-label">Safe Refactoring Prompt:</div>
+                <CodeBlock code={`Refactor this [TASK] without breaking existing functionality.
+Preserve all:
+- [CRITICAL_FEATURE_1]
+- [CRITICAL_FEATURE_2]
+- [CRITICAL_FEATURE_3]
+
+Current code:
+[paste existing working code]
+
+Goal: [REFACTORING_GOAL] while maintaining everything that works.`} lang="text" />
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 10: When NOT to Use AI
+         3 scenarios where manual work is better
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>When NOT to Use AI</h2>
+            <p class="mb-2">AI is powerful for [PLACEHOLDER_TOPIC], but it's not always the right tool. Understanding when NOT to use AI is just as important as knowing when to use it.</p>
+
+            <div class="analysis-grid mt-2">
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_SCENARIO_1_TITLE]</h3>
+                    <p><strong>[PLACEHOLDER_KEY_PRINCIPLE]</strong> [PLACEHOLDER_EXPLANATION - ~100 words]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_SCENARIO_2_TITLE]</h3>
+                    <p><strong>[PLACEHOLDER_KEY_PRINCIPLE]</strong> [PLACEHOLDER_EXPLANATION - ~100 words]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>[PLACEHOLDER_SCENARIO_3_TITLE]</h3>
+                    <p><strong>[PLACEHOLDER_KEY_PRINCIPLE]</strong> [PLACEHOLDER_EXPLANATION - ~100 words]</p>
+                </div>
+            </div>
+
+            <div class="warning-box mt-3">
+                <h3>🟠 Prof. Teeters' Warning About AI and Learning</h3>
+                <p class="mt-1"><strong>"[PLACEHOLDER_PROF_TEETERS_QUOTE]"</strong></p>
+                <p class="mt-1">[PLACEHOLDER_CONTEXT - When she said it, why. ~50 words]</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 11: Quick Reference - AI [Topic] Tasks
+         Grid showing AI suitability for different tasks
+         ============================================================ -->
+    <section class="content-section">
+        <h2>Quick Reference: AI [PLACEHOLDER_TOPIC] Tasks</h2>
+        <p class="mt-1">Not every [PLACEHOLDER_TOPIC] task is equally suitable for AI assistance. This grid shows what to expect:</p>
+
+        <div class="overview-grid mt-2">
+            <div class="insight-card">
+                <h3><span class="insight-icon">✅</span> [PLACEHOLDER_TASK_1]</h3>
+                <p class="stat-large">AI Use: Excellent</p>
+                <p><strong>Review step: [PLACEHOLDER_VERIFICATION]</strong></p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">✅</span> [PLACEHOLDER_TASK_2]</h3>
+                <p class="stat-large stat-teal">AI Use: Excellent</p>
+                <p><strong>Review step: [PLACEHOLDER_VERIFICATION]</strong></p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">⚠️</span> [PLACEHOLDER_TASK_3]</h3>
+                <p class="stat-large stat-brown">AI Use: Unreliable</p>
+                <p><strong>Review step: [PLACEHOLDER_VERIFICATION]</strong></p>
+            </div>
+
+            <div class="insight-card">
+                <h3><span class="insight-icon">🛑</span> [PLACEHOLDER_TASK_4]</h3>
+                <p class="stat-large">AI Use: Not Recommended</p>
+                <p><strong>Instead: [PLACEHOLDER_ALTERNATIVE]</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         SECTION 12: Learning Objectives Checklist
+         Final verification and celebration
+         ============================================================ -->
+    <section class="content-section">
+        <h2>Learning Objectives Checklist</h2>
+        <p class="mt-1"><strong>Congratulations on completing all six stations of HAP's Learning Lab!</strong> Before you finish, verify you've mastered the principles of responsible AI use for [PLACEHOLDER_TOPIC]:</p>
+
+        <div class="analysis-grid mt-2">
+            <div class="analysis-point">
+                <h3>Understanding AI Capabilities</h3>
+                <ul class="mt-1">
+                    <li>[PLACEHOLDER_OBJECTIVE_1]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_2]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_3]</li>
+                </ul>
+            </div>
+
+            <div class="analysis-point">
+                <h3>Prompt Engineering Skills</h3>
+                <ul class="mt-1">
+                    <li>[PLACEHOLDER_OBJECTIVE_1]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_2]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_3]</li>
+                </ul>
+            </div>
+
+            <div class="analysis-point">
+                <h3>Verification Workflow</h3>
+                <ul class="mt-1">
+                    <li>[PLACEHOLDER_OBJECTIVE_1]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_2]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_3]</li>
+                </ul>
+            </div>
+
+            <div class="analysis-point">
+                <h3>Professional Responsibility</h3>
+                <ul class="mt-1">
+                    <li>[PLACEHOLDER_OBJECTIVE_1]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_2]</li>
+                    <li>[PLACEHOLDER_OBJECTIVE_3]</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="hap-note-callout mt-3">
+            <img src="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_150,c_limit/v1762699548/hap-celebrating_bljvgl.jpg"
+                alt="HAP celebrating completion of all stations"
+                width="150" height="150" class="hap-note-image" decoding="async" loading="lazy">
+            <div class="hap-note-content">
+                <h3>Prof. Teeters on Completing All Six Stations</h3>
+                <p><strong>"[PLACEHOLDER_PROF_TEETERS_OPENING_QUOTE]"</strong></p>
+                <p class="mt-1">[PLACEHOLDER_REFLECTION - Prof. Teeters' reflection on HAP's journey. ~100 words]</p>
+                <p class="mt-1">[PLACEHOLDER_FINAL_WISDOM - Parting advice. ~100 words] 🟠</p>
+            </div>
+        </div>
+    </section>
+
+</StationLayout>

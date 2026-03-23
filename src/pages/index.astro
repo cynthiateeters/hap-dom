@@ -1,0 +1,107 @@
+---
+/**
+ * Placeholder Hub Page
+ *
+ * Replace this file with content from src/templates/hub-template.astro
+ *
+ * GETTING STARTED:
+ * 1. Read docs/designing-labs/hap-narrative-and-scene-design.md
+ * 2. Fill out a station blueprint for each station (docs/reference-cards/station-blueprint-template.md)
+ * 3. Copy src/templates/hub-template.astro to this location
+ * 4. Replace all [PLACEHOLDER_*] markers with your content
+ */
+
+import MainLayout from '../layouts/MainLayout.astro';
+
+const introContent = `
+    <p><strong>Welcome to your new HAP Learning Lab!</strong></p>
+    <p>This is a placeholder page. To get started, copy the hub template from
+    <code>src/templates/hub-template.astro</code> and replace this file.</p>
+    <p class="mt-1">Check out the documentation in the <code>docs/</code> folder for guidance
+    on creating your learning lab content. 🟠</p>
+`;
+---
+
+<MainLayout
+    title="HAP's Learning Lab | Getting Started"
+    description="A placeholder page for your new HAP Learning Lab. Replace with your content."
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="Your Learning Lab Topic Here"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/hap-waving_dgzacg.jpg"
+    avatarAlt="HAP waving hello"
+    introContent={introContent}
+    showNavigation={false}
+    footerReminder="Start by reading the documentation in docs/designing-labs/"
+>
+
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>Getting Started</h2>
+
+            <div class="analysis-grid">
+                <div class="analysis-point">
+                    <h3>📚 Step 1: Read the docs</h3>
+                    <p>Start with <code>docs/designing-labs/hap-narrative-and-scene-design.md</code></p>
+                    <p class="mt-1">This will help you understand HAP's voice and the station structure.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>📝 Step 2: Plan your stations</h3>
+                    <p>Use the blueprint template in <code>docs/reference-cards/station-blueprint-template.md</code></p>
+                    <p class="mt-1">Fill out one blueprint for each of your 6 stations before writing content.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>🏗️ Step 3: Create your pages</h3>
+                    <p>Copy templates from <code>src/templates/</code> to <code>src/pages/</code></p>
+                    <p class="mt-1">Replace all <code>[PLACEHOLDER_*]</code> markers with your content.</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>✅ Step 4: Validate</h3>
+                    <p>Use the Claude Skills in <code>skills/</code> to validate your content</p>
+                    <p class="mt-1">Run <code>npm run build</code> to check for errors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">🎓 Quick Reference</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>Hub template</h3>
+                    <p><code>src/templates/hub-template.astro</code> → <code>src/pages/index.astro</code></p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>Station template</h3>
+                    <p><code>src/templates/station-template.astro</code> → <code>src/pages/stations/station[1-6].astro</code></p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">3</div>
+                <div>
+                    <h3>HAP images</h3>
+                    <p>See the image inventory in <code>skills/hap-image-validation/</code></p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">4</div>
+                <div>
+                    <h3>Development server</h3>
+                    <p>Run <code>npm run dev</code> to start the development server at localhost:4321</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</MainLayout>

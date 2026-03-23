@@ -1,0 +1,11 @@
+# Placeholder for stations directory
+#
+# Copy station-template.astro from src/templates/ to create:
+# - station1.astro
+# - station2.astro
+# - station3.astro
+# - station4.astro
+# - station5.astro
+# - station6.astro
+#
+# Delete this file after creating your station files.

@@ -1,0 +1,62 @@
+---
+/**
+ * Header.astro - HAP Learning Lab header component
+ *
+ * Displays the page title, subtitle, HAP avatar, and introduction content.
+ */
+
+interface Props {
+  title: string;
+  subtitle: string;
+  avatarImage: string;
+  avatarAlt: string;
+  introContent: string;
+  showIntroImage?: boolean;
+  introImage?: string;
+  introImageAlt?: string;
+}
+
+const {
+  title,
+  subtitle,
+  avatarImage,
+  avatarAlt,
+  introContent,
+  showIntroImage = false,
+  introImage,
+  introImageAlt
+} = Astro.props;
+---
+
+<header class="header">
+    <div class="header-content">
+        <div class="hybit-welcome">
+            <div class="hybit-avatar">
+                <img src={avatarImage}
+                    alt={avatarAlt}
+                    width="200" height="200"
+                    decoding="async"
+                    fetchpriority="high">
+            </div>
+            <div>
+                <h1>{title}</h1>
+                <p class="subtitle">{subtitle}</p>
+            </div>
+        </div>
+        <div class="intro-box">
+            {showIntroImage && introImage ? (
+                <>
+                    <img src={introImage}
+                        srcset={`${introImage.replace('w_240', 'w_120')} 1x, ${introImage} 2x`}
+                        alt={introImageAlt}
+                        width="120" height="120"
+                        class="intro-hap-image"
+                        decoding="async">
+                    <div class="intro-text" set:html={introContent} />
+                </>
+            ) : (
+                <div set:html={introContent} />
+            )}
+        </div>
+    </div>
+</header>

@@ -1,0 +1,28 @@
+---
+/**
+ * Footer.astro - HAP Learning Lab footer component
+ *
+ * Displays HAP's reminder message, copyright, and trademark notices.
+ */
+
+interface Props {
+  reminder?: string;
+}
+
+const { reminder = 'Remember: Learning is a journey, not a destination. Keep exploring!' } = Astro.props;
+---
+
+<footer class='footer'>
+  <p><strong>HAP's Learning Lab</strong> | An AI-Enhanced Educational Experience by Prof. Cynthia Teeters</p>
+  <p class='footer-reminder'>
+    {reminder} 🟠 — HAP
+  </p>
+  <div class='footer-copyright'>
+    <img src='https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_80,c_limit/v1759497938/HAP-learner_dvehmt.jpg' alt='HAP the apprentice learner with his study book and tools' class='footer-hybit' width='80' height='80' decoding='async' loading='lazy' />
+    <div>
+      <p>HAP&trade; Educational Content &copy; 2026 Cynthia Teeters. All rights reserved.</p>
+      <p>HyBit A. ProtoBot&trade; (HAP&trade;) character and the apprentice learning methodology are proprietary educational innovations.</p>
+      <p>Character concept, teaching methodology, and all written content created by Prof. Cynthia Teeters. Visual elements created with AI assistance.</p>
+    </div>
+  </div>
+</footer>

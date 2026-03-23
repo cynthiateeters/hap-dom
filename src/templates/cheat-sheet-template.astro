@@ -1,0 +1,75 @@
+---
+/**
+ * Cheat Sheet Template - HAP Learning Lab
+ *
+ * Cheat sheets are companion reference pages for stations.
+ * They use MainLayout (not StationLayout) because they are
+ * not stations — they are quick-reference resources.
+ *
+ * TEMPLATE USAGE:
+ * 1. Copy to src/pages/cheat-sheets/[topic].astro
+ * 2. Replace all [PLACEHOLDER_*] markers
+ * 3. Run `npm run build` to verify
+ */
+
+// NOTE: When you copy this to src/pages/cheat-sheets/, this import will work correctly
+import MainLayout from '../../layouts/MainLayout.astro';
+import CodeBlock from '../../components/CodeBlock.astro';
+---
+
+<MainLayout
+    title="[PLACEHOLDER_CHEAT_SHEET_TITLE] | HAP's Learning Lab"
+    description="[PLACEHOLDER_META_DESCRIPTION - Quick reference for station topics]"
+    headerTitle="[PLACEHOLDER_CHEAT_SHEET_TITLE]"
+    headerSubtitle="Quick Reference"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759497938/[PLACEHOLDER_AVATAR_IMAGE].jpg"
+    avatarAlt="[PLACEHOLDER_AVATAR_ALT]"
+    introContent="<p>[PLACEHOLDER_INTRO - Brief description of what this cheat sheet covers] 🟠</p>"
+    showNavigation={false}
+    footerReminder="[PLACEHOLDER_FOOTER_REMINDER]"
+>
+
+    <!-- ============================================================
+         Quick Reference Cards
+         Key concepts in scannable card format
+         ============================================================ -->
+    <section class="content-section">
+        <div class="tips-container">
+            <h2 class="section-heading-centered">[PLACEHOLDER_SECTION_TITLE]</h2>
+
+            <div class="tip-card">
+                <div class="tip-number">1</div>
+                <div>
+                    <h3>[PLACEHOLDER_ITEM_1_TITLE]</h3>
+                    <p>[PLACEHOLDER_ITEM_1_CONTENT]</p>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-number">2</div>
+                <div>
+                    <h3>[PLACEHOLDER_ITEM_2_TITLE]</h3>
+                    <p>[PLACEHOLDER_ITEM_2_CONTENT]</p>
+                </div>
+            </div>
+
+            <!-- Add more tip cards as needed -->
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Code Examples (optional)
+         Common commands or patterns for quick copy-paste
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>[PLACEHOLDER_EXAMPLES_TITLE]</h2>
+
+            <div class="prompt-box">
+                <div class="prompt-label">[PLACEHOLDER_CODE_LABEL]:</div>
+                <CodeBlock code={`[PLACEHOLDER_CODE_EXAMPLE]`} lang="bash" />
+            </div>
+        </div>
+    </section>
+
+</MainLayout>

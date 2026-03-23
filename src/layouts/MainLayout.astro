@@ -1,0 +1,107 @@
+---
+/**
+ * MainLayout.astro - Main layout for HAP Learning Lab pages
+ *
+ * This is the base layout that provides:
+ * - HTML document structure
+ * - Meta tags (SEO, Open Graph)
+ * - Favicon configuration
+ * - Performance optimizations (preconnect, preload)
+ * - Content Security Policy
+ * - Skip link for accessibility
+ * - Header, Navigation, Main, Footer structure
+ */
+
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Navigation from '../components/Navigation.astro';
+import '../styles/global.css';
+import '../styles/shiki-hap-theme.css';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  headerTitle: string;
+  headerSubtitle: string;
+  avatarImage: string;
+  avatarAlt: string;
+  introContent: string;
+  showIntroImage?: boolean;
+  introImage?: string;
+  introImageAlt?: string;
+  showNavigation?: boolean;
+  stationNumber?: number;
+  prevStation?: { url: string; label: string };
+  nextStation?: { url: string; label: string };
+  footerReminder?: string;
+}
+
+const { title, description, ogImage = 'https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495998/hap-laptop_xiewar.jpg', headerTitle, headerSubtitle, avatarImage, avatarAlt, introContent, showIntroImage = false, introImage, introImageAlt, showNavigation = true, stationNumber, prevStation, nextStation, footerReminder } = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+
+    <title>{title}</title>
+
+    <meta name='description' content={description} />
+
+    <!-- Open Graph -->
+    <meta property='og:title' content={title} />
+    <meta property='og:description' content={description} />
+    <meta property='og:type' content='website' />
+    <meta property='og:image' content={ogImage} />
+    <meta name='twitter:card' content='summary_large_image' />
+
+    <!-- Favicon -->
+    <link rel='icon' type='image/png' sizes='16x16' href='https://res.cloudinary.com/cynthia-teeters/image/upload/f_png,q_auto,w_16,h_16/v1759596416/hap-favicon-h_gosgur.jpg' />
+    <link rel='icon' type='image/png' sizes='32x32' href='https://res.cloudinary.com/cynthia-teeters/image/upload/f_png,q_auto,w_32,h_32/v1759596416/hap-favicon-h_gosgur.jpg' />
+    <link rel='apple-touch-icon' sizes='180x180' href='https://res.cloudinary.com/cynthia-teeters/image/upload/f_png,q_auto,w_180,h_180/v1759596416/hap-favicon-h_gosgur.jpg' />
+    <link rel='icon' type='image/png' sizes='192x192' href='https://res.cloudinary.com/cynthia-teeters/image/upload/f_png,q_auto,w_192,h_192/v1759596416/hap-favicon-h_gosgur.jpg' />
+
+    <!-- Performance -->
+    <link rel='preconnect' href='https://res.cloudinary.com' crossorigin />
+    <link rel='preload' href='/fonts/Nunito/Nunito-VariableFont_wght.woff2' as='font' type='font/woff2' crossorigin />
+    <link rel='preload' href='/fonts/Source_Code_Pro/SourceCodePro-VariableFont_wght.woff2' as='font' type='font/woff2' crossorigin />
+
+    <!-- CSP -->
+    <meta http-equiv='Content-Security-Policy' content="default-src 'self';
+        img-src 'self' https://res.cloudinary.com data:;
+        media-src 'self' https://res.cloudinary.com;
+        script-src 'self' 'unsafe-inline';
+        style-src 'self' 'unsafe-inline';
+        font-src 'self';
+        connect-src 'self' ws://localhost:* ws://127.0.0.1:*;
+        base-uri 'self';
+        form-action 'self';" />
+  </head>
+  <body>
+    <!-- Accessibility skip link -->
+    <a href='#main-content' class='skip-link'>Skip to main content</a>
+
+    <Header title={headerTitle} subtitle={headerSubtitle} avatarImage={avatarImage} avatarAlt={avatarAlt} introContent={introContent} showIntroImage={showIntroImage} introImage={introImage} introImageAlt={introImageAlt} />
+
+    {showNavigation && stationNumber && <Navigation position='top' stationNumber={stationNumber} prevStation={prevStation} nextStation={nextStation} />}
+
+    <main id='main-content' class='content-container'>
+      <slot />
+    </main>
+
+    {showNavigation && stationNumber && <Navigation position='bottom' stationNumber={stationNumber} prevStation={prevStation} nextStation={nextStation} />}
+
+    <Footer reminder={footerReminder} />
+
+    <!-- Copy button for code blocks -->
+    <script src='/js/copy-button.js' is:inline defer></script>
+  </body>
+</html>
+<!--
+HAP Educational Content © 2026 Cynthia Teeters. All rights reserved.
+HyBit A. ProtoBot (HAP) character and the apprentice learning methodology are proprietary educational innovations.
+Character concept, teaching methodology, and all written content created by Prof. Cynthia Teeters.
+Visual elements created with AI assistance.
+-->

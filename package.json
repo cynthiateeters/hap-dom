@@ -1,0 +1,26 @@
+{
+  "name": "hap-learning-lab",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "HAP Learning Lab - A 6-station educational website template",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.16.15"
+  },
+  "keywords": [
+    "astro",
+    "education",
+    "learning-lab",
+    "hap",
+    "static-site"
+  ],
+  "author": "Cynthia Teeters",
+  "license": "MIT"
+}

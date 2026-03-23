@@ -1,0 +1,165 @@
+---
+/**
+ * Hub Page Template - HAP Learning Lab
+ *
+ * Copy this file to src/pages/index.astro and replace all
+ * [PLACEHOLDER] markers with your content.
+ *
+ * TEMPLATE USAGE:
+ * 1. Copy to src/pages/index.astro
+ * 2. Replace all [PLACEHOLDER_*] markers
+ * 3. Update station card links and descriptions
+ * 4. Run `npm run build` to verify
+ */
+
+import MainLayout from '../layouts/MainLayout.astro';
+
+// [PLACEHOLDER_INTRO_CONTENT]
+// Write HAP's welcome message in first-person voice.
+// Introduce the learning lab topic and what students will learn.
+const introContent = `
+    <p><strong>[PLACEHOLDER_WELCOME_HOOK]</strong></p>
+    <p>[PLACEHOLDER_CONTEXT - What problem does this lab solve?]</p>
+    <p class="mt-1">[PLACEHOLDER_JOURNEY - What will students learn across 6 stations?]</p>
+    <p class="mt-1">[PLACEHOLDER_CALL_TO_ACTION] 🟠</p>
+`;
+---
+
+<MainLayout
+    title="[PLACEHOLDER_LAB_TITLE] | HAP's Learning Lab"
+    description="[PLACEHOLDER_META_DESCRIPTION - 150-160 characters describing the learning lab]"
+    ogImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_1200,c_fill,g_auto/v1759495998/[PLACEHOLDER_OG_IMAGE].jpg"
+    headerTitle="HAP's Learning Lab"
+    headerSubtitle="[PLACEHOLDER_LAB_SUBTITLE]"
+    avatarImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_200,c_limit/v1759495998/[PLACEHOLDER_AVATAR_IMAGE].jpg"
+    avatarAlt="[PLACEHOLDER_AVATAR_ALT]"
+    introContent={introContent}
+    showIntroImage={false}
+    introImage="https://res.cloudinary.com/cynthia-teeters/image/upload/f_auto,q_auto,w_240,c_limit/v1759495998/hap-waving_dgzacg.jpg"
+    introImageAlt="HAP waving hello"
+    showNavigation={false}
+    footerReminder="[PLACEHOLDER_FOOTER_REMINDER - Memorable takeaway for the whole lab]"
+>
+
+    <!-- ============================================================
+         About This Lab Section
+         4 cards explaining what, how, philosophy, and advice
+         ============================================================ -->
+    <section class="content-section">
+        <div class="topic-section">
+            <h2>About HAP's Learning Lab</h2>
+
+            <div class="analysis-grid analysis-grid--two-col">
+                <div class="analysis-point">
+                    <h3>🔬 What I Learned</h3>
+                    <p>[PLACEHOLDER_WHAT_LEARNED_1]</p>
+                    <p class="mt-1">[PLACEHOLDER_WHAT_LEARNED_2]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>🎯 How I Practiced</h3>
+                    <p>[PLACEHOLDER_HOW_PRACTICED_1]</p>
+                    <p class="mt-1">[PLACEHOLDER_HOW_PRACTICED_2]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>🎨 My Philosophy</h3>
+                    <p>[PLACEHOLDER_PHILOSOPHY_1]</p>
+                    <p class="mt-1">[PLACEHOLDER_PHILOSOPHY_2]</p>
+                </div>
+
+                <div class="analysis-point">
+                    <h3>🤔 My Advice</h3>
+                    <p>[PLACEHOLDER_ADVICE_1]</p>
+                    <p class="mt-1">[PLACEHOLDER_ADVICE_2]</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         Learning Stations Grid
+         6 station cards linking to each station page
+         ============================================================ -->
+    <div class="content-container">
+        <section class="content-section">
+            <h2 class="section-heading-centered">Learning Stations</h2>
+            <nav aria-label="Learning stations">
+                <div class="overview-grid">
+
+                    <!-- Station 1 -->
+                    <a href="/stations/station1/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_1]</span> Station 1: [PLACEHOLDER_S1_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S1_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S1_DESCRIPTION - HAP's voice, 2-3 sentences]</p>
+                        <p class="station-cta">→ Visit Station 1</p>
+                    </a>
+
+                    <!-- Station 2 -->
+                    <a href="/stations/station2/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_2]</span> Station 2: [PLACEHOLDER_S2_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S2_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S2_DESCRIPTION]</p>
+                        <p class="station-cta">→ Visit Station 2</p>
+                    </a>
+
+                    <!-- Station 3 -->
+                    <a href="/stations/station3/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_3]</span> Station 3: [PLACEHOLDER_S3_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S3_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S3_DESCRIPTION]</p>
+                        <p class="station-cta">→ Visit Station 3</p>
+                    </a>
+
+                    <!-- Station 4 -->
+                    <a href="/stations/station4/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_4]</span> Station 4: [PLACEHOLDER_S4_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S4_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S4_DESCRIPTION]</p>
+                        <p class="station-cta">→ Visit Station 4</p>
+                    </a>
+
+                    <!-- Station 5 -->
+                    <a href="/stations/station5/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_5]</span> Station 5: [PLACEHOLDER_S5_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S5_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S5_DESCRIPTION]</p>
+                        <p class="station-cta">→ Visit Station 5</p>
+                    </a>
+
+                    <!-- Station 6 -->
+                    <a href="/stations/station6/" class="insight-card station-card-link">
+                        <h3><span class="insight-icon">[EMOJI_6]</span> Station 6: [PLACEHOLDER_S6_TITLE]</h3>
+                        <p><strong>Focus:</strong> [PLACEHOLDER_S6_FOCUS]</p>
+                        <p class="station-description">[PLACEHOLDER_S6_DESCRIPTION]</p>
+                        <p class="station-cta">→ Visit Station 6</p>
+                    </a>
+
+                </div>
+            </nav>
+        </section>
+    </div>
+
+    <!-- ============================================================
+         Reference / Cheat Sheets Section
+         Links to companion cheat sheet pages for each station.
+         Remove this section if your lab does not include cheat sheets.
+         ============================================================ -->
+    <div class="content-container">
+        <section class="content-section">
+            <h2 class="section-heading-centered">Reference</h2>
+            <div class="overview-grid">
+
+                <!-- Cheat Sheet 1 -->
+                <a href="/cheat-sheets/[PLACEHOLDER_CS1_SLUG]/" class="insight-card station-card-link">
+                    <h3>[PLACEHOLDER_CS1_TITLE]</h3>
+                    <p>[PLACEHOLDER_CS1_DESCRIPTION]</p>
+                </a>
+
+                <!-- Add more cheat sheet cards as needed -->
+
+            </div>
+        </section>
+    </div>
+
+</MainLayout>

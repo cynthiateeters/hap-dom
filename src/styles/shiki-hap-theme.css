@@ -1,0 +1,156 @@
+/* HAP Learning Lab Shiki Theme
+   Maps Shiki's css-variables theme to HAP's color system
+   Maintains WCAG AA contrast ratios on all backgrounds */
+
+/* Inline code styling - for <code> tags not in <pre> blocks */
+:not(pre) > code {
+  background-color: hsl(32, 76%, 63% / 0.15);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-family: 'Source Code Pro', Consolas, Monaco, monospace;
+  font-size: clamp(0.85em, 1.5vw, 0.9em);
+  /* color: var(--dark-brown); */
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Code block wrapper styling - matches .prompt-box appearance */
+.code-block-wrapper {
+  border: var(--medium-brown) 2px solid;
+  border-radius: var(--radius, 16px);
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Base Shiki CSS variables - applied globally */
+:root {
+  --astro-code-color-text: var(--cream-white);
+  --astro-code-color-background: transparent;
+  --astro-code-token-constant: var(--warm-orange);
+  --astro-code-token-string: var(--teal-accent);
+  --astro-code-token-comment: hsl(32, 35%, 75%);
+  --astro-code-token-keyword: var(--warm-orange);
+  --astro-code-token-parameter: var(--soft-orange);
+  --astro-code-token-function: var(--soft-orange);
+  --astro-code-token-string-expression: var(--teal-accent);
+  --astro-code-token-punctuation: hsl(30, 20%, 72%);
+  --astro-code-token-link: var(--teal-accent);
+}
+
+/* Context-specific overrides for different container backgrounds */
+
+/* .prompt-box - dark gradient background */
+.prompt-box {
+  --astro-code-color-text: var(--cream-white);
+  --astro-code-token-constant: var(--warm-orange);
+  --astro-code-token-string: var(--teal-accent);
+  --astro-code-token-comment: hsl(32, 35%, 88%);
+  --astro-code-token-keyword: var(--warm-orange);
+  --astro-code-token-function: var(--soft-orange);
+  --astro-code-token-punctuation: hsl(30, 20%, 72%);
+}
+
+/* .warning-box - yellow background */
+.warning-box {
+  --astro-code-color-text: var(--dark-brown);
+  --astro-code-token-constant: hsl(32, 62%, 47%);
+  --astro-code-token-string: hsl(172, 33%, 36%);
+  --astro-code-token-comment: hsl(30, 18%, 36%);
+  --astro-code-token-keyword: hsl(32, 62%, 47%);
+  --astro-code-token-function: hsl(33, 66%, 54%);
+  --astro-code-token-punctuation: hsl(30, 14%, 48%);
+}
+
+/* .tip-card - teal background */
+.tip-card {
+  --astro-code-color-text: var(--cream-white);
+  --astro-code-token-constant: var(--soft-orange);
+  --astro-code-token-string: hsl(45, 100%, 81%);
+  --astro-code-token-comment: hsl(0, 0%, 100%);
+  --astro-code-token-keyword: var(--soft-orange);
+  --astro-code-token-function: hsl(45, 100%, 91%);
+  --astro-code-token-punctuation: var(--peach-background);
+}
+
+/* Base code block styling */
+pre.astro-code {
+  padding: 1rem;
+  margin: 0;
+  overflow: auto;
+  border-radius: 5px;
+  font-family: "Source Code Pro", Consolas, Monaco, monospace;
+  font-size: clamp(0.8rem, 1.5vw, 0.85rem);
+  line-height: 1.7;
+  tab-size: 4;
+  background: transparent;
+}
+
+/* Responsive padding for wrapper */
+@media (max-width: 768px) {
+  .code-block-wrapper {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .code-block-wrapper {
+    padding: 0.75rem;
+  }
+}
+
+/* Container-specific overrides */
+.prompt-box pre.astro-code,
+.warning-box pre.astro-code,
+.tip-card pre.astro-code {
+  background: transparent;
+  margin: 0.5em 0 0 0;
+  position: relative;
+}
+
+/* Copy button styling */
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--teal-accent, hsl(168, 28%, 54%));
+  color: var(--cream-white, hsl(32, 100%, 97%));
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 600;
+  opacity: 0;
+  transition: opacity 0.2s ease, background 0.2s ease;
+  z-index: 10;
+}
+
+.code-block-wrapper:hover .copy-button,
+.prompt-box:hover .copy-button,
+.warning-box:hover .copy-button,
+.tip-card:hover .copy-button {
+  opacity: 1;
+}
+
+.copy-button:hover {
+  background: var(--warm-orange, hsl(32, 76%, 63%));
+}
+
+.copy-button:active {
+  transform: scale(0.95);
+}
+
+.copy-button.copied {
+  background: var(--warm-orange, hsl(32, 76%, 63%));
+}
+
+/*
+HAP Educational Content © 2026 Cynthia Teeters.
+HyBit character concept, teaching methodology, and all written content are proprietary.
+Visual elements created with AI assistance.
+*/
